@@ -35,11 +35,6 @@ return [
             'password' => '',
             'encryption' => null,
         ],
-
-    'config.email.source' => 'no-reply@tomatoshark.com',
-    'config.email.feedback' => 'feedback@tomatoshark.com',
-    'config.email.fromname' => 'TomatoShark Team',
-
     'predis.db' => 0,
     'predis.options' => ['prefix' => 'sandbox:'],
     'predis.parametrs' =>
