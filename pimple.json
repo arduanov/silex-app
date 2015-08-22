@@ -125,6 +125,11 @@
         "value": "\/var\/www\/pomm-service-provider\/app\/cache"
     },
     {
+        "name": "fragment.path",
+        "type": "string",
+        "value": "\/_fragment"
+    },
+    {
         "name": "monolog.level",
         "type": "int",
         "value": 250
@@ -305,6 +310,36 @@
         "value": "monolog"
     },
     {
+        "name": "http_cache",
+        "type": "class",
+        "value": "Silex\\Provider\\HttpCache\\HttpCache"
+    },
+    {
+        "name": "http_cache.esi",
+        "type": "class",
+        "value": "Symfony\\Component\\HttpKernel\\HttpCache\\Esi"
+    },
+    {
+        "name": "http_cache.store",
+        "type": "class",
+        "value": "Symfony\\Component\\HttpKernel\\HttpCache\\Store"
+    },
+    {
+        "name": "http_cache.esi_listener",
+        "type": "class",
+        "value": "Symfony\\Component\\HttpKernel\\EventListener\\SurrogateListener"
+    },
+    {
+        "name": "http_cache.options",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "http_cache.cache_dir",
+        "type": "string",
+        "value": "\/var\/www\/pomm-service-provider\/app\/cache\/http"
+    },
+    {
         "name": "fragment.handler",
         "type": "class",
         "value": "Symfony\\Component\\HttpKernel\\Fragment\\FragmentHandler"
@@ -320,6 +355,11 @@
         "value": "Symfony\\Component\\HttpKernel\\Fragment\\HIncludeFragmentRenderer"
     },
     {
+        "name": "fragment.renderer.esi",
+        "type": "class",
+        "value": "Symfony\\Component\\HttpKernel\\Fragment\\EsiFragmentRenderer"
+    },
+    {
         "name": "fragment.listener",
         "type": "class",
         "value": "Symfony\\Component\\HttpKernel\\EventListener\\FragmentListener"
@@ -333,11 +373,6 @@
         "name": "uri_signer.secret",
         "type": "string",
         "value": "2713a582157f16edcf6c318ca2d1f508"
-    },
-    {
-        "name": "fragment.path",
-        "type": "string",
-        "value": "\/_fragment"
     },
     {
         "name": "fragment.renderer.hinclude.global_template",

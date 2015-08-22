@@ -9,6 +9,7 @@ return [
     'root.path' => $root_path,
     'app.path' => $app_path,
     'cache.path' => $app_path . '/cache',
+    'fragment.path' => $app_path . '/cache/_fragment',
 
     'monolog.level' => Monolog\Logger::DEBUG,
 

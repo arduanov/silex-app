@@ -17,8 +17,8 @@ use WhoopsSilex\WhoopsServiceProvider;
 class Application extends Silex
 {
     use Silex\TwigTrait;
-    use Silex\UrlGeneratorTrait;
-    use Silex\SecurityTrait;
+//    use Silex\UrlGeneratorTrait;
+//    use Silex\SecurityTrait;
 
     public function __construct()
     {
@@ -29,6 +29,8 @@ class Application extends Silex
         $this->loadErrorHandler($this);
         $this->loadModels($this);
         $this->loadRoutes($this);
+        print_r(get_included_files());
+
         return $this;
     }
 
@@ -44,7 +46,7 @@ class Application extends Silex
     public function loadProviders(Application $app)
     {
         $app->register(new Provider\MonologServiceProvider(), $app['monolog.config']);
-        $app->register(new WhoopsServiceProvider);
+//        $app->register(new WhoopsServiceProvider);
         $app->register(new Provider\TwigServiceProvider(), [
             'twig.path' => $app['app.path'] . '/resources/view/',
         ]);
@@ -53,16 +55,23 @@ class Application extends Silex
         $app->register(new PommProvider\PommServiceProvider(),
             $app['pomm.config']
         );
+        $app->register(new \Silex\Provider\RoutingServiceProvider());
+
+        $app->register(new \Silex\Provider\HttpCacheServiceProvider(), [
+            'http_cache.cache_dir' => $app['cache.path'] . '/http',
+        ]);
+
+        $app->register(new \Silex\Provider\HttpFragmentServiceProvider());
         $app->register(new \Silex\Provider\ServiceControllerServiceProvider());
 
         $app->register(new \Silex\Provider\HttpFragmentServiceProvider());
 
-        $app->register(new Provider\WebProfilerServiceProvider(), [
-            'profiler.cache_dir' => $app['cache.path'] . '/profiler',
-            'profiler.mount_prefix' => '/_profiler', // this is the default
-        ]);
+//        $app->register(new Provider\WebProfilerServiceProvider(), [
+//            'profiler.cache_dir' => $app['cache.path'] . '/profiler',
+//            'profiler.mount_prefix' => '/_profiler', // this is the default
+//        ]);
 
-        $app->register(new \PommProject\Silex\ProfilerServiceProvider\PommProfilerServiceProvider());
+//        $app->register(new \PommProject\Silex\ProfilerServiceProvider\PommProfilerServiceProvider());
         $app['db'] = function () use ($app) {
             return $app['pomm']['db'];
         };
@@ -74,6 +83,7 @@ class Application extends Silex
             return $app['db']->getModel('App\Model\XmUserModel');
         };
     }
+
     public function loadErrorHandler(Application $app)
     {
 //        ErrorHandler::register();
@@ -116,7 +126,7 @@ class Application extends Silex
         };
 
         $app->get('/', "home.controller:indexAction");
-        $app->get('/one/', "home.controller:indexAction");
+        $app->get('/one/', "home.controller:sidebarAction")->bind('sidebar');
     }
 
 }
