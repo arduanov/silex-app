@@ -5,4 +5,3 @@ $app = new App\Application();
 
 //print_r(get_included_files());
 return $app;
-

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ee68d29e38d7ad6f4c02a3dc9cfccc9f",
+    "hash": "4532f21dae22674287dde838769b7a8e",
     "packages": [
         {
             "name": "doctrine/cache",
@@ -75,6 +75,64 @@
                 "caching"
             ],
             "time": "2015-04-15 00:11:59"
+        },
+        {
+            "name": "filp/whoops",
+            "version": "1.1.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/filp/whoops.git",
+                "reference": "72538eeb70bbfb11964412a3d098d109efd012f7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/72538eeb70bbfb11964412a3d098d109efd012f7",
+                "reference": "72538eeb70bbfb11964412a3d098d109efd012f7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Whoops": "src/"
+                },
+                "classmap": [
+                    "src/deprecated"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Filipe Dobreira",
+                    "homepage": "https://github.com/filp",
+                    "role": "Developer"
+                }
+            ],
+            "description": "php error handling for cool kids",
+            "homepage": "https://github.com/filp/whoops",
+            "keywords": [
+                "error",
+                "exception",
+                "handling",
+                "library",
+                "silex-provider",
+                "whoops",
+                "zf2"
+            ],
+            "time": "2015-06-29 05:42:04"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -656,6 +714,56 @@
             "time": "2015-08-05 16:16:09"
         },
         {
+            "name": "silex/web-profiler",
+            "version": "dev-master",
+            "target-dir": "Silex/Provider",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/silexphp/Silex-WebProfiler.git",
+                "reference": "ff164a034bd902300d93c140e1a8f3b3af6a93ca"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/silexphp/Silex-WebProfiler/zipball/ff164a034bd902300d93c140e1a8f3b3af6a93ca",
+                "reference": "ff164a034bd902300d93c140e1a8f3b3af6a93ca",
+                "shasum": ""
+            },
+            "require": {
+                "silex/silex": "2.0.*@dev",
+                "symfony/stopwatch": "~2.6",
+                "symfony/twig-bridge": "~2.6",
+                "symfony/web-profiler-bundle": "~2.6"
+            },
+            "require-dev": {
+                "symfony/browser-kit": "~2.6",
+                "symfony/css-selector": "~2.6"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Silex\\Provider\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "A WebProfiler for Silex",
+            "homepage": "http://silex.sensiolabs.org/",
+            "time": "2015-06-04 14:28:21"
+        },
+        {
             "name": "symfony/console",
             "version": "v2.7.3",
             "source": {
@@ -1109,6 +1217,64 @@
             "time": "2015-07-31 13:24:29"
         },
         {
+            "name": "symfony/monolog-bridge",
+            "version": "v2.7.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/MonologBridge.git",
+                "reference": "e3d63cd6fd9ffc6dc0d22697c54db2958b95407c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/MonologBridge/zipball/e3d63cd6fd9ffc6dc0d22697c54db2958b95407c",
+                "reference": "e3d63cd6fd9ffc6dc0d22697c54db2958b95407c",
+                "shasum": ""
+            },
+            "require": {
+                "monolog/monolog": "~1.11",
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "symfony/console": "~2.4",
+                "symfony/event-dispatcher": "~2.2",
+                "symfony/http-kernel": "~2.4",
+                "symfony/phpunit-bridge": "~2.7"
+            },
+            "suggest": {
+                "symfony/console": "For the possibility to show log messages in console commands depending on verbosity settings. You need version ~2.3 of the console for it.",
+                "symfony/event-dispatcher": "Needed when using log messages in console commands.",
+                "symfony/http-kernel": "For using the debugging handlers together with the response life cycle of the HTTP kernel."
+            },
+            "type": "symfony-bridge",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Bridge\\Monolog\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Monolog Bridge",
+            "homepage": "https://symfony.com",
+            "time": "2015-06-25 12:52:11"
+        },
+        {
             "name": "symfony/options-resolver",
             "version": "v2.7.3",
             "source": {
@@ -1292,6 +1458,55 @@
                 "url"
             ],
             "time": "2015-07-09 16:07:40"
+        },
+        {
+            "name": "symfony/stopwatch",
+            "version": "v2.7.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Stopwatch.git",
+                "reference": "b07a866719bbac5294c67773340f97b871733310"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Stopwatch/zipball/b07a866719bbac5294c67773340f97b871733310",
+                "reference": "b07a866719bbac5294c67773340f97b871733310",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "~2.7"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Stopwatch\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Stopwatch Component",
+            "homepage": "https://symfony.com",
+            "time": "2015-07-01 18:23:16"
         },
         {
             "name": "symfony/translation",
@@ -1503,6 +1718,62 @@
             "time": "2015-07-31 06:49:15"
         },
         {
+            "name": "symfony/web-profiler-bundle",
+            "version": "v2.7.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/WebProfilerBundle.git",
+                "reference": "fdc66bc5629b6cc34dca5f616367ab9eafc1e9bc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/WebProfilerBundle/zipball/fdc66bc5629b6cc34dca5f616367ab9eafc1e9bc",
+                "reference": "fdc66bc5629b6cc34dca5f616367ab9eafc1e9bc",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9",
+                "symfony/http-kernel": "~2.4",
+                "symfony/routing": "~2.2",
+                "symfony/twig-bridge": "~2.7"
+            },
+            "require-dev": {
+                "symfony/config": "~2.2",
+                "symfony/console": "~2.3",
+                "symfony/dependency-injection": "~2.2",
+                "symfony/phpunit-bridge": "~2.7",
+                "symfony/stopwatch": "~2.2"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Bundle\\WebProfilerBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony WebProfilerBundle",
+            "homepage": "https://symfony.com",
+            "time": "2015-06-12 19:24:25"
+        },
+        {
             "name": "symfony/yaml",
             "version": "v2.7.3",
             "source": {
@@ -1550,6 +1821,96 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2015-07-28 14:07:07"
+        },
+        {
+            "name": "texthtml/whoops-pimple",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/texthtml/whoops-pimple.git",
+                "reference": "a36a35de810a5369d931600abe477f98f2d58c49"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/texthtml/whoops-pimple/zipball/a36a35de810a5369d931600abe477f98f2d58c49",
+                "reference": "a36a35de810a5369d931600abe477f98f2d58c49",
+                "shasum": ""
+            },
+            "require": {
+                "filp/whoops": "~1.1",
+                "pimple/pimple": "~3.0",
+                "symfony/http-kernel": "~2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WhoopsPimple\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "AGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Mathieu Rochette",
+                    "email": "mathieu@rochette.cc",
+                    "homepage": "https://mathieu.rochette.cc"
+                }
+            ],
+            "description": "Integrates the Whoops library into Pimple",
+            "keywords": [
+                "error",
+                "exception",
+                "pimple",
+                "silex",
+                "whoops"
+            ],
+            "time": "2014-11-06 21:22:08"
+        },
+        {
+            "name": "texthtml/whoops-silex",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/texthtml/whoops-silex.git",
+                "reference": "bc4797ba761db398c9f1f532dd00d9487aa46dc3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/texthtml/whoops-silex/zipball/bc4797ba761db398c9f1f532dd00d9487aa46dc3",
+                "reference": "bc4797ba761db398c9f1f532dd00d9487aa46dc3",
+                "shasum": ""
+            },
+            "require": {
+                "silex/silex": "~2.0@dev",
+                "texthtml/whoops-pimple": "~1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WhoopsSilex\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "AGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Mathieu Rochette",
+                    "email": "mathieu@rochette.cc",
+                    "homepage": "https://mathieu.rochette.cc"
+                }
+            ],
+            "description": "Integrates the Whoops library into Silex",
+            "keywords": [
+                "error",
+                "exception",
+                "silex",
+                "whoops"
+            ],
+            "time": "2015-04-09 08:49:20"
         },
         {
             "name": "twig/twig",
@@ -1617,7 +1978,8 @@
         "pomm-project/foundation": 20,
         "pomm-project/model-manager": 20,
         "pomm-project/cli": 20,
-        "pomm-project/pomm-profiler-service-provider": 20
+        "pomm-project/pomm-profiler-service-provider": 20,
+        "silex/web-profiler": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -10,6 +10,8 @@ return [
     'app.path' => $app_path,
     'cache.path' => $app_path . '/cache',
 
+    'monolog.level' => Monolog\Logger::DEBUG,
+
     'monolog.config' => [
         'monolog.logfile' => $app_path . '/logs/' . date('Y-m-d') . '.log',
         'monolog.level' => Monolog\Logger::NOTICE,

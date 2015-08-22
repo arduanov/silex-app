@@ -11,11 +11,9 @@
     "psr-0": {
       "App\\": "src/"
     },
-    "psr-4": {
-      "PommProject\\Silex\\ServiceProvider\\": "src/lib",
-      "Predis\\": "src/lib/",
-      "Sorien\\Provider\\": "src/lib/"
-    }
+    "classmap": [
+      "src/lib/"
+    ]
   },
   "extra": {
     "branch-alias": {
@@ -33,7 +31,10 @@
     "symfony/form": "~2.7",
     "symfony/validator": "~2.7",
     "doctrine/cache": "~1.4",
-    "pomm-project/pomm-profiler-service-provider": "2.0.*@dev"
+    "pomm-project/pomm-profiler-service-provider": "2.0.*@dev",
+    "silex/web-profiler": "~2.0@dev",
+    "texthtml/whoops-silex": "~1.0.3",
+    "symfony/monolog-bridge": "~2.7"
   },
   "require-dev": {
     "codeception/codeception": "~2.1.0"
