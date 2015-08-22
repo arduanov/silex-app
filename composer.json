@@ -1,0 +1,41 @@
+{
+  "name": "arduanov/silex-bootstrap",
+  "description": "Silex bootstrap with Pomm.",
+  "authors": [
+    {
+      "name": "Arduanov Marsel",
+      "email": "arduanov@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-0": {
+      "App\\": "src/"
+    },
+    "psr-4": {
+      "PommProject\\Silex\\ServiceProvider\\": "src/lib",
+      "Predis\\": "src/lib/",
+      "Sorien\\Provider\\": "src/lib/"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "2.0-dev"
+    }
+  },
+  "require": {
+    "php": ">=5.6.0",
+    "silex/silex": "~2.0@dev",
+    "pomm-project/foundation": "2.0.*@dev",
+    "pomm-project/model-manager": "2.0.*@dev",
+    "pomm-project/cli": "2.0.*@dev",
+    "predis/predis": "~1.0",
+    "monolog/monolog": "~1.16",
+    "symfony/form": "~2.7",
+    "symfony/validator": "~2.7",
+    "doctrine/cache": "~1.4",
+    "pomm-project/pomm-profiler-service-provider": "2.0.*@dev"
+  },
+  "require-dev": {
+    "codeception/codeception": "~2.1.0"
+  }
+}

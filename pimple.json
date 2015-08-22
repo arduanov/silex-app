@@ -1,0 +1,337 @@
+[
+    {
+        "name": "routes_factory",
+        "type": "class",
+        "value": "Symfony\\Component\\Routing\\RouteCollection"
+    },
+    {
+        "name": "routes",
+        "type": "class",
+        "value": "Symfony\\Component\\Routing\\RouteCollection"
+    },
+    {
+        "name": "controllers",
+        "type": "class",
+        "value": "Silex\\ControllerCollection"
+    },
+    {
+        "name": "controllers_factory",
+        "type": "class",
+        "value": "Silex\\ControllerCollection"
+    },
+    {
+        "name": "route_class",
+        "type": "string",
+        "value": "Silex\\Route"
+    },
+    {
+        "name": "route_factory",
+        "type": "class",
+        "value": "Silex\\Route"
+    },
+    {
+        "name": "exception_handler",
+        "type": "class",
+        "value": "Silex\\ExceptionHandler"
+    },
+    {
+        "name": "callback_resolver",
+        "type": "class",
+        "value": "Silex\\CallbackResolver"
+    },
+    {
+        "name": "resolver",
+        "type": "class",
+        "value": "Silex\\ControllerResolver"
+    },
+    {
+        "name": "kernel",
+        "type": "class",
+        "value": "Symfony\\Component\\HttpKernel\\HttpKernel"
+    },
+    {
+        "name": "request_stack",
+        "type": "class",
+        "value": "Symfony\\Component\\HttpFoundation\\RequestStack"
+    },
+    {
+        "name": "request.http_port",
+        "type": "int",
+        "value": 80
+    },
+    {
+        "name": "request.https_port",
+        "type": "int",
+        "value": 443
+    },
+    {
+        "name": "debug",
+        "type": "bool",
+        "value": false
+    },
+    {
+        "name": "charset",
+        "type": "string",
+        "value": "UTF-8"
+    },
+    {
+        "name": "logger",
+        "type": "class",
+        "value": "Monolog\\Logger"
+    },
+    {
+        "name": "dispatcher",
+        "type": "class",
+        "value": "Symfony\\Component\\EventDispatcher\\EventDispatcher"
+    },
+    {
+        "name": "url_generator",
+        "type": "class",
+        "value": "Symfony\\Component\\Routing\\Generator\\UrlGenerator"
+    },
+    {
+        "name": "request_matcher",
+        "type": "class",
+        "value": "Silex\\Provider\\Routing\\RedirectableUrlMatcher"
+    },
+    {
+        "name": "request_context",
+        "type": "class",
+        "value": "Symfony\\Component\\Routing\\RequestContext"
+    },
+    {
+        "name": "routing.listener",
+        "type": "class",
+        "value": "Symfony\\Component\\HttpKernel\\EventListener\\RouterListener"
+    },
+    {
+        "name": "APPLICATION_ENVIRONMENT",
+        "type": "string",
+        "value": "sandbox"
+    },
+    {
+        "name": "timezone",
+        "type": "string",
+        "value": "Europe\/Moscow"
+    },
+    {
+        "name": "root.path",
+        "type": "string",
+        "value": "\/var\/www\/pomm-service-provider"
+    },
+    {
+        "name": "cache.path",
+        "type": "string",
+        "value": "\/var\/www\/pomm-service-provider\/cache"
+    },
+    {
+        "name": "storage.path.public",
+        "type": "string",
+        "value": "\/var\/www\/pomm-service-provider\/..\/..\/..\/..\/storage\/public"
+    },
+    {
+        "name": "storage.path.private",
+        "type": "string",
+        "value": "\/var\/www\/pomm-service-provider\/..\/..\/..\/..\/storage\/private"
+    },
+    {
+        "name": "cache.lifetime",
+        "type": "int",
+        "value": 1
+    },
+    {
+        "name": "db.options",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "amqp.options",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "swiftmailer.options",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "config.email.source",
+        "type": "string",
+        "value": "no-reply@tomatoshark.com"
+    },
+    {
+        "name": "config.email.feedback",
+        "type": "string",
+        "value": "feedback@tomatoshark.com"
+    },
+    {
+        "name": "config.email.fromname",
+        "type": "string",
+        "value": "TomatoShark Team"
+    },
+    {
+        "name": "frontend.interfaces",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "aws.config",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "dropbox.config",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "soundcloud.config",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "soundcloud.auth_config",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "facebook.auth.config",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "facebook.app.config",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "google.auth.config",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "twitter.auth.config",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "predis.db",
+        "type": "int",
+        "value": 0
+    },
+    {
+        "name": "predis.options",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "predis.parametrs",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "monolog.config",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "mailchimp.config",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "maximum_file_size",
+        "type": "int",
+        "value": 209715200
+    },
+    {
+        "name": "local.amazon",
+        "type": "bool",
+        "value": false
+    },
+    {
+        "name": "zendesk.config",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "common.marketplace.domain",
+        "type": "string",
+        "value": "storefront"
+    },
+    {
+        "name": "monolog.logger.class",
+        "type": "string",
+        "value": "Monolog\\Logger"
+    },
+    {
+        "name": "monolog",
+        "type": "class",
+        "value": "Monolog\\Logger"
+    },
+    {
+        "name": "monolog.formatter",
+        "type": "class",
+        "value": "Monolog\\Formatter\\LineFormatter"
+    },
+    {
+        "name": "monolog.handler",
+        "type": "class",
+        "value": "Monolog\\Handler\\StreamHandler"
+    },
+    {
+        "name": "monolog.level",
+        "type": "int",
+        "value": 250
+    },
+    {
+        "name": "monolog.listener",
+        "type": "class",
+        "value": "Silex\\EventListener\\LogListener"
+    },
+    {
+        "name": "monolog.name",
+        "type": "string",
+        "value": "application"
+    },
+    {
+        "name": "monolog.bubble",
+        "type": "bool",
+        "value": true
+    },
+    {
+        "name": "monolog.permission",
+        "type": "null",
+        "value": ""
+    },
+    {
+        "name": "monolog.exception.logger_filter",
+        "type": "null",
+        "value": ""
+    },
+    {
+        "name": "monolog.logfile",
+        "type": "string",
+        "value": "\/var\/www\/pomm-service-provider\/log\/2015-08-21.log"
+    },
+    {
+        "name": "monolog.slack.key",
+        "type": "string",
+        "value": "xoxp-4722109569-4722866145-4723089761-26060e"
+    },
+    {
+        "name": "pomm",
+        "type": "class",
+        "value": "PommProject\\Foundation\\Pomm"
+    },
+    {
+        "name": "pomm.configuration",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "pomm.logger.service",
+        "type": "string",
+        "value": "monolog"
+    }
+]
