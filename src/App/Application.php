@@ -29,7 +29,7 @@ class Application extends Silex
         $this->loadErrorHandler($this);
         $this->loadModels($this);
         $this->loadRoutes($this);
-        print_r(get_included_files());
+//        print_r(get_included_files());
 
         return $this;
     }
@@ -40,7 +40,7 @@ class Application extends Silex
         foreach ($config as $key => $value) {
             $app[$key] = $value;
         }
-
+$app['debug']=true;
     }
 
     public function loadProviders(Application $app)
@@ -50,7 +50,7 @@ class Application extends Silex
         $app->register(new Provider\TwigServiceProvider(), [
             'twig.path' => $app['app.path'] . '/resources/view/',
         ]);
-        $app->register(new \Sorien\Provider\PimpleDumpProvider(), ['dump.path' => $app['root.path']]);
+//        $app->register(new \Sorien\Provider\PimpleDumpProvider(), ['dump.path' => $app['root.path']]);
 
         $app->register(new PommProvider\PommServiceProvider(),
             $app['pomm.config']
@@ -64,14 +64,43 @@ class Application extends Silex
         $app->register(new \Silex\Provider\HttpFragmentServiceProvider());
         $app->register(new \Silex\Provider\ServiceControllerServiceProvider());
 
-        $app->register(new \Silex\Provider\HttpFragmentServiceProvider());
+//        $app['security.firewalls'] = [
+//            'admin' => [
+//                'pattern' => '^/admin',
+//                'http' => true,
+//                'users' => [
+//                    // raw password is foo
+//                    'admin' => ['ROLE_ADMIN', '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg=='],
+//                ],
+//            ],
+//        ];
 
-//        $app->register(new Provider\WebProfilerServiceProvider(), [
-//            'profiler.cache_dir' => $app['cache.path'] . '/profiler',
-//            'profiler.mount_prefix' => '/_profiler', // this is the default
-//        ]);
+//        $app['security.firewalls'] = array(
+//            'admin' => array(
+//                'pattern' => '^/admin',
+//                'form' => array('login_path' => '/login', 'check_path' => '/admin'),
+//                'users' => array(
+//                    'admin' => array('ROLE_ADMIN', '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg=='),
+//                ),
+//            ),
+//        );
 
-//        $app->register(new \PommProject\Silex\ProfilerServiceProvider\PommProfilerServiceProvider());
+
+
+
+
+
+
+//        $app->register(new \Silex\Provider\SecurityServiceProvider());
+//        $app->register(new \Silex\Provider\SessionServiceProvider());
+
+
+        $app->register(new Provider\WebProfilerServiceProvider(), [
+            'profiler.cache_dir' => $app['cache.path'] . '/profiler',
+            'profiler.mount_prefix' => '/_profiler', // this is the default
+        ]);
+
+        $app->register(new \PommProject\Silex\ProfilerServiceProvider\PommProfilerServiceProvider());
         $app['db'] = function () use ($app) {
             return $app['pomm']['db'];
         };
@@ -81,6 +110,9 @@ class Application extends Silex
     {
         $app['user.model'] = function () use ($app) {
             return $app['db']->getModel('App\Model\XmUserModel');
+        };
+        $app['track.model'] = function () use ($app) {
+            return $app['db']->getModel('App\Model\XmTrackOriginalModel');
         };
     }
 
@@ -126,7 +158,22 @@ class Application extends Silex
         };
 
         $app->get('/', "home.controller:indexAction");
+        $app->get('/tracks', "home.controller:tracksAction");
         $app->get('/one/', "home.controller:sidebarAction")->bind('sidebar');
+        $app->get('/admin', function () {
+//            print_r(get_included_files());
+            return 'admin';
+        });
+        $app->get('/two', function () {
+            return 'two';
+        });
+
+        $app->get('/login', function(Request $request) use ($app) {
+            return $app['twig']->render('login.twig', array(
+                'error'         => $app['security.last_error']($request),
+                'last_username' => $app['session']->get('_security.last_username'),
+            ));
+        });
     }
 
 }

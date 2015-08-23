@@ -67,7 +67,7 @@
     {
         "name": "debug",
         "type": "bool",
-        "value": false
+        "value": true
     },
     {
         "name": "charset",
@@ -82,7 +82,7 @@
     {
         "name": "dispatcher",
         "type": "class",
-        "value": "Symfony\\Component\\HttpKernel\\Debug\\TraceableEventDispatcher"
+        "value": "Symfony\\Component\\EventDispatcher\\EventDispatcher"
     },
     {
         "name": "url_generator",
@@ -142,7 +142,7 @@
     {
         "name": "cache.lifetime",
         "type": "int",
-        "value": 1
+        "value": 0
     },
     {
         "name": "amqp.options",
@@ -227,27 +227,12 @@
     {
         "name": "monolog.logfile",
         "type": "string",
-        "value": "\/var\/www\/pomm-service-provider\/app\/logs\/2015-08-22.log"
+        "value": "\/var\/www\/pomm-service-provider\/app\/logs\/2015-08-23.log"
     },
     {
         "name": "monolog.slack.key",
         "type": "string",
         "value": ""
-    },
-    {
-        "name": "whoops.error_page_handler",
-        "type": "class",
-        "value": "Whoops\\Handler\\PrettyPageHandler"
-    },
-    {
-        "name": "whoops.exception_handler",
-        "type": "closure",
-        "value": ""
-    },
-    {
-        "name": "whoops",
-        "type": "class",
-        "value": "Whoops\\Run"
     },
     {
         "name": "twig.options",
@@ -385,116 +370,6 @@
         "value": ""
     },
     {
-        "name": "profiler.mount_prefix",
-        "type": "string",
-        "value": "\/_profiler"
-    },
-    {
-        "name": "data_collector.templates",
-        "type": "array",
-        "value": ""
-    },
-    {
-        "name": "data_collectors",
-        "type": "array",
-        "value": ""
-    },
-    {
-        "name": "twig.profiler.profile",
-        "type": "class",
-        "value": "Twig_Profiler_Profile"
-    },
-    {
-        "name": "web_profiler.controller.profiler",
-        "type": "class",
-        "value": "Symfony\\Bundle\\WebProfilerBundle\\Controller\\ProfilerController"
-    },
-    {
-        "name": "web_profiler.controller.router",
-        "type": "class",
-        "value": "Symfony\\Bundle\\WebProfilerBundle\\Controller\\RouterController"
-    },
-    {
-        "name": "web_profiler.controller.exception",
-        "type": "class",
-        "value": "Symfony\\Bundle\\WebProfilerBundle\\Controller\\ExceptionController"
-    },
-    {
-        "name": "web_profiler.toolbar.listener",
-        "type": "class",
-        "value": "Symfony\\Bundle\\WebProfilerBundle\\EventListener\\WebDebugToolbarListener"
-    },
-    {
-        "name": "profiler",
-        "type": "class",
-        "value": "Symfony\\Component\\HttpKernel\\Profiler\\Profiler"
-    },
-    {
-        "name": "profiler.storage",
-        "type": "class",
-        "value": "Symfony\\Component\\HttpKernel\\Profiler\\FileProfilerStorage"
-    },
-    {
-        "name": "profiler.request_matcher",
-        "type": "null",
-        "value": ""
-    },
-    {
-        "name": "profiler.only_exceptions",
-        "type": "bool",
-        "value": false
-    },
-    {
-        "name": "profiler.only_master_requests",
-        "type": "bool",
-        "value": false
-    },
-    {
-        "name": "web_profiler.debug_toolbar.enable",
-        "type": "bool",
-        "value": true
-    },
-    {
-        "name": "web_profiler.debug_toolbar.position",
-        "type": "string",
-        "value": "bottom"
-    },
-    {
-        "name": "web_profiler.debug_toolbar.intercept_redirects",
-        "type": "bool",
-        "value": false
-    },
-    {
-        "name": "profiler.listener",
-        "type": "class",
-        "value": "Symfony\\Component\\HttpKernel\\EventListener\\ProfilerListener"
-    },
-    {
-        "name": "stopwatch",
-        "type": "class",
-        "value": "Symfony\\Component\\Stopwatch\\Stopwatch"
-    },
-    {
-        "name": "code.file_link_format",
-        "type": "null",
-        "value": ""
-    },
-    {
-        "name": "profiler.templates_path",
-        "type": "string",
-        "value": "\/var\/www\/pomm-service-provider\/vendor\/symfony\/web-profiler-bundle\/Resources\/views"
-    },
-    {
-        "name": "profiler.cache_dir",
-        "type": "string",
-        "value": "\/var\/www\/pomm-service-provider\/app\/cache\/profiler"
-    },
-    {
-        "name": "pomm.templates_path",
-        "type": "string",
-        "value": "\/var\/www\/pomm-service-provider\/vendor\/pomm-project\/pomm-profiler-service-provider\/views"
-    },
-    {
         "name": "db",
         "type": "class",
         "value": "PommProject\\ModelManager\\Session"
@@ -503,6 +378,11 @@
         "name": "user.model",
         "type": "class",
         "value": "App\\Model\\XmUserModel"
+    },
+    {
+        "name": "track.model",
+        "type": "class",
+        "value": "App\\Model\\XmTrackOriginalModel"
     },
     {
         "name": "home.controller",

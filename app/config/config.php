@@ -20,7 +20,7 @@ return [
         'monolog.slack.key' => '',
     ],
 
-    'cache.lifetime' => 1,
+    'cache.lifetime' => 0,
 
     'amqp.options' =>
         [

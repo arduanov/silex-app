@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4532f21dae22674287dde838769b7a8e",
+    "hash": "8f6f8067a19e18292a71448147bc1098",
     "packages": [
         {
             "name": "doctrine/cache",
@@ -135,6 +135,54 @@
             "time": "2015-06-29 05:42:04"
         },
         {
+            "name": "gigablah/silex-oauth",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gigablah/silex-oauth.git",
+                "reference": "4188c32823a7b95f142ba280ab82751f90541b3b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gigablah/silex-oauth/zipball/4188c32823a7b95f142ba280ab82751f90541b3b",
+                "reference": "4188c32823a7b95f142ba280ab82751f90541b3b",
+                "shasum": ""
+            },
+            "require": {
+                "lusitanian/oauth": ">=0.3.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Gigablah\\Silex\\OAuth\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Heng",
+                    "email": "bigblah@gmail.com"
+                }
+            ],
+            "description": "Silex OAuth Authentication Provider",
+            "homepage": "https://github.com/gigablah/silex-oauth",
+            "keywords": [
+                "oauth",
+                "silex"
+            ],
+            "time": "2015-06-30 03:04:47"
+        },
+        {
             "name": "jdorn/sql-formatter",
             "version": "v1.2.17",
             "source": {
@@ -183,6 +231,68 @@
                 "sql"
             ],
             "time": "2014-01-12 16:20:24"
+        },
+        {
+            "name": "lusitanian/oauth",
+            "version": "v0.3.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Lusitanian/PHPoAuthLib.git",
+                "reference": "ac5a1cd5a4519143728dce2213936eea302edf8a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Lusitanian/PHPoAuthLib/zipball/ac5a1cd5a4519143728dce2213936eea302edf8a",
+                "reference": "ac5a1cd5a4519143728dce2213936eea302edf8a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*",
+                "predis/predis": "0.8.*@dev",
+                "symfony/http-foundation": "~2.1"
+            },
+            "suggest": {
+                "ext-openssl": "Allows for usage of secure connections with the stream-based HTTP client.",
+                "predis/predis": "Allows using the Redis storage backend.",
+                "symfony/http-foundation": "Allows using the Symfony Session storage backend."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "OAuth": "src",
+                    "OAuth\\Unit": "tests"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David Desberg",
+                    "email": "david@daviddesberg.com"
+                },
+                {
+                    "name": "Pieter Hordijk",
+                    "email": "info@pieterhordijk.com"
+                }
+            ],
+            "description": "PHP 5.3+ oAuth 1/2 Library",
+            "keywords": [
+                "Authentication",
+                "authorization",
+                "oauth",
+                "security"
+            ],
+            "time": "2014-09-05 15:19:58"
         },
         {
             "name": "monolog/monolog",
@@ -312,12 +422,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pomm-project/Cli.git",
-                "reference": "62aefb9177370a0dcb39afc5544b550a143e0608"
+                "reference": "ec9503de1cac2d9dd5777701d55abc5663aa7a10"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pomm-project/Cli/zipball/62aefb9177370a0dcb39afc5544b550a143e0608",
-                "reference": "62aefb9177370a0dcb39afc5544b550a143e0608",
+                "url": "https://api.github.com/repos/pomm-project/Cli/zipball/ec9503de1cac2d9dd5777701d55abc5663aa7a10",
+                "reference": "ec9503de1cac2d9dd5777701d55abc5663aa7a10",
                 "shasum": ""
             },
             "require": {
@@ -365,7 +475,7 @@
                 "pomm",
                 "postgresql"
             ],
-            "time": "2015-08-15 09:58:38"
+            "time": "2015-08-23 10:45:01"
         },
         {
             "name": "pomm-project/foundation",
@@ -373,12 +483,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pomm-project/Foundation.git",
-                "reference": "da0568fee95b7fe7c23e6ade51151e2d1cf9a964"
+                "reference": "91c9158c86bd428b24d5f954ffb5617d83dfdc02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/da0568fee95b7fe7c23e6ade51151e2d1cf9a964",
-                "reference": "da0568fee95b7fe7c23e6ade51151e2d1cf9a964",
+                "url": "https://api.github.com/repos/pomm-project/Foundation/zipball/91c9158c86bd428b24d5f954ffb5617d83dfdc02",
+                "reference": "91c9158c86bd428b24d5f954ffb5617d83dfdc02",
                 "shasum": ""
             },
             "require": {
@@ -419,7 +529,7 @@
                 "pomm",
                 "postgresql"
             ],
-            "time": "2015-08-15 09:55:30"
+            "time": "2015-08-22 10:44:04"
         },
         {
             "name": "pomm-project/model-manager",
@@ -427,12 +537,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pomm-project/ModelManager.git",
-                "reference": "7069cc4d0a7c87a3ebcfd3d17c55b9a61b4f3c99"
+                "reference": "42370d8024b41ad32ed94a6a4e51fefed7342a9e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pomm-project/ModelManager/zipball/7069cc4d0a7c87a3ebcfd3d17c55b9a61b4f3c99",
-                "reference": "7069cc4d0a7c87a3ebcfd3d17c55b9a61b4f3c99",
+                "url": "https://api.github.com/repos/pomm-project/ModelManager/zipball/42370d8024b41ad32ed94a6a4e51fefed7342a9e",
+                "reference": "42370d8024b41ad32ed94a6a4e51fefed7342a9e",
                 "shasum": ""
             },
             "require": {
@@ -477,7 +587,7 @@
                 "pomm",
                 "postgresql"
             ],
-            "time": "2015-08-18 16:02:27"
+            "time": "2015-08-23 10:29:09"
         },
         {
             "name": "pomm-project/pomm-profiler-service-provider",
@@ -485,12 +595,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pomm-project/pomm-profiler-service-provider.git",
-                "reference": "2e9230cce2682d4505d0e48fd23884261cd9f49d"
+                "reference": "49903ac710d8729c22c4d6457f9f7f0018d5dc86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pomm-project/pomm-profiler-service-provider/zipball/2e9230cce2682d4505d0e48fd23884261cd9f49d",
-                "reference": "2e9230cce2682d4505d0e48fd23884261cd9f49d",
+                "url": "https://api.github.com/repos/pomm-project/pomm-profiler-service-provider/zipball/49903ac710d8729c22c4d6457f9f7f0018d5dc86",
+                "reference": "49903ac710d8729c22c4d6457f9f7f0018d5dc86",
                 "shasum": ""
             },
             "require": {
@@ -522,7 +632,7 @@
             ],
             "authors": [
                 {
-                    "name": "Jérôme Macias",
+                    "name": "Jérôme MACIAS",
                     "email": "jerome.macias@gmail.com"
                 },
                 {
@@ -536,7 +646,7 @@
                 "pomm",
                 "silex"
             ],
-            "time": "2014-12-08 22:15:11"
+            "time": "2015-08-22 16:42:41"
         },
         {
             "name": "predis/predis",
@@ -632,12 +742,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silexphp/Silex.git",
-                "reference": "48a3fdc483bc7e5e27750afaf2325682ea2b325f"
+                "reference": "8a77fe76f844d01ba5723be1b23c9e1adae1b5f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silexphp/Silex/zipball/48a3fdc483bc7e5e27750afaf2325682ea2b325f",
-                "reference": "48a3fdc483bc7e5e27750afaf2325682ea2b325f",
+                "url": "https://api.github.com/repos/silexphp/Silex/zipball/8a77fe76f844d01ba5723be1b23c9e1adae1b5f7",
+                "reference": "8a77fe76f844d01ba5723be1b23c9e1adae1b5f7",
                 "shasum": ""
             },
             "require": {
@@ -656,6 +766,7 @@
                 "doctrine/dbal": "~2.2",
                 "monolog/monolog": "~1.4,>=1.4.1",
                 "swiftmailer/swiftmailer": "5.*",
+                "symfony/asset": "~2.7",
                 "symfony/browser-kit": "~2.7",
                 "symfony/config": "~2.7",
                 "symfony/css-selector": "~2.7",
@@ -711,7 +822,7 @@
             "keywords": [
                 "microframework"
             ],
-            "time": "2015-08-05 16:16:09"
+            "time": "2015-08-23 07:09:04"
         },
         {
             "name": "silex/web-profiler",
@@ -762,6 +873,59 @@
             "description": "A WebProfiler for Silex",
             "homepage": "http://silex.sensiolabs.org/",
             "time": "2015-06-04 14:28:21"
+        },
+        {
+            "name": "symfony/asset",
+            "version": "v2.7.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/asset.git",
+                "reference": "f5f5f099a40db2fe5d3dab6f74e17c45c70e3a45"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/asset/zipball/f5f5f099a40db2fe5d3dab6f74e17c45c70e3a45",
+                "reference": "f5f5f099a40db2fe5d3dab6f74e17c45c70e3a45",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "symfony/http-foundation": "~2.4",
+                "symfony/phpunit-bridge": "~2.7"
+            },
+            "suggest": {
+                "symfony/http-foundation": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Asset\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Asset Component",
+            "homepage": "https://symfony.com",
+            "time": "2015-07-25 20:47:31"
         },
         {
             "name": "symfony/console",
@@ -1460,6 +1624,82 @@
             "time": "2015-07-09 16:07:40"
         },
         {
+            "name": "symfony/security",
+            "version": "v2.7.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Security.git",
+                "reference": "3d137c73cd8c6cb584e3f478b52de00e751d2289"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Security/zipball/3d137c73cd8c6cb584e3f478b52de00e751d2289",
+                "reference": "3d137c73cd8c6cb584e3f478b52de00e751d2289",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9",
+                "symfony/event-dispatcher": "~2.2",
+                "symfony/http-foundation": "~2.1",
+                "symfony/http-kernel": "~2.4"
+            },
+            "replace": {
+                "symfony/security-acl": "self.version",
+                "symfony/security-core": "self.version",
+                "symfony/security-csrf": "self.version",
+                "symfony/security-http": "self.version"
+            },
+            "require-dev": {
+                "doctrine/common": "~2.2",
+                "doctrine/dbal": "~2.2",
+                "ircmaxell/password-compat": "~1.0",
+                "psr/log": "~1.0",
+                "symfony/expression-language": "~2.6",
+                "symfony/intl": "~2.3",
+                "symfony/phpunit-bridge": "~2.7",
+                "symfony/routing": "~2.2",
+                "symfony/translation": "~2.0,>=2.0.5",
+                "symfony/validator": "~2.5,>=2.5.5"
+            },
+            "suggest": {
+                "doctrine/dbal": "For using the built-in ACL implementation",
+                "ircmaxell/password-compat": "For using the BCrypt password encoder in PHP <5.5",
+                "symfony/class-loader": "For using the ACL generateSql script",
+                "symfony/expression-language": "For using the expression voter",
+                "symfony/finder": "For using the ACL generateSql script",
+                "symfony/routing": "For using the HttpUtils class to create sub-requests, redirect the user, and match URLs",
+                "symfony/validator": "For using the user password constraint"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Security\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Security Component",
+            "homepage": "https://symfony.com",
+            "time": "2015-07-28 14:07:07"
+        },
+        {
             "name": "symfony/stopwatch",
             "version": "v2.7.3",
             "source": {
@@ -1979,7 +2219,8 @@
         "pomm-project/model-manager": 20,
         "pomm-project/cli": 20,
         "pomm-project/pomm-profiler-service-provider": 20,
-        "silex/web-profiler": 20
+        "silex/web-profiler": 20,
+        "gigablah/silex-oauth": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -23,9 +23,10 @@ class HomeController
 //throw new \Exception(123);
 
         $response = new Response();
-        $response->setMaxAge(30);
+//        $response->setMaxAge(30);
         $response->setSharedMaxAge(30);
         $response->setTtl(30);
+
         return $app->render('projects.twig', $data, $response);
     }
 
@@ -38,5 +39,15 @@ class HomeController
         $response = new Response();
         $response->setTtl(30);
         return $app->render('project.twig', $data, $response);
+    }
+
+    public function tracksAction(Application $app, Request $reqeust)
+    {
+        $sellers = $app['track.model']->findWithMetadata();
+        $data = [];
+//        $data = ['tracks' => $sellers->getIterator()];
+        return json_encode($sellers->extract());
+
+        return 100;//$app->render('project.twig', $data);
     }
 }
