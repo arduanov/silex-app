@@ -46,8 +46,8 @@ class HomeController
         $sellers = $app['track.model']->findWithMetadata();
         $data = [];
 //        $data = ['tracks' => $sellers->getIterator()];
-        return json_encode($sellers->extract());
-
-        return 100;//$app->render('project.twig', $data);
+          //  print_r($sellers);
+//phpinfo();
+        return $app->json($sellers);//$app->render('project.twig', $data);
     }
 }

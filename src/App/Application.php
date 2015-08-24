@@ -95,12 +95,12 @@ $app['debug']=true;
 //        $app->register(new \Silex\Provider\SessionServiceProvider());
 
 
-        $app->register(new Provider\WebProfilerServiceProvider(), [
-            'profiler.cache_dir' => $app['cache.path'] . '/profiler',
-            'profiler.mount_prefix' => '/_profiler', // this is the default
-        ]);
-
-        $app->register(new \PommProject\Silex\ProfilerServiceProvider\PommProfilerServiceProvider());
+//        $app->register(new Provider\WebProfilerServiceProvider(), [
+//            'profiler.cache_dir' => $app['cache.path'] . '/profiler',
+//            'profiler.mount_prefix' => '/_profiler', // this is the default
+//        ]);
+//
+//        $app->register(new \PommProject\Silex\ProfilerServiceProvider\PommProfilerServiceProvider());
         $app['db'] = function () use ($app) {
             return $app['pomm']['db'];
         };

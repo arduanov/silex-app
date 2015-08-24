@@ -50,17 +50,17 @@ from
 INNER JOIN xm_price price ON u.id = price.user_id
 where
     t.id > 5000
-group by t.id,ts.id LIMIT 100
+group by t.id,ts.id LIMIT 50
 SQL;
 
 //        SELECT t.id,json_agg(mv) metadata
 //FROM xm_track_original t
 //  LEFT JOIN xm_metadata_value mv on t.id = mv.track_id
         // step 2
-        $projection = $this->createProjection();
-//                           ->setField('metadata', "json_agg(mv) metadata", 'json');
+        $projection = $this->createProjection()
+                           ->setField('metadata', "json_agg(mv) metadata", 'json');
         $projection->setField('sample','ts.id sample','varchar');
-        $projection->setField('vaweform','ts.waveform vaweform','varchar');
+        $projection->setField('waveform','ts.waveform waveform','varchar');
 //        $projection->setField('x_user','json_agg(DISTINCT u) x_user','json');
 
         // step 3
@@ -86,6 +86,17 @@ SQL;
 //        print_r($sql);
 //        exit;
         // step 4
-        return $this->query($sql, [], $projection);
+
+        $data = $this->query($sql, [], $projection);
+//        $data = $data->extract();
+
+//        foreach ($data as &$item) {
+//            if(!empty($item['waveform'])){
+//                $item['waveform']=unserialize($item['waveform']);
+//            }
+//        }
+
+
+        return $data;
     }
 }
