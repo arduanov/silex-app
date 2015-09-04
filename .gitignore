@@ -7,5 +7,6 @@ app/cache/*
 !app/cache/.gitkeep
 app/data/*
 !app/data/.gitkeep
-
+bower_components
+.vagrant
 
