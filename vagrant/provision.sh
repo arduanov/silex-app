@@ -35,7 +35,6 @@ echo Installing Nginx...
 
 apt-get install -yqq nginx
 cp /vagrant/vagrant/config/nginx/* /etc/nginx/sites-enabled/
-
 service nginx restart
 
 

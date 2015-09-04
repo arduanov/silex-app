@@ -22,7 +22,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   	symfony.vm.synced_folder "./", "/var/www/", :mount_options => ['nolock,vers=3,udp,noatime,actimeo=1'], :export_options => ['async,insecure,no_subtree_check,no_acl,no_root_squash'], :nfs => true
 
-
 	symfony.vm.provider :virtualbox do |vb|
 	  vb.name = "symfony"
 	  vb.customize ["modifyvm", :id, "--memory", "2048"]
