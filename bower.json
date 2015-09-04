@@ -1,0 +1,12 @@
+{
+    "name": "pomm",
+    "authors": [
+        "Beelab <info@bee-lab.net>",
+        "arduanov"
+    ],
+    "private": true,
+    "dependencies": {
+        "bootstrap": "*",
+        "dropzone": "*"
+    }
+}
