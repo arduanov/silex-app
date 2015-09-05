@@ -30,6 +30,12 @@ class HomeController
         return $app->render('projects.twig', $data, $response);
     }
 
+    public function test(Application $app, Request $reqeust)
+    {
+
+        return $app->render('admin/layout.twig', []);
+    }
+
     public function sidebarAction(Application $app, Request $reqeust)
     {
         $where = new \PommProject\Foundation\Where('role = $*', ['buyer']);

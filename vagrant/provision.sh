@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # DEBIAN_FRONTEND=noninteractive
 
-sudo timedatectl set-timezone Europe/Moscow
+apt-get update
+timedatectl set-timezone Europe/Moscow
 
 ##
 # Postgresql
@@ -44,15 +45,4 @@ curl -sS https://getcomposer.org/installer | php
 mv composer.phar /usr/local/bin/composer
 
 
-echo Installing BowerPHP...
-
-composer global require "beelab/bowerphp 0.3.*@beta"
-echo "export PATH=~/.composer/vendor/bin:$PATH" > ~/.bash_profile
-source ~/.bash_profile
-
-
-echo Installing Project...
-
-cd /var/www
-composer install
-bowerphp install
+#su vagrant -l /vagrant/vagrant/project.sh

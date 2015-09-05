@@ -17,7 +17,8 @@ use WhoopsSilex\WhoopsServiceProvider;
 class Application extends Silex
 {
     use Silex\TwigTrait;
-//    use Silex\UrlGeneratorTrait;
+    use Silex\UrlGeneratorTrait;
+
 //    use Silex\SecurityTrait;
 
     public function __construct()
@@ -40,7 +41,7 @@ class Application extends Silex
         foreach ($config as $key => $value) {
             $app[$key] = $value;
         }
-$app['debug']=true;
+        $app['debug'] = true;
     }
 
     public function loadProviders(Application $app)
@@ -48,7 +49,17 @@ $app['debug']=true;
         $app->register(new Provider\MonologServiceProvider(), $app['monolog.config']);
 //        $app->register(new WhoopsServiceProvider);
         $app->register(new Provider\TwigServiceProvider(), [
-            'twig.path' => $app['app.path'] . '/resources/view/',
+            'twig.path' => $app['app.path'] . '/view/',
+        ]);
+        $app->register(new Provider\AssetServiceProvider(), [
+            //'assets.version' => 'v1',
+//            'assets.base_path' => $app['root.path'],
+            'assets.named_packages' => [
+                'css' => [
+                    'version' => 'v1',
+                    'base_path' => '/asset/css'
+                ]
+            ]
         ]);
 //        $app->register(new \Sorien\Provider\PimpleDumpProvider(), ['dump.path' => $app['root.path']]);
 
@@ -84,11 +95,6 @@ $app['debug']=true;
 //                ),
 //            ),
 //        );
-
-
-
-
-
 
 
 //        $app->register(new \Silex\Provider\SecurityServiceProvider());
@@ -158,6 +164,7 @@ $app['debug']=true;
         };
 
         $app->get('/', "home.controller:indexAction");
+        $app->get('/test', "home.controller:test");
         $app->get('/tracks', "home.controller:tracksAction");
         $app->get('/one/', "home.controller:sidebarAction")->bind('sidebar');
         $app->get('/admin', function () {
@@ -168,11 +175,11 @@ $app['debug']=true;
             return 'two';
         });
 
-        $app->get('/login', function(Request $request) use ($app) {
-            return $app['twig']->render('login.twig', array(
-                'error'         => $app['security.last_error']($request),
+        $app->get('/login', function (Request $request) use ($app) {
+            return $app['twig']->render('login.twig', [
+                'error' => $app['security.last_error']($request),
                 'last_username' => $app['session']->get('_security.last_username'),
-            ));
+            ]);
         });
     }
 

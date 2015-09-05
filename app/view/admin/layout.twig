@@ -3,15 +3,10 @@
     <head>
         <meta charset="utf-8" />
         <title>{% block title '' %} | Sismo</title>
+
+        {{ asset('/bootstrap.min.css','css') }}
     </head>
     <body>
-        <div id="content">
-            {% block content '' %}
-        </div>
-        <div id="sidebar">
-            {{ render_esi(url('sidebar')) }}
-        </div>
-        <footer>
-        </footer>
+     123
     </body>
 </html>
