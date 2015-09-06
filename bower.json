@@ -1,12 +1,14 @@
 {
-    "name": "pomm",
-    "authors": [
-        "Beelab <info@bee-lab.net>",
-        "arduanov"
-    ],
-    "private": true,
-    "dependencies": {
-        "bootstrap": "*",
-        "dropzone": "*"
-    }
+  "name": "pomm",
+  "authors": [
+    "arduanov"
+  ],
+  "private": true,
+  "dependencies": {
+    "bootstrap-markdown": "*",
+    "bootstrap-material-design": "*",
+    "bootstrap-tagsinput": "*",
+    "dropzone": "*",
+    "eonasdan-bootstrap-datetimepicker": "*"
+  }
 }

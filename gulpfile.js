@@ -3,15 +3,29 @@ var gulp = require('gulp');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
+var pako = require('gulp-pako');
 
 
 var paths = {
-    js: [
-        'bower_components/bootstrap/dist/js/bootstrap.min.js',
-        'bower_components/jquery/dist/jquery.min.js'
-    ],
+
     css: [
-        'bower_components/bootstrap/dist/css/bootstrap.min.css'
+        'bower_components/bootstrap/dist/css/bootstrap.min.css',
+        'bower_components/bootstrap-material-design/dist/css/material.min.css',
+        'bower_components/bootstrap-material-design/dist/css/roboto.css',
+        'bower_components/bootstrap-material-design/dist/css/ripples.min.css',
+        'bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css',
+
+    ],
+    js: [
+        'bower_components/jquery/dist/jquery.min.js',
+        'bower_components/bootstrap/dist/js/bootstrap.min.js',
+        'bower_components/bootstrap-material-design/dist/js/material.min.js',
+        'bower_components/bootstrap-material-design/dist/js/ripples.min.js',
+        'bower_components/bootstrap-markdown/js/bootstrap-markdown.js',
+        'bower_components/moment/min/moment.min.js',
+        'bower_components/moment/locale/en-gb.js',
+        'bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
+        'app/asset/admin.js',
     ],
     watch: []
 };

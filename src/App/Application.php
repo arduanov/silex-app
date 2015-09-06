@@ -58,6 +58,10 @@ class Application extends Silex
                 'css' => [
                     'version' => 'v1',
                     'base_path' => '/asset/css'
+                ],
+                'js' => [
+                    'version' => 'v1',
+                    'base_path' => '/asset/js'
                 ]
             ]
         ]);
