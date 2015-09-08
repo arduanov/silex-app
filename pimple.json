@@ -1,0 +1,392 @@
+[
+    {
+        "name": "routes_factory",
+        "type": "class",
+        "value": "Symfony\\Component\\Routing\\RouteCollection"
+    },
+    {
+        "name": "routes",
+        "type": "class",
+        "value": "Symfony\\Component\\Routing\\RouteCollection"
+    },
+    {
+        "name": "controllers",
+        "type": "class",
+        "value": "Silex\\ControllerCollection"
+    },
+    {
+        "name": "controllers_factory",
+        "type": "class",
+        "value": "Silex\\ControllerCollection"
+    },
+    {
+        "name": "route_class",
+        "type": "string",
+        "value": "Silex\\Route"
+    },
+    {
+        "name": "route_factory",
+        "type": "class",
+        "value": "Silex\\Route"
+    },
+    {
+        "name": "exception_handler",
+        "type": "class",
+        "value": "Silex\\ExceptionHandler"
+    },
+    {
+        "name": "callback_resolver",
+        "type": "class",
+        "value": "Silex\\CallbackResolver"
+    },
+    {
+        "name": "resolver",
+        "type": "class",
+        "value": "Silex\\ServiceControllerResolver"
+    },
+    {
+        "name": "kernel",
+        "type": "class",
+        "value": "Symfony\\Component\\HttpKernel\\HttpKernel"
+    },
+    {
+        "name": "request_stack",
+        "type": "class",
+        "value": "Symfony\\Component\\HttpFoundation\\RequestStack"
+    },
+    {
+        "name": "request.http_port",
+        "type": "int",
+        "value": 80
+    },
+    {
+        "name": "request.https_port",
+        "type": "int",
+        "value": 443
+    },
+    {
+        "name": "debug",
+        "type": "bool",
+        "value": true
+    },
+    {
+        "name": "charset",
+        "type": "string",
+        "value": "UTF-8"
+    },
+    {
+        "name": "logger",
+        "type": "class",
+        "value": "Symfony\\Bridge\\Monolog\\Logger"
+    },
+    {
+        "name": "dispatcher",
+        "type": "class",
+        "value": "Symfony\\Component\\EventDispatcher\\EventDispatcher"
+    },
+    {
+        "name": "url_generator",
+        "type": "class",
+        "value": "Symfony\\Component\\Routing\\Generator\\UrlGenerator"
+    },
+    {
+        "name": "request_matcher",
+        "type": "class",
+        "value": "Silex\\Provider\\Routing\\RedirectableUrlMatcher"
+    },
+    {
+        "name": "request_context",
+        "type": "class",
+        "value": "Symfony\\Component\\Routing\\RequestContext"
+    },
+    {
+        "name": "routing.listener",
+        "type": "class",
+        "value": "Symfony\\Component\\HttpKernel\\EventListener\\RouterListener"
+    },
+    {
+        "name": "environment",
+        "type": "string",
+        "value": "sandbox"
+    },
+    {
+        "name": "root.path",
+        "type": "string",
+        "value": "\/var\/www\/pomm-service-provider"
+    },
+    {
+        "name": "app.path",
+        "type": "string",
+        "value": "\/var\/www\/pomm-service-provider\/app"
+    },
+    {
+        "name": "cache.path",
+        "type": "string",
+        "value": "\/var\/www\/pomm-service-provider\/app\/cache"
+    },
+    {
+        "name": "fragment.path",
+        "type": "string",
+        "value": "\/_fragment"
+    },
+    {
+        "name": "monolog.level",
+        "type": "int",
+        "value": 250
+    },
+    {
+        "name": "monolog.config",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "cache.lifetime",
+        "type": "int",
+        "value": 0
+    },
+    {
+        "name": "amqp.options",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "swiftmailer.options",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "predis.db",
+        "type": "int",
+        "value": 0
+    },
+    {
+        "name": "predis.options",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "predis.parametrs",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "pomm.config",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "monolog.handler.debug",
+        "type": "class",
+        "value": "Symfony\\Bridge\\Monolog\\Handler\\DebugHandler"
+    },
+    {
+        "name": "monolog.logger.class",
+        "type": "string",
+        "value": "Symfony\\Bridge\\Monolog\\Logger"
+    },
+    {
+        "name": "monolog",
+        "type": "class",
+        "value": "Symfony\\Bridge\\Monolog\\Logger"
+    },
+    {
+        "name": "monolog.formatter",
+        "type": "class",
+        "value": "Monolog\\Formatter\\LineFormatter"
+    },
+    {
+        "name": "monolog.handler",
+        "type": "class",
+        "value": "Monolog\\Handler\\StreamHandler"
+    },
+    {
+        "name": "monolog.listener",
+        "type": "class",
+        "value": "Silex\\EventListener\\LogListener"
+    },
+    {
+        "name": "monolog.name",
+        "type": "string",
+        "value": "application"
+    },
+    {
+        "name": "monolog.bubble",
+        "type": "bool",
+        "value": true
+    },
+    {
+        "name": "monolog.permission",
+        "type": "null",
+        "value": ""
+    },
+    {
+        "name": "monolog.exception.logger_filter",
+        "type": "null",
+        "value": ""
+    },
+    {
+        "name": "monolog.logfile",
+        "type": "string",
+        "value": "\/var\/www\/pomm-service-provider\/app\/logs\/2015-08-23.log"
+    },
+    {
+        "name": "monolog.slack.key",
+        "type": "string",
+        "value": ""
+    },
+    {
+        "name": "twig.options",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "twig.form.templates",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "twig.path",
+        "type": "string",
+        "value": "\/var\/www\/pomm-service-provider\/app\/resources\/view\/"
+    },
+    {
+        "name": "twig.templates",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "twig",
+        "type": "class",
+        "value": "Twig_Environment"
+    },
+    {
+        "name": "twig.loader.filesystem",
+        "type": "class",
+        "value": "Twig_Loader_Filesystem"
+    },
+    {
+        "name": "twig.loader.array",
+        "type": "class",
+        "value": "Twig_Loader_Array"
+    },
+    {
+        "name": "twig.loader",
+        "type": "class",
+        "value": "Twig_Loader_Chain"
+    },
+    {
+        "name": "twig.environment_factory",
+        "type": "closure",
+        "value": ""
+    },
+    {
+        "name": "pomm",
+        "type": "class",
+        "value": "PommProject\\Foundation\\Pomm"
+    },
+    {
+        "name": "pomm.configuration",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "pomm.logger.service",
+        "type": "string",
+        "value": "monolog"
+    },
+    {
+        "name": "http_cache",
+        "type": "class",
+        "value": "Silex\\Provider\\HttpCache\\HttpCache"
+    },
+    {
+        "name": "http_cache.esi",
+        "type": "class",
+        "value": "Symfony\\Component\\HttpKernel\\HttpCache\\Esi"
+    },
+    {
+        "name": "http_cache.store",
+        "type": "class",
+        "value": "Symfony\\Component\\HttpKernel\\HttpCache\\Store"
+    },
+    {
+        "name": "http_cache.esi_listener",
+        "type": "class",
+        "value": "Symfony\\Component\\HttpKernel\\EventListener\\SurrogateListener"
+    },
+    {
+        "name": "http_cache.options",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "http_cache.cache_dir",
+        "type": "string",
+        "value": "\/var\/www\/pomm-service-provider\/app\/cache\/http"
+    },
+    {
+        "name": "fragment.handler",
+        "type": "class",
+        "value": "Symfony\\Component\\HttpKernel\\Fragment\\FragmentHandler"
+    },
+    {
+        "name": "fragment.renderer.inline",
+        "type": "class",
+        "value": "Symfony\\Component\\HttpKernel\\Fragment\\InlineFragmentRenderer"
+    },
+    {
+        "name": "fragment.renderer.hinclude",
+        "type": "class",
+        "value": "Symfony\\Component\\HttpKernel\\Fragment\\HIncludeFragmentRenderer"
+    },
+    {
+        "name": "fragment.renderer.esi",
+        "type": "class",
+        "value": "Symfony\\Component\\HttpKernel\\Fragment\\EsiFragmentRenderer"
+    },
+    {
+        "name": "fragment.listener",
+        "type": "class",
+        "value": "Symfony\\Component\\HttpKernel\\EventListener\\FragmentListener"
+    },
+    {
+        "name": "uri_signer",
+        "type": "class",
+        "value": "Symfony\\Component\\HttpKernel\\UriSigner"
+    },
+    {
+        "name": "uri_signer.secret",
+        "type": "string",
+        "value": "2713a582157f16edcf6c318ca2d1f508"
+    },
+    {
+        "name": "fragment.renderer.hinclude.global_template",
+        "type": "null",
+        "value": ""
+    },
+    {
+        "name": "fragment.renderers",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "db",
+        "type": "class",
+        "value": "PommProject\\ModelManager\\Session"
+    },
+    {
+        "name": "user.model",
+        "type": "class",
+        "value": "App\\Model\\XmUserModel"
+    },
+    {
+        "name": "track.model",
+        "type": "class",
+        "value": "App\\Model\\XmTrackOriginalModel"
+    },
+    {
+        "name": "home.controller",
+        "type": "class",
+        "value": "App\\Controller\\HomeController"
+    }
+]

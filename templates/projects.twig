@@ -1,0 +1,12 @@
+{% extends 'layout.twig' %}
+
+
+{% block title 'Projects' %}
+
+{% block content %}
+    <ul>
+    {% for track in tracks %}
+        <li>{{ track.id }}</li>
+    {% endfor %}
+    </ul>
+{% endblock %}

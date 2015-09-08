@@ -1,0 +1,14 @@
+{
+  "name": "pomm",
+  "authors": [
+    "arduanov"
+  ],
+  "private": true,
+  "dependencies": {
+    "marked": "*",
+    "bootstrap-material-design": "*",
+    "bootstrap-tagsinput": "*",
+    "dropzone": "*",
+    "eonasdan-bootstrap-datetimepicker": "*"
+  }
+}
