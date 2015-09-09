@@ -198,27 +198,24 @@ class Record
         return $this->findBy([]);
     }
 
-    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+    public function findBy(array $criteria, array $orderBy = [], $limit = null, $offset = null)
     {
         $qb = self::$CONN->createQueryBuilder();
         $qb->select($this->getColumns())
            ->from($this->tableName());
 
         foreach ($criteria as $key => $value) {
-$type = null;
-
-            if(is_array($value)){
+            $type = null;
+            if (is_array($value)) {
                 $type = DBAL\Connection::PARAM_STR_ARRAY;
             }
-            $where = $key . ' = :param_' . $key;
+            $where = $key . ' = :' . $key;
             $qb->andWhere($where)
-               ->setParameter(':param_' . $key, $value,$type);
+               ->setParameter(':' . $key, $value, $type);
         }
-
-
-//if($orderBy){
-//    $qb->orderBy()
-//}
+        foreach ($orderBy as $sort => $order) {
+            $qb->addOrderBy($sort, $order);
+        }
         if ($limit) {
             $qb->setMaxResults($limit);
         }
@@ -228,6 +225,14 @@ $type = null;
 
         return $this->findByQueryBuilder($qb);
     }
+
+//    public function findBySql($sql)
+//    {
+//        $qb = self::$CONN->query();
+//
+//
+//        return '';
+//    }
 
     /**
      * Returns a single object, retrieved from the database.
