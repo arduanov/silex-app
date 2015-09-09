@@ -15,7 +15,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	config.vm.hostname = "symfony.dev"
 
 	# speedup filesystem
-	config.vm.synced_folder "./", "/var/www/", :mount_options => ['nolock,vers=3,udp,noatime,actimeo=1'], :export_options => ['async,insecure,no_subtree_check,no_acl,no_root_squash'], :nfs => true
+	config.vm.synced_folder "./", "/var/www/silex", :mount_options => ['nolock,vers=3,udp,noatime,actimeo=1'], :export_options => ['async,insecure,no_subtree_check,no_acl,no_root_squash'], :nfs => true
 
 	#config.vm.synced_folder "./", "/var/www/", owner: "vagrant", group: "www-data", mount_options: ["dmode=775,fmode=664"]
 

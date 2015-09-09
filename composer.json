@@ -25,6 +25,7 @@
     "silex/silex": "~2.0@dev",
     "doctrine/migrations": "1.0.*@dev",
     "doctrine/dbal": "~2.5",
+    "doctrine/orm": "~2.5",
     "predis/predis": "~1.0",
     "monolog/monolog": "~1.16",
     "symfony/config": "~2.7",

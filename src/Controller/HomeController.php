@@ -34,16 +34,20 @@ class HomeController
     public function record(Application $app, Request $reqeust)
     {
         \SimpleRecord\Record::connection($app['db']);
-//        $post = new \Model\Post();
-//        $post->description = 'descr';
-//        $result = $post->save();
-
         $post = new \Model\Post();
-        $db_post = $post->findOne();
+//        $post->description = 'descr55';
 //        $result = $post->save();
 
+//        $post = new \Model\Post();
+//        $db_post = $post->findOne();
+//        $result = $post->save();
 
+//        $db_post->name  = 'testname';
+//        $db_post->save();
 
+        $db_post = $post->findAll();
+//print_r(get_included_files());exit;
+//        return '';
         return $app->json(['result'=>$db_post]);
     }
 
