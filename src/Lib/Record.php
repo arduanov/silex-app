@@ -14,15 +14,16 @@ use Doctrine\Common\Inflector\Inflector;
 class Record
 {
     /**
-     * @var DBAL\Connection
+     * @var \Doctrine\DBAL\Connection
      */
-    public static $CONN;
+    protected static $CONN;
 //    public static $EVENT_MANAGER;
+//    protected static $QUERY_BUILDER;
 
     /**
      * Sets a static reference for the connection to the database.
      *
-     * @param <type> $connection
+     * @param \Doctrine\DBAL\Connection $connection
      */
     final public static function connection(DBAL\Connection $connection)
     {
@@ -54,9 +55,9 @@ class Record
             $class_name = get_class($this);
         }
 
-        try {
+        if (defined($class_name . '::TABLE_NAME')) {
             return constant($class_name . '::TABLE_NAME');
-        } catch (\Exception $e) {
+        } else {
             $reflection = new \ReflectionClass($class_name);
             $class_name = $reflection->getShortName();
 
@@ -71,6 +72,7 @@ class Record
      * the class's variables based on the key=>value pairs found in the array.
      *
      * @param array $data An array of key,value pairs.
+     * @param boolean $FETCH_PDO
      */
     public function __construct(array $data = null, $FETCH_PDO = false)
     {
@@ -87,7 +89,7 @@ class Record
      *
      * @param array $data An array of key,value pairs.
      */
-    public function setFromData($data)
+    public function setFromData(array $data)
     {
         foreach ($data as $key => $value) {
             $this->$key = $value;
@@ -104,9 +106,11 @@ class Record
         if (!$this->beforeSave()) {
             return false;
         }
-
         $value_of = [];
         $columns = $this->getColumns();
+//        var_dump($columns);
+//        exit;
+
         foreach ($columns as $column) {
             if (!empty($this->$column) || is_numeric($this->$column)) { // Do include 0 as value
                 $value_of[$column] = $this->$column;
@@ -124,8 +128,9 @@ class Record
             }
 
             $return = self::$CONN->insert($this->tableName(), $value_of);
-            $this->id = self::$CONN->lastInsertId();
-
+            if (isset($this->id)) {
+                $this->id = self::$CONN->lastInsertId();
+            }
             if (!$this->afterInsert()) {
                 return false;
             }
@@ -150,14 +155,17 @@ class Record
     /**
      * Generates a delete string and executes it.
      *
-     * @param string $table The table name.
-     * @param string $where The query condition.
-     * @return boolean      True if delete was successful.
+     * @throws \Exception
+     * @return boolean True if delete was successful.
      */
     public function delete()
     {
         if (!$this->beforeDelete()) {
             return false;
+        }
+
+        if (!isset($this->id)) {
+            throw new \Exception('cant delete without id');
         }
         $return = self::$CONN->delete($this->tableName(), ['id' => $this->id]);
 
@@ -174,34 +182,49 @@ class Record
 
     }
 
-
     /**
      * Returns an array of all columns in the table.
      *
      * It is a good idea to rewrite this method in all your model classes.
      * This function is used in save() for creating the insert and/or update
      * sql query.
+     *
+     * @return array
      */
     public function getColumns()
     {
         return array_keys(get_object_vars($this));
     }
 
-
+    /**
+     * @param $id
+     * @return $this
+     * @throws \Exception
+     */
     public function find($id)
     {
         return $this->findOneBy(['id' => $id]);
     }
 
+    /**
+     * @return array
+     */
     public function findAll()
     {
         return $this->findBy([]);
     }
 
+    /**
+     * @param array $criteria Options array containing parameters for the query
+     * @param array $orderBy
+     * @param integer $limit
+     * @param integer $offset
+     * @return array
+     */
     public function findBy(array $criteria, array $orderBy = [], $limit = null, $offset = null)
     {
         $qb = self::$CONN->createQueryBuilder();
-        $qb->select($this->getColumns())
+        $qb->select('*')
            ->from($this->tableName());
 
         foreach ($criteria as $key => $value) {
@@ -222,7 +245,6 @@ class Record
         if ($offset) {
             $qb->setFirstResult($offset);
         }
-
         return $this->findByQueryBuilder($qb);
     }
 
@@ -243,7 +265,7 @@ class Record
      */
     public function findOneBy(array $criteria)
     {
-        $items = $this->findBy($criteria);
+        $items = $this->findBy($criteria, [], 2);
 
         if (!$items) {
             return false;
@@ -256,8 +278,22 @@ class Record
         return array_shift($items);
     }
 
-    public function findByQueryBuilder(DBAL\Query\QueryBuilder $qb)
+//    public function createQueryBuilder()
+//    {
+//        return self::$QUERY_BUILDER = self::$CONN->createQueryBuilder();
+//    }
+
+    /**
+     * @param DBAL\Query\QueryBuilder $qb
+     * @return array
+     */
+    public function findByQueryBuilder(DBAL\Query\QueryBuilder $qb = null)
     {
+//        if (!$qb && self::$QUERY_BUILDER) {
+//            $qb = self::$QUERY_BUILDER;
+//            self::$QUERY_BUILDER = null;
+//        }
+//        $one = $qb->getMaxResults();
         return $qb->execute()->fetchAll(\PDO::FETCH_CLASS, get_class($this), [null, true]);
     }
 
@@ -302,7 +338,7 @@ class Record
     }
 
     /**
-     * Allows sub-classes do stuff after a Record is saved.
+     * Allows sub-classes do stuff after a Record is fetched.
      *
      * @return boolean True if the actions succeeded.
      */

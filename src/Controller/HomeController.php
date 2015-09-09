@@ -35,8 +35,8 @@ class HomeController
     {
         \SimpleRecord\Record::connection($app['db']);
         $post = new \Model\Post();
-//        $post->description = 'descr55';
-//        $result = $post->save();
+        $post->description = 'descr55';
+        $result = $post->save();
 
 //        $post = new \Model\Post();
 //        $db_post = $post->findOne();
@@ -45,9 +45,9 @@ class HomeController
 //        $db_post->name  = 'testname';
 //        $db_post->save();
 
-        $db_post = $post->findAll();
+//        $db_post = $post->findAll();
 //print_r(get_included_files());exit;
-//        return '';
+        return '';
         return $app->json(['result'=>$db_post]);
     }
 
