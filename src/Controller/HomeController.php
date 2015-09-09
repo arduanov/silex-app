@@ -34,10 +34,17 @@ class HomeController
     public function record(Application $app, Request $reqeust)
     {
         \SimpleRecord\Record::connection($app['db']);
+//        $post = new \Model\Post();
+//        $post->description = 'descr';
+//        $result = $post->save();
+
         $post = new \Model\Post();
-        $post->description = 'descr';
-        $result = $post->save();
-        return $app->json(['result'=>$result]);
+        $db_post = $post->findOne();
+//        $result = $post->save();
+
+
+
+        return $app->json(['result'=>$db_post]);
     }
 
     public function test(Application $app, Request $reqeust)

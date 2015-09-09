@@ -70,20 +70,14 @@ class Record
      */
     final public static function tableName($class_name)
     {
-        try {
 //            if(!$class_name){
 //                $class_name = get_class(self);
 //            }
-            $reflection = new \ReflectionClass($class_name);
-            $class_name = $reflection->getShortName();
+        $reflection = new \ReflectionClass($class_name);
+        $class_name = $reflection->getShortName();
 
-            if (class_exists($class_name) && defined($class_name . '::TABLE_NAME')) {
-                return constant($class_name . '::TABLE_NAME');
-            } else {
-                return Inflector::tableize($class_name);
-            }
-        } catch (\Exception $e) {
-
+        $table_name = $reflection->getConstant('TABLE_NAME');
+        if (!$table_name) {
             return Inflector::tableize($class_name);
         }
     }
@@ -95,18 +89,7 @@ class Record
      */
     final public static function lastInsertId()
     {
-        // PostgreSQL does not support lastInsertId retrieval without knowing the sequence name
-        if (self::$__CONN__->getAttribute(PDO::ATTR_DRIVER_NAME) === 'pgsql') {
-            $sql = 'SELECT lastval();';
-
-            if ($result = self::$__CONN__->query($sql)) {
-                return $result->fetchColumn();
-            } else {
-                return 0;
-            }
-        }
-
-        return self::$__CONN__->lastInsertId();
+        return self::$CONN->lastInsertId();
     }
 
     /**
@@ -157,20 +140,18 @@ class Record
             }
             $columns = $this->getColumns();
 
-            foreach ($columns as $column) {
-                // Make sure we don't try to add "id" field;
-                if ($column === 'id') {
-                    continue;
-                }
-
-                $value_of[$column] = $this->$column;
-
+            // Make sure we don't try to add "id" field;
+            if (isset($columns['id'])) {
+                unset ($columns['id']);
             }
 
-            $return = self::$CONN->insert(self::tableName(get_class($this)),$value_of);
+            foreach ($columns as $column) {
+                $value_of[$column] = $this->$column;
+            }
 
-//            $return = self::$__CONN__->exec($sql) !== false;
+            $return = self::$CONN->insert(self::tableName(get_class($this)), $value_of);
             $this->id = self::$CONN->lastInsertId();
+
             if (!$this->afterInsert()) {
                 return false;
             }
@@ -429,66 +410,66 @@ class Record
      *
      * @todo    Decide if we'll keep the from and joins options since they clash heavily with the one Record == one DB tuple idea.
      */
-    public static function find($options = [])
-    {
-        // @todo Replace by InvalidArgumentException if not array based on logger decision.
-        $options = (is_null($options)) ? [] : $options;
-
-        $class_name = get_called_class();
-        $table_name = self::tableNameFromClassName($class_name);
-
-        // Collect attributes
-        $ses = isset($options['select']) ? trim($options['select']) : '';
-        $frs = isset($options['from']) ? trim($options['from']) : '';
-        $jos = isset($options['joins']) ? trim($options['joins']) : '';
-        $whs = isset($options['where']) ? trim($options['where']) : '';
-        $gbs = isset($options['group']) ? trim($options['group']) : '';
-        $has = isset($options['having']) ? trim($options['having']) : '';
-        $obs = isset($options['order']) ? trim($options['order']) : '';
-        $lis = isset($options['limit']) ? (int)$options['limit'] : 0;
-        $ofs = isset($options['offset']) ? (int)$options['offset'] : 0;
-        $values = isset($options['values']) ? (array)$options['values'] : [];
-        // Asked for single Record?
-        $single = ($lis === 1) ? true : false;
-
-        // Prepare query parts
-        $select = empty($ses) ? 'SELECT *' : "SELECT $ses";
-        $from = empty($frs) ? "FROM $table_name" : "FROM $frs";
-        $joins = empty($jos) ? '' : $jos;
-        $where = empty($whs) ? '' : "WHERE $whs";
-        $group_by = empty($gbs) ? '' : "GROUP BY $gbs";
-        $having = empty($has) ? '' : "HAVING $has";
-        $order_by = empty($obs) ? '' : "ORDER BY $obs";
-        $limit = $lis > 0 ? "LIMIT $lis" : '';
-        $offset = $ofs > 0 ? "OFFSET $ofs" : '';
-
-        // Build the query
-        $sql = "$select $from $joins $where $group_by $having $order_by $limit $offset";
-        // Run query
-        $objects = self::findBySql($sql, $values);
-
-        return ($single) ? (!empty($objects) ? $objects[0] : false) : $objects;
-    }
-
-    private static function findBySql($sql, $values = null)
-    {
-        $class_name = get_called_class();
-
-        self::logQuery($sql);
-
-        // Prepare and execute
-        $stmt = self::getConnection()->prepare($sql);
-        if (!$stmt->execute($values)) {
-            return false;
-        }
-
-        $objects = [];
-        while ($object = $stmt->fetchObject($class_name)) {
-            $objects[] = $object;
-        }
-
-        return $objects;
-    }
+//    public static function find($options = [])
+//    {
+//        // @todo Replace by InvalidArgumentException if not array based on logger decision.
+//        $options = (is_null($options)) ? [] : $options;
+//
+//        $class_name = get_called_class();
+//        $table_name = self::tableNameFromClassName($class_name);
+//
+//        // Collect attributes
+//        $ses = isset($options['select']) ? trim($options['select']) : '';
+//        $frs = isset($options['from']) ? trim($options['from']) : '';
+//        $jos = isset($options['joins']) ? trim($options['joins']) : '';
+//        $whs = isset($options['where']) ? trim($options['where']) : '';
+//        $gbs = isset($options['group']) ? trim($options['group']) : '';
+//        $has = isset($options['having']) ? trim($options['having']) : '';
+//        $obs = isset($options['order']) ? trim($options['order']) : '';
+//        $lis = isset($options['limit']) ? (int)$options['limit'] : 0;
+//        $ofs = isset($options['offset']) ? (int)$options['offset'] : 0;
+//        $values = isset($options['values']) ? (array)$options['values'] : [];
+//        // Asked for single Record?
+//        $single = ($lis === 1) ? true : false;
+//
+//        // Prepare query parts
+//        $select = empty($ses) ? 'SELECT *' : "SELECT $ses";
+//        $from = empty($frs) ? "FROM $table_name" : "FROM $frs";
+//        $joins = empty($jos) ? '' : $jos;
+//        $where = empty($whs) ? '' : "WHERE $whs";
+//        $group_by = empty($gbs) ? '' : "GROUP BY $gbs";
+//        $having = empty($has) ? '' : "HAVING $has";
+//        $order_by = empty($obs) ? '' : "ORDER BY $obs";
+//        $limit = $lis > 0 ? "LIMIT $lis" : '';
+//        $offset = $ofs > 0 ? "OFFSET $ofs" : '';
+//
+//        // Build the query
+//        $sql = "$select $from $joins $where $group_by $having $order_by $limit $offset";
+//        // Run query
+//        $objects = self::findBySql($sql, $values);
+//
+//        return ($single) ? (!empty($objects) ? $objects[0] : false) : $objects;
+//    }
+//
+//    private static function findBySql($sql, $values = null)
+//    {
+//        $class_name = get_called_class();
+//
+//        self::logQuery($sql);
+//
+//        // Prepare and execute
+//        $stmt = self::getConnection()->prepare($sql);
+//        if (!$stmt->execute($values)) {
+//            return false;
+//        }
+//
+//        $objects = [];
+//        while ($object = $stmt->fetchObject($class_name)) {
+//            $objects[] = $object;
+//        }
+//
+//        return $objects;
+//    }
 
     /**
      * Returns a record based on it's id.
@@ -529,10 +510,25 @@ class Record
      * @param array $options Options array containing parameters for the query
      * @return                      Single object
      */
-    public static function findOne($options = [])
+    public function findOne($where = [])
     {
-        $options['limit'] = 1;
-        return self::find($options);
+        $qb = self::$CONN->createQueryBuilder();
+        $qb->select($this->getColumns())
+           ->from($this->tableName(get_class($this)))
+           ->setMaxResults(10);
+
+
+        $sth = $qb->execute();
+
+//        self::$CONN->setFetchMode(\PDO::FETCH_CLASS, get_class($this));
+        $data = [];
+//        while ($record = $sth->fetch()) {
+//            $data []= $record;
+//        }
+
+        $data  =$sth->fetchAll(\PDO::FETCH_CLASS, get_class($this));
+        var_dump($data);
+        return $data;
     }
 
     /**
