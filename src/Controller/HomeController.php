@@ -31,9 +31,18 @@ class HomeController
         return $app->render('projects.twig', $data, $response);
     }
 
+    public function record(Application $app, Request $reqeust)
+    {
+        \SimpleRecord\Record::connection($app['db']);
+        $post = new \Model\Post();
+        $post->description = 'descr';
+        $result = $post->save();
+        return $app->json(['result'=>$result]);
+    }
+
     public function test(Application $app, Request $reqeust)
     {
-        $app->abort(404, "Post  does not exist.");
+//        $app->abort(404, "Post  does not exist.");
 
         return $app->render('admin/layout.twig', []);
     }
@@ -46,9 +55,9 @@ class HomeController
         ];
 
         $form = $app['form.factory']->createBuilder('form', $data)
-                                    ->add('name','text',
+                                    ->add('name', 'text',
                                         [
-                                            'constraints' => [new Assert\NotBlank(), new Assert\Length(array('max' => 2))]
+                                            'constraints' => [new Assert\NotBlank(), new Assert\Length(['max' => 2])]
                                         ])
                                     ->add('email')
                                     ->add('gender', 'choice', [
@@ -69,7 +78,7 @@ class HomeController
             return $app->redirect('/test2');
         }
 
-        print_r(get_included_files());
+//        print_r(get_included_files());
 
         return $app['twig']->render('admin/form.twig', ['form' => $form->createView()]);
     }

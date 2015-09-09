@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 use Silex\Provider;
 use Symfony\Component\Debug\ErrorHandler;
@@ -43,6 +43,8 @@ class Application extends Silex\Application
     public function loadProviders(Application $app)
     {
         $app->register(new Provider\MonologServiceProvider(), $app['monolog.config']);
+        $app->register(new Provider\DoctrineServiceProvider());
+
         $app->register(new Provider\TwigServiceProvider(), [
             'twig.path' => $app['root.path'] . '/templates/',
             'twig.form.templates' => ['bootstrap_3_horizontal_layout.html.twig']
@@ -119,9 +121,9 @@ class Application extends Silex\Application
 //        ExceptionHandler::register();
         $app->register(new WhoopsServiceProvider);
 
-        $app->error(function (Exception $e, $code) {
-            return new Response('We are sorry, but something went terribly wrong.');
-        },0);
+//        $app->error(function (Exception $e, $code) {
+//            return new Response('We are sorry, but something went terribly wrong.');
+//        },0);
 //        $handler->setExceptionHandler(function (\Exception $e) use ($app) {
 //            $app['monolog']->addCritical($e->getMessage());
 ////            echo $e->getMessage();
@@ -160,6 +162,7 @@ class Application extends Silex\Application
         };
 
         $app->get('/', "home.controller:indexAction");
+        $app->get('/record', "home.controller:record");
         $app->get('/test', "home.controller:test");
         $app->get('/test2', "home.controller:test2")->method('get|post');
         $app->get('/tracks', "home.controller:tracksAction");

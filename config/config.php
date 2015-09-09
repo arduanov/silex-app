@@ -6,7 +6,7 @@ return [
     'environment' => 'sandbox',
     'root.path' => $root_path,
     'cache.path' => $root_path . '/var/cache',
-    'fragment.path' =>  $root_path . '/var/cache/_fragment',
+    'fragment.path' => $root_path . '/var/cache/_fragment',
 
     'monolog.level' => Monolog\Logger::DEBUG,
 
@@ -43,17 +43,11 @@ return [
             'host' => '127.0.0.1',
             'port' => 6379
         ],
-    'pomm.config'=>[
-        'pomm.configuration' =>
-            [
-                'db' => [
-                    'dsn' => 'pgsql://postgres:dqk68MSR7iQJQJoeSU@localhost:5432/silex',
-                    'class:session_builder' => '\PommProject\ModelManager\SessionBuilder',
-                    'pomm:default' => true,
-
-                ],
-
-            ],
-        'pomm.logger.service' => 'monolog',
+    'db.options' => [
+        'driver' => 'pdo_pgsql',
+        'dbname' => 'silex',
+        'host' => 'localhost',
+        'user' => 'postgres',
+        'password' => 'dqk68MSR7iQJQJoeSU',
     ]
 ];

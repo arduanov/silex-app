@@ -3,6 +3,7 @@
 namespace SimpleRecord;
 
 use Doctrine\DBAL;
+use Doctrine\Common\Inflector\Inflector;
 
 /**
  * The Record class represents a single database record.
@@ -10,11 +11,14 @@ use Doctrine\DBAL;
  * It is used as an abstraction layer so classes don't need to implement their
  * own database functionality.
  */
-class Model
+class Record
 {
     const PARAM_BOOL = 5;
-    public static $__CONN__ = false;
-    public static $__QUERIES__ = [];
+    /**
+     * @var DBAL\Connection
+     */
+    public static $CONN;
+    public static $EVENT_MANAGER;
 
     /**
      * Sets a static reference for the connection to the database.
@@ -23,7 +27,7 @@ class Model
      */
     final public static function connection(DBAL\Connection $connection)
     {
-        self::$DB = $connection;
+        self::$CONN = $connection;
     }
 
     /**
@@ -33,7 +37,7 @@ class Model
      */
     final public static function getConnection()
     {
-        return self::$DB;
+        return self::$CONN;
     }
 
 
@@ -64,14 +68,23 @@ class Model
      * @param string $class_name
      * @return string Database table name.
      */
-    final public static function tableNameFromClassName($class_name)
+    final public static function tableName($class_name)
     {
         try {
+//            if(!$class_name){
+//                $class_name = get_class(self);
+//            }
+            $reflection = new \ReflectionClass($class_name);
+            $class_name = $reflection->getShortName();
+
             if (class_exists($class_name) && defined($class_name . '::TABLE_NAME')) {
-                return TABLE_PREFIX . constant($class_name . '::TABLE_NAME');
+                return constant($class_name . '::TABLE_NAME');
+            } else {
+                return Inflector::tableize($class_name);
             }
-        } catch (Exception $e) {
-            return TABLE_PREFIX . Inflector::underscore($class_name);
+        } catch (\Exception $e) {
+
+            return Inflector::tableize($class_name);
         }
     }
 
@@ -130,6 +143,10 @@ class Model
      */
     public function save()
     {
+//        var_dump(get_class($this->getConnection()));exit;
+//        var_dump(get_class($this));exit;
+//        var_dump(self::tableName(get_class($this)));
+//        exit;
         if (!$this->beforeSave()) {
             return false;
         }
@@ -139,27 +156,21 @@ class Model
                 return false;
             }
             $columns = $this->getColumns();
-            // Escape and format for SQL insert query
-            // @todo check if we like this new method of escaping and defaulting
+
             foreach ($columns as $column) {
                 // Make sure we don't try to add "id" field;
                 if ($column === 'id') {
                     continue;
                 }
 
-                if (!empty($this->$column) || is_numeric($this->$column)) { // Do include 0 as value
-                    $value_of[$column] = self::$__CONN__->quote($this->$column);
-                } elseif (isset($this->$column)) { // Properly fallback to the default column value instead of relying on an empty string
-                    // SQLite can't handle the DEFAULT value
-                    if (self::$__CONN__->getAttribute(PDO::ATTR_DRIVER_NAME) != 'sqlite') {
-                        $value_of[$column] = 'DEFAULT';
-                    }
-                }
+                $value_of[$column] = $this->$column;
+
             }
-            $sql = 'INSERT INTO ' . self::tableNameFromClassName(get_class($this)) . ' ('
-                . implode(', ', array_keys($value_of)) . ') VALUES (' . implode(', ', array_values($value_of)) . ')';
-            $return = self::$__CONN__->exec($sql) !== false;
-            $this->id = self::lastInsertId();
+
+            $return = self::$CONN->insert(self::tableName(get_class($this)),$value_of);
+
+//            $return = self::$__CONN__->exec($sql) !== false;
+            $this->id = self::$CONN->lastInsertId();
             if (!$this->afterInsert()) {
                 return false;
             }
@@ -190,7 +201,6 @@ class Model
                 return false;
             }
         }
-        self::logQuery($sql);
         if (!$this->afterSave()) {
             return false;
         }
