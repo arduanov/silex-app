@@ -1,5 +1,4 @@
 .idea
-vendor
 var/logs/*
 !var/logs/.gitkeep
 var/cache/*
@@ -8,4 +7,5 @@ var/data/*
 !var/data/.gitkeep
 bower_components
 .vagrant
-
+node_modules
+vendor

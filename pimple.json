@@ -1,60 +1,5 @@
 [
     {
-        "name": "routes_factory",
-        "type": "class",
-        "value": "Symfony\\Component\\Routing\\RouteCollection"
-    },
-    {
-        "name": "routes",
-        "type": "class",
-        "value": "Symfony\\Component\\Routing\\RouteCollection"
-    },
-    {
-        "name": "controllers",
-        "type": "class",
-        "value": "Silex\\ControllerCollection"
-    },
-    {
-        "name": "controllers_factory",
-        "type": "class",
-        "value": "Silex\\ControllerCollection"
-    },
-    {
-        "name": "route_class",
-        "type": "string",
-        "value": "Silex\\Route"
-    },
-    {
-        "name": "route_factory",
-        "type": "class",
-        "value": "Silex\\Route"
-    },
-    {
-        "name": "exception_handler",
-        "type": "class",
-        "value": "Silex\\ExceptionHandler"
-    },
-    {
-        "name": "callback_resolver",
-        "type": "class",
-        "value": "Silex\\CallbackResolver"
-    },
-    {
-        "name": "resolver",
-        "type": "class",
-        "value": "Silex\\ServiceControllerResolver"
-    },
-    {
-        "name": "kernel",
-        "type": "class",
-        "value": "Symfony\\Component\\HttpKernel\\HttpKernel"
-    },
-    {
-        "name": "request_stack",
-        "type": "class",
-        "value": "Symfony\\Component\\HttpFoundation\\RequestStack"
-    },
-    {
         "name": "request.http_port",
         "type": "int",
         "value": 80
@@ -80,9 +25,49 @@
         "value": "Symfony\\Bridge\\Monolog\\Logger"
     },
     {
+        "name": "resolver",
+        "type": "class",
+        "value": "Silex\\ServiceControllerResolver"
+    },
+    {
+        "name": "kernel",
+        "type": "class",
+        "value": "Symfony\\Component\\HttpKernel\\HttpKernel"
+    },
+    {
+        "name": "request_stack",
+        "type": "class",
+        "value": "Symfony\\Component\\HttpFoundation\\RequestStack"
+    },
+    {
         "name": "dispatcher",
         "type": "class",
         "value": "Symfony\\Component\\EventDispatcher\\EventDispatcher"
+    },
+    {
+        "name": "callback_resolver",
+        "type": "class",
+        "value": "Silex\\CallbackResolver"
+    },
+    {
+        "name": "route_class",
+        "type": "string",
+        "value": "Silex\\Route"
+    },
+    {
+        "name": "route_factory",
+        "type": "class",
+        "value": "Silex\\Route"
+    },
+    {
+        "name": "routes_factory",
+        "type": "class",
+        "value": "Symfony\\Component\\Routing\\RouteCollection"
+    },
+    {
+        "name": "routes",
+        "type": "class",
+        "value": "Symfony\\Component\\Routing\\RouteCollection"
     },
     {
         "name": "url_generator",
@@ -100,9 +85,24 @@
         "value": "Symfony\\Component\\Routing\\RequestContext"
     },
     {
+        "name": "controllers",
+        "type": "class",
+        "value": "Silex\\ControllerCollection"
+    },
+    {
+        "name": "controllers_factory",
+        "type": "class",
+        "value": "Silex\\ControllerCollection"
+    },
+    {
         "name": "routing.listener",
         "type": "class",
         "value": "Symfony\\Component\\HttpKernel\\EventListener\\RouterListener"
+    },
+    {
+        "name": "exception_handler",
+        "type": "class",
+        "value": "Silex\\ExceptionHandler"
     },
     {
         "name": "environment",
@@ -112,22 +112,17 @@
     {
         "name": "root.path",
         "type": "string",
-        "value": "\/var\/www\/pomm-service-provider"
-    },
-    {
-        "name": "app.path",
-        "type": "string",
-        "value": "\/var\/www\/pomm-service-provider\/app"
+        "value": "\/var\/www\/silex"
     },
     {
         "name": "cache.path",
         "type": "string",
-        "value": "\/var\/www\/pomm-service-provider\/app\/cache"
+        "value": "\/var\/www\/silex\/var\/cache"
     },
     {
         "name": "fragment.path",
         "type": "string",
-        "value": "\/_fragment"
+        "value": "\/var\/www\/silex\/var\/cache\/_fragment"
     },
     {
         "name": "monolog.level",
@@ -170,7 +165,7 @@
         "value": ""
     },
     {
-        "name": "pomm.config",
+        "name": "db.options",
         "type": "array",
         "value": ""
     },
@@ -178,6 +173,11 @@
         "name": "monolog.handler.debug",
         "type": "class",
         "value": "Symfony\\Bridge\\Monolog\\Handler\\DebugHandler"
+    },
+    {
+        "name": "monolog.not_found_activation_strategy",
+        "type": "class",
+        "value": "Symfony\\Bridge\\Monolog\\Handler\\FingersCrossed\\NotFoundActivationStrategy"
     },
     {
         "name": "monolog.logger.class",
@@ -198,6 +198,11 @@
         "name": "monolog.handler",
         "type": "class",
         "value": "Monolog\\Handler\\StreamHandler"
+    },
+    {
+        "name": "monolog.handlers",
+        "type": "array",
+        "value": ""
     },
     {
         "name": "monolog.listener",
@@ -227,12 +232,70 @@
     {
         "name": "monolog.logfile",
         "type": "string",
-        "value": "\/var\/www\/pomm-service-provider\/app\/logs\/2015-08-23.log"
+        "value": "\/var\/www\/silex\/var\/logs\/2015-09-11.log"
     },
     {
         "name": "monolog.slack.key",
         "type": "string",
         "value": ""
+    },
+    {
+        "name": "db.default_options",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "dbs.options.initializer",
+        "type": "closure",
+        "value": ""
+    },
+    {
+        "name": "dbs",
+        "type": "container",
+        "value": [
+            {
+                "name": "default",
+                "type": "class",
+                "value": "Doctrine\\DBAL\\Connection"
+            }
+        ]
+    },
+    {
+        "name": "dbs.config",
+        "type": "container",
+        "value": [
+            {
+                "name": "default",
+                "type": "class",
+                "value": "Doctrine\\DBAL\\Configuration"
+            }
+        ]
+    },
+    {
+        "name": "dbs.event_manager",
+        "type": "container",
+        "value": [
+            {
+                "name": "default",
+                "type": "class",
+                "value": "Doctrine\\Common\\EventManager"
+            }
+        ]
+    },
+    {
+        "name": "db",
+        "type": "class",
+        "value": "Doctrine\\DBAL\\Connection"
+    },
+    {
+        "name": "db.config",
+        "type": "class",
+        "value": "Doctrine\\DBAL\\Configuration"
+    },
+    {
+        "name": "db.event_manager",
+        "type": "class",
+        "value": "Doctrine\\Common\\EventManager"
     },
     {
         "name": "twig.options",
@@ -247,12 +310,17 @@
     {
         "name": "twig.path",
         "type": "string",
-        "value": "\/var\/www\/pomm-service-provider\/app\/resources\/view\/"
+        "value": "\/var\/www\/silex\/templates\/"
     },
     {
         "name": "twig.templates",
         "type": "array",
         "value": ""
+    },
+    {
+        "name": "twig.app_variable",
+        "type": "class",
+        "value": "Symfony\\Bridge\\Twig\\AppVariable"
     },
     {
         "name": "twig",
@@ -280,113 +348,468 @@
         "value": ""
     },
     {
-        "name": "pomm",
+        "name": "assets.packages",
         "type": "class",
-        "value": "PommProject\\Foundation\\Pomm"
+        "value": "Symfony\\Component\\Asset\\Packages"
     },
     {
-        "name": "pomm.configuration",
+        "name": "assets.default_package",
+        "type": "class",
+        "value": "Symfony\\Component\\Asset\\PathPackage"
+    },
+    {
+        "name": "assets.context",
+        "type": "class",
+        "value": "Symfony\\Component\\Asset\\Context\\RequestStackContext"
+    },
+    {
+        "name": "assets.base_path",
+        "type": "string",
+        "value": ""
+    },
+    {
+        "name": "assets.base_urls",
         "type": "array",
         "value": ""
     },
     {
-        "name": "pomm.logger.service",
-        "type": "string",
-        "value": "monolog"
-    },
-    {
-        "name": "http_cache",
-        "type": "class",
-        "value": "Silex\\Provider\\HttpCache\\HttpCache"
-    },
-    {
-        "name": "http_cache.esi",
-        "type": "class",
-        "value": "Symfony\\Component\\HttpKernel\\HttpCache\\Esi"
-    },
-    {
-        "name": "http_cache.store",
-        "type": "class",
-        "value": "Symfony\\Component\\HttpKernel\\HttpCache\\Store"
-    },
-    {
-        "name": "http_cache.esi_listener",
-        "type": "class",
-        "value": "Symfony\\Component\\HttpKernel\\EventListener\\SurrogateListener"
-    },
-    {
-        "name": "http_cache.options",
-        "type": "array",
-        "value": ""
-    },
-    {
-        "name": "http_cache.cache_dir",
-        "type": "string",
-        "value": "\/var\/www\/pomm-service-provider\/app\/cache\/http"
-    },
-    {
-        "name": "fragment.handler",
-        "type": "class",
-        "value": "Symfony\\Component\\HttpKernel\\Fragment\\FragmentHandler"
-    },
-    {
-        "name": "fragment.renderer.inline",
-        "type": "class",
-        "value": "Symfony\\Component\\HttpKernel\\Fragment\\InlineFragmentRenderer"
-    },
-    {
-        "name": "fragment.renderer.hinclude",
-        "type": "class",
-        "value": "Symfony\\Component\\HttpKernel\\Fragment\\HIncludeFragmentRenderer"
-    },
-    {
-        "name": "fragment.renderer.esi",
-        "type": "class",
-        "value": "Symfony\\Component\\HttpKernel\\Fragment\\EsiFragmentRenderer"
-    },
-    {
-        "name": "fragment.listener",
-        "type": "class",
-        "value": "Symfony\\Component\\HttpKernel\\EventListener\\FragmentListener"
-    },
-    {
-        "name": "uri_signer",
-        "type": "class",
-        "value": "Symfony\\Component\\HttpKernel\\UriSigner"
-    },
-    {
-        "name": "uri_signer.secret",
-        "type": "string",
-        "value": "2713a582157f16edcf6c318ca2d1f508"
-    },
-    {
-        "name": "fragment.renderer.hinclude.global_template",
+        "name": "assets.version",
         "type": "null",
         "value": ""
     },
     {
-        "name": "fragment.renderers",
+        "name": "assets.version_format",
+        "type": "null",
+        "value": ""
+    },
+    {
+        "name": "assets.named_packages",
         "type": "array",
         "value": ""
     },
     {
-        "name": "db",
-        "type": "class",
-        "value": "PommProject\\ModelManager\\Session"
+        "name": "assets.strategy_factory",
+        "type": "closure",
+        "value": ""
     },
     {
-        "name": "user.model",
-        "type": "class",
-        "value": "App\\Model\\XmUserModel"
+        "name": "assets.package_factory",
+        "type": "closure",
+        "value": ""
     },
     {
-        "name": "track.model",
+        "name": "validator",
         "type": "class",
-        "value": "App\\Model\\XmTrackOriginalModel"
+        "value": "Symfony\\Component\\Validator\\Validator\\RecursiveValidator"
+    },
+    {
+        "name": "validator.builder",
+        "type": "class",
+        "value": "Symfony\\Component\\Validator\\ValidatorBuilder"
+    },
+    {
+        "name": "validator.mapping.class_metadata_factory",
+        "type": "class",
+        "value": "Symfony\\Component\\Validator\\Mapping\\Factory\\LazyLoadingMetadataFactory"
+    },
+    {
+        "name": "validator.validator_factory",
+        "type": "class",
+        "value": "Silex\\Provider\\Validator\\ConstraintValidatorFactory"
+    },
+    {
+        "name": "validator.object_initializers",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "validator.validator_service_ids",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "locale.listener",
+        "type": "class",
+        "value": "Silex\\Provider\\Locale\\LocaleListener"
+    },
+    {
+        "name": "locale",
+        "type": "string",
+        "value": "en"
+    },
+    {
+        "name": "translator",
+        "type": "class",
+        "value": "Symfony\\Component\\Translation\\Translator"
+    },
+    {
+        "name": "translator.listener",
+        "type": "class",
+        "value": "Symfony\\Component\\HttpKernel\\EventListener\\TranslatorListener"
+    },
+    {
+        "name": "translator.message_selector",
+        "type": "class",
+        "value": "Symfony\\Component\\Translation\\MessageSelector"
+    },
+    {
+        "name": "translator.resources",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "translator.domains",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "locale_fallbacks",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "translator.cache_dir",
+        "type": "null",
+        "value": ""
+    },
+    {
+        "name": "csrf.token_manager",
+        "type": "class",
+        "value": "Symfony\\Component\\Security\\Csrf\\CsrfTokenManager"
+    },
+    {
+        "name": "csrf.token_storage",
+        "type": "class",
+        "value": "Symfony\\Component\\Security\\Csrf\\TokenStorage\\NativeSessionTokenStorage"
+    },
+    {
+        "name": "csrf.token_generator",
+        "type": "class",
+        "value": "Symfony\\Component\\Security\\Csrf\\TokenGenerator\\UriSafeTokenGenerator"
+    },
+    {
+        "name": "csrf.session_namespace",
+        "type": "string",
+        "value": "_csrf"
+    },
+    {
+        "name": "form.types",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "form.type.extensions",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "form.type.guessers",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "form.extension.csrf",
+        "type": "class",
+        "value": "Symfony\\Component\\Form\\Extension\\Csrf\\CsrfExtension"
+    },
+    {
+        "name": "form.extensions",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "form.factory",
+        "type": "class",
+        "value": "Symfony\\Component\\Form\\FormFactory"
+    },
+    {
+        "name": "form.resolved_type_factory",
+        "type": "class",
+        "value": "Symfony\\Component\\Form\\ResolvedFormTypeFactory"
+    },
+    {
+        "name": "security.firewalls",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "security.role_hierarchy",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "security.access_rules",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "security.hide_user_not_found",
+        "type": "bool",
+        "value": true
+    },
+    {
+        "name": "security.authorization_checker",
+        "type": "class",
+        "value": "Symfony\\Component\\Security\\Core\\Authorization\\AuthorizationChecker"
+    },
+    {
+        "name": "security.token_storage",
+        "type": "class",
+        "value": "Symfony\\Component\\Security\\Core\\Authentication\\Token\\Storage\\TokenStorage"
+    },
+    {
+        "name": "user",
+        "type": "null",
+        "value": ""
+    },
+    {
+        "name": "security.authentication_manager",
+        "type": "class",
+        "value": "Symfony\\Component\\Security\\Core\\Authentication\\AuthenticationProviderManager"
+    },
+    {
+        "name": "security.encoder_factory",
+        "type": "class",
+        "value": "Symfony\\Component\\Security\\Core\\Encoder\\EncoderFactory"
+    },
+    {
+        "name": "security.encoder.digest",
+        "type": "class",
+        "value": "Symfony\\Component\\Security\\Core\\Encoder\\MessageDigestPasswordEncoder"
+    },
+    {
+        "name": "security.user_checker",
+        "type": "class",
+        "value": "Symfony\\Component\\Security\\Core\\User\\UserChecker"
+    },
+    {
+        "name": "security.access_manager",
+        "type": "class",
+        "value": "Symfony\\Component\\Security\\Core\\Authorization\\AccessDecisionManager"
+    },
+    {
+        "name": "security.voters",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "security.firewall",
+        "type": "class",
+        "value": "Symfony\\Component\\Security\\Http\\Firewall"
+    },
+    {
+        "name": "security.channel_listener",
+        "type": "class",
+        "value": "Symfony\\Component\\Security\\Http\\Firewall\\ChannelListener"
+    },
+    {
+        "name": "security.authentication_listener.factory.logout",
+        "type": "closure",
+        "value": ""
+    },
+    {
+        "name": "security.authentication_listener.factory.pre_auth",
+        "type": "closure",
+        "value": ""
+    },
+    {
+        "name": "security.authentication_listener.factory.form",
+        "type": "closure",
+        "value": ""
+    },
+    {
+        "name": "security.authentication_listener.factory.http",
+        "type": "closure",
+        "value": ""
+    },
+    {
+        "name": "security.authentication_listener.factory.remember_me",
+        "type": "closure",
+        "value": ""
+    },
+    {
+        "name": "security.authentication_listener.factory.anonymous",
+        "type": "closure",
+        "value": ""
+    },
+    {
+        "name": "security.firewall_map",
+        "type": "class",
+        "value": "Symfony\\Component\\Security\\Http\\FirewallMap"
+    },
+    {
+        "name": "security.access_listener",
+        "type": "class",
+        "value": "Symfony\\Component\\Security\\Http\\Firewall\\AccessListener"
+    },
+    {
+        "name": "security.access_map",
+        "type": "class",
+        "value": "Symfony\\Component\\Security\\Http\\AccessMap"
+    },
+    {
+        "name": "security.trust_resolver",
+        "type": "class",
+        "value": "Symfony\\Component\\Security\\Core\\Authentication\\AuthenticationTrustResolver"
+    },
+    {
+        "name": "security.session_strategy",
+        "type": "class",
+        "value": "Symfony\\Component\\Security\\Http\\Session\\SessionAuthenticationStrategy"
+    },
+    {
+        "name": "security.http_utils",
+        "type": "class",
+        "value": "Symfony\\Component\\Security\\Http\\HttpUtils"
+    },
+    {
+        "name": "security.last_error",
+        "type": "closure",
+        "value": ""
+    },
+    {
+        "name": "security.context_listener._proto",
+        "type": "closure",
+        "value": ""
+    },
+    {
+        "name": "security.user_provider.inmemory._proto",
+        "type": "closure",
+        "value": ""
+    },
+    {
+        "name": "security.exception_listener._proto",
+        "type": "closure",
+        "value": ""
+    },
+    {
+        "name": "security.authentication.success_handler._proto",
+        "type": "closure",
+        "value": ""
+    },
+    {
+        "name": "security.authentication.failure_handler._proto",
+        "type": "closure",
+        "value": ""
+    },
+    {
+        "name": "security.authentication_listener.form._proto",
+        "type": "closure",
+        "value": ""
+    },
+    {
+        "name": "security.authentication_listener.http._proto",
+        "type": "closure",
+        "value": ""
+    },
+    {
+        "name": "security.authentication_listener.anonymous._proto",
+        "type": "closure",
+        "value": ""
+    },
+    {
+        "name": "security.authentication.logout_handler._proto",
+        "type": "closure",
+        "value": ""
+    },
+    {
+        "name": "security.authentication_listener.logout._proto",
+        "type": "closure",
+        "value": ""
+    },
+    {
+        "name": "security.authentication_listener.switch_user._proto",
+        "type": "closure",
+        "value": ""
+    },
+    {
+        "name": "security.entry_point.form._proto",
+        "type": "closure",
+        "value": ""
+    },
+    {
+        "name": "security.entry_point.http._proto",
+        "type": "closure",
+        "value": ""
+    },
+    {
+        "name": "security.authentication_provider.dao._proto",
+        "type": "closure",
+        "value": ""
+    },
+    {
+        "name": "security.authentication_provider.anonymous._proto",
+        "type": "closure",
+        "value": ""
+    },
+    {
+        "name": "security.validator.user_password_validator",
+        "type": "class",
+        "value": "Symfony\\Component\\Security\\Core\\Validator\\Constraints\\UserPasswordValidator"
+    },
+    {
+        "name": "whoops.error_page_handler",
+        "type": "class",
+        "value": "Whoops\\Handler\\PrettyPageHandler"
+    },
+    {
+        "name": "whoops.exception_handler",
+        "type": "closure",
+        "value": ""
+    },
+    {
+        "name": "whoops",
+        "type": "class",
+        "value": "Whoops\\Run"
     },
     {
         "name": "home.controller",
         "type": "class",
-        "value": "App\\Controller\\HomeController"
+        "value": "Controller\\HomeController"
+    },
+    {
+        "name": "security.user_provider.admin",
+        "type": "class",
+        "value": "Symfony\\Component\\Security\\Core\\User\\InMemoryUserProvider"
+    },
+    {
+        "name": "security.context_listener.admin",
+        "type": "class",
+        "value": "Symfony\\Component\\Security\\Http\\Firewall\\ContextListener"
+    },
+    {
+        "name": "security.entry_point.admin.form",
+        "type": "class",
+        "value": "Symfony\\Component\\Security\\Http\\EntryPoint\\FormAuthenticationEntryPoint"
+    },
+    {
+        "name": "security.authentication_listener.admin.form",
+        "type": "class",
+        "value": "Symfony\\Component\\Security\\Http\\Firewall\\UsernamePasswordFormAuthenticationListener"
+    },
+    {
+        "name": "security.authentication_provider.admin.dao",
+        "type": "class",
+        "value": "Symfony\\Component\\Security\\Core\\Authentication\\Provider\\DaoAuthenticationProvider"
+    },
+    {
+        "name": "security.exception_listener.admin",
+        "type": "class",
+        "value": "Symfony\\Component\\Security\\Http\\Firewall\\ExceptionListener"
+    },
+    {
+        "name": "security.authentication_providers",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "security.authentication.success_handler.admin",
+        "type": "class",
+        "value": "Symfony\\Component\\Security\\Http\\Authentication\\DefaultAuthenticationSuccessHandler"
+    },
+    {
+        "name": "security.authentication.failure_handler.admin",
+        "type": "class",
+        "value": "Symfony\\Component\\Security\\Http\\Authentication\\DefaultAuthenticationFailureHandler"
     }
 ]

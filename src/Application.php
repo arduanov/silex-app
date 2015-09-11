@@ -20,11 +20,10 @@ class Application extends Silex\Application
     public function __construct()
     {
         parent::__construct();
-
         $this->loadConfig($this);
         $this->loadProviders($this);
         $this->loadErrorHandler($this);
-        $this->loadModels($this);
+//        $this->loadModels($this);
         $this->loadRoutes($this);
 //        print_r(get_included_files());
 
@@ -63,7 +62,6 @@ class Application extends Silex\Application
                 ]
             ]
         ]);
-//        $app->register(new \Sorien\Provider\PimpleDumpProvider(), ['dump.path' => $app['root.path']]);
 
         $app->register(new Silex\Provider\RoutingServiceProvider());
 //        $app->register(new Silex\Provider\HttpCacheServiceProvider(), [
@@ -100,19 +98,20 @@ class Application extends Silex\Application
             ],
         ];
         $app->register(new \Silex\Provider\SecurityServiceProvider());
+        $app->register(new \Sorien\Provider\PimpleDumpProvider(), ['dump.path' => $app['root.path']]);
 
 
     }
 
-    public function loadModels(Application $app)
-    {
-        $app['user.model'] = function () use ($app) {
-            return $app['db']->getModel('App\Model\XmUserModel');
-        };
-        $app['track.model'] = function () use ($app) {
-            return $app['db']->getModel('App\Model\XmTrackOriginalModel');
-        };
-    }
+//    public function loadModels(Application $app)
+//    {
+//        $app['user.model'] = function () use ($app) {
+//            return $app['db']->getModel('App\Model\XmUserModel');
+//        };
+//        $app['track.model'] = function () use ($app) {
+//            return $app['db']->getModel('App\Model\XmTrackOriginalModel');
+//        };
+//    }
 
     public function loadErrorHandler(Application $app)
     {
@@ -194,5 +193,3 @@ class Application extends Silex\Application
 //    print_r(get_included_files());
 //    return 123;
 //});
-
-
