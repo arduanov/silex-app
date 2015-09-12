@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2131a67c85c1f5f85b7384321a75d8f3",
+    "hash": "bcbe71b01a4c0df8621e6a1ed9724c5b",
     "packages": [
         {
             "name": "arduanov/simple-record",

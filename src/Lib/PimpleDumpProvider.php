@@ -159,7 +159,7 @@ class PimpleDumpProvider implements ControllerProviderInterface, BootableProvide
             $self = $this;
 
             $app->after(function (Request $request, Response $response) use ($app, $self) {
-//                $self->outOfRequestScopeTypes['request'] = get_class($app['request']);
+                $self->outOfRequestScopeTypes['request'] = get_class($request);
             });
 
             $app->finish(function (Request $request, Response $response) use ($app, $self) {

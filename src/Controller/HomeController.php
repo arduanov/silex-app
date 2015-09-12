@@ -1,8 +1,8 @@
 <?php
 
-namespace Controller;
+namespace App\Controller;
 
-use Application;
+use App\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -96,12 +96,7 @@ class HomeController
 
     public function sidebarAction(Application $app, Request $reqeust)
     {
-        $where = new \PommProject\Foundation\Where('role = $*', ['buyer']);
-        $sellers = $app['user.model']->paginateFindWhere($where, 20);
-        $data = ['tracks' => $sellers->getIterator()];
-
-        $response = new Response();
-        $response->setTtl(30);
+ return '';
         return $app->render('project.twig', $data, $response);
     }
 

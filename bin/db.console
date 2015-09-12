@@ -1,66 +1,64 @@
 #!/usr/bin/env php
 <?php
-/*
- * This file is part of the Pomm's Cli package.
- *
- * (c) 2014 Grégoire HUBERT <hubert.greg@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+use Doctrine\DBAL\Migrations\Configuration\Configuration;
+use Doctrine\DBAL\Migrations\OutputWriter;
+use Symfony\Component\Console\Output\ConsoleOutput;
+use Doctrine\DBAL\Migrations\Tools\Console\Command\AbstractCommand;
+
 
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Input\InputArgument;
 
-use PommProject\Cli\Command\InspectSchema;
-use PommProject\Cli\Command\InspectRelation;
-use PommProject\Cli\Command\InspectDatabase;
-use PommProject\Cli\Command\InspectConfig;
-use PommProject\Cli\Command\GenerateRelationStructure;
-use PommProject\Cli\Command\GenerateRelationModel;
-use PommProject\Cli\Command\GenerateEntity;
-use PommProject\Cli\Command\GenerateForRelation;
-use PommProject\Cli\Command\GenerateForSchema;
+require_once(__DIR__ . '/../vendor/autoload.php');
 
 
-$app = require_once __DIR__ . '/../app/app.php';
+$app = new \App\Application();
+$app['migrations.output_writer'] = new OutputWriter(
+    function ($message) {
+        $output = new ConsoleOutput();
+        $output->writeln($message);
+    }
+);
+
+$app['migrations.directory'] = $app['root.path'].'/src/Data/Migrations';
+$app['migrations.name'] = 'Migrations';
+$app['migrations.namespace'] = 'App\Data\Migrations';
+$app['migrations.table_name'] = 'migration_versions';
 
 
-$application = new Application('pomm', 'NextGen early-dev');
-$InspectConfig = new InspectConfig();
-$InspectConfig->setPomm($app['pomm']);
-
-$InspectDatabase = new InspectDatabase();
-$InspectDatabase->setPomm($app['pomm']);
-
-$InspectSchema = new InspectSchema();
-$InspectSchema->setPomm($app['pomm']);
-
-$InspectRelation = new InspectRelation();
-$InspectRelation->setPomm($app['pomm']);
-
-$GenerateRelationStructure = new GenerateRelationStructure();
-$GenerateRelationStructure->setPomm($app['pomm']);
-
-$GenerateRelationModel = new GenerateRelationModel();
-$GenerateRelationModel->setPomm($app['pomm']);
-
-$GenerateEntity = new GenerateEntity();
-$GenerateEntity->setPomm($app['pomm']);
-
-$GenerateForRelation = new GenerateForRelation();
-$GenerateForRelation->setPomm($app['pomm']);
-
-$GenerateForSchema = new GenerateForSchema();
-$GenerateForSchema->setPomm($app['pomm']);
+$configuration = new Configuration($app['db'], $app['migrations.output_writer']);
+$configuration->setMigrationsDirectory($app['migrations.directory']);
+$configuration->setName($app['migrations.name']);
+$configuration->setMigrationsNamespace($app['migrations.namespace']);
+$configuration->setMigrationsTableName($app['migrations.table_name']);
+$configuration->registerMigrationsFromDirectory($app['migrations.directory']);
 
 
-$application->add($InspectConfig);
-$application->add($InspectDatabase);
-$application->add($InspectSchema);
-$application->add($InspectRelation);
-$application->add($GenerateRelationStructure);
-$application->add($GenerateRelationModel);
-$application->add($GenerateEntity);
-$application->add($GenerateForRelation);
-$application->add($GenerateForSchema);
-$application->run();
+$console = new Application();
+
+//$app->boot();
+
+$helperSet = new \Symfony\Component\Console\Helper\HelperSet([
+    'db' => new \Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper($app['db']),
+    'dialog' => new \Symfony\Component\Console\Helper\QuestionHelper(),
+]);
+$console->setHelperSet($helperSet);
+$commands = [
+    '\Doctrine\DBAL\Migrations\Tools\Console\Command\ExecuteCommand',
+    '\Doctrine\DBAL\Migrations\Tools\Console\Command\GenerateCommand',
+    '\Doctrine\DBAL\Migrations\Tools\Console\Command\MigrateCommand',
+    '\Doctrine\DBAL\Migrations\Tools\Console\Command\StatusCommand',
+    '\Doctrine\DBAL\Migrations\Tools\Console\Command\VersionCommand',
+];
+foreach ($commands as $name) {
+    /** @var AbstractCommand $command */
+    $command = new $name();
+    $command->setMigrationConfiguration($configuration);
+    $console->add($command);
+}
+
+
+$console->run();

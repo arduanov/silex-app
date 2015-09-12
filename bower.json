@@ -5,6 +5,7 @@
   ],
   "private": true,
   "dependencies": {
+    "bootstrap": "*",
     "marked": "*",
     "bootstrap-material-design": "*",
     "bootstrap-tagsinput": "*",

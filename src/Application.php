@@ -1,6 +1,9 @@
-    <?php
+<?php
+
+namespace App;
 
 use Silex\Provider;
+use Silex\Application as Silex;
 use Symfony\Component\Debug\ErrorHandler;
 use Symfony\Component\Debug\ExceptionHandler;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -10,10 +13,10 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use WhoopsSilex\WhoopsServiceProvider;
 use Symfony\Component\Debug\Debug;
 
-class Application extends Silex\Application
+class Application extends Silex
 {
-    use Silex\Application\TwigTrait;
-    use Silex\Application\UrlGeneratorTrait;
+    use Silex\TwigTrait;
+    use Silex\UrlGeneratorTrait;
 
 //    use Silex\SecurityTrait;
 
@@ -63,19 +66,19 @@ class Application extends Silex\Application
             ]
         ]);
 
-        $app->register(new Silex\Provider\RoutingServiceProvider());
+        $app->register(new Provider\RoutingServiceProvider());
 //        $app->register(new Silex\Provider\HttpCacheServiceProvider(), [
 //            'http_cache.cache_dir' => $app['cache.path'] . '/http',
 //        ]);
 //        $app->register(new Silex\Provider\HttpFragmentServiceProvider());
 
-        $app->register(new Silex\Provider\ValidatorServiceProvider());
-        $app->register(new Silex\Provider\LocaleServiceProvider());
-        $app->register(new Silex\Provider\TranslationServiceProvider());
-        $app->register(new Silex\Provider\CsrfServiceProvider());
-        $app->register(new Silex\Provider\FormServiceProvider());
+        $app->register(new Provider\ValidatorServiceProvider());
+        $app->register(new Provider\LocaleServiceProvider());
+        $app->register(new Provider\TranslationServiceProvider());
+        $app->register(new Provider\CsrfServiceProvider());
+        $app->register(new Provider\FormServiceProvider());
 
-        $app->register(new Silex\Provider\ServiceControllerServiceProvider());
+        $app->register(new Provider\ServiceControllerServiceProvider());
 
 //        $app['security.firewalls'] = [
 //            'admin' => [
