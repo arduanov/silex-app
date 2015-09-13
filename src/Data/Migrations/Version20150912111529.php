@@ -15,14 +15,28 @@ class Version20150912111529 extends AbstractMigration
      */
     public function up(Schema $schema)
     {
-        $table = $schema->createTable('comment');
+        $table = $schema->createTable('post');
         $table->addColumn('id', 'integer')
-              ->setAutoincrement(true)
-        ;
+              ->setAutoincrement(true);
         $table->setPrimaryKey(['id']);
         $table->addColumn('title', 'string');
-        // this up() migration is auto-generated, please modify it to your needs
+        $table->addColumn('slug', 'string');
+        $table->addColumn('description', 'text')
+              ->setNotnull(false);
+        $table->addColumn('content', 'text')
+              ->setNotnull(false);
+        $table->addColumn('content_markdown', 'text')
+              ->setNotnull(false);
 
+        $table->addColumn('created_at', 'datetime');
+        $table->addColumn('modified_at', 'datetime')
+              ->setNotnull(false);
+        $table->addColumn('published_at', 'datetime')
+              ->setNotnull(false);
+        $table->addColumn('published', 'boolean')
+              ->setDefault(false);
+
+        $table->addUniqueIndex(['slug','published']);
     }
 
     /**
