@@ -6,14 +6,19 @@ use SimpleRecord\Record;
 
 class Post extends Record
 {
-    public $id;
-    public $name = 1;
-    public $slug = 2;
-    public $description = 3;
-    public $cdate;
-    public $mdate;
+    const TABLE_NAME = 'post';
 
-//    const TABLE_NAME = 'test';
+    public $id;
+    public $title;
+    public $slug;
+    public $description;
+    public $content;
+    public $content_markdown;
+    public $created_at;
+    public $modified_at;
+    public $published_at;
+    public $published;
+
 //    public function __construct($d = null,$from_pdo = false)
 //    {
 ////        var_dump($from_pdo);
