@@ -20,6 +20,41 @@
     margin-left:0px !important;
 }
 
-.md-editor textarea{
+/*
+   markdown editor
+*/
+.CodeMirror{
     font-family: 'Roboto Mono';
+}
+.editor-toolbar.fullscreen {
+    height: 50px;
+    margin: 0;
+}
+
+.editor-toolbar,
+.editor-toolbar:hover,
+.editor-wrapper input.title:focus,
+.editor-wrapper input.title:hover {
+    opacity:1
+}
+
+.editor-toolbar,
+.editor-toolbar a,
+.CodeMirror,
+.CodeMirror .CodeMirror-code .cm-comment{
+    border-radius: 0;
+}
+.editor-toolbar a {
+    padding: 10px 15px !important;
+}
+.CodeMirror{
+    border:none;
+    border-bottom: 1px solid #ccc;
+    padding: 0;
+}
+
+
+    /* Стили для превью */
+.editor-preview,.editor-preview-side{
+
 }

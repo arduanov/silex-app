@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Application;
+use App\Model;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -31,10 +32,58 @@ class HomeController
         return $app->render('projects.twig', $data, $response);
     }
 
+    public function post(Application $app, Request $request)
+    {
+        $post = new Model\Post();
+        $data = [
+            'name' => 'Your name',
+            'email' => 'Your email',
+        ];
+
+        $form = $app['form.factory']->createBuilder('form', $data)
+                                    ->add('title', 'text', ['constraints' => [
+                                        new Assert\NotBlank(),
+                                        new Assert\Length(['max' => 255])
+                                    ],
+                                        'attr' => ['max_length' => 255],
+                                    ])
+                                    ->add('description', 'text', ['constraints' => [
+                                        new Assert\NotBlank(),
+                                        new Assert\Length(['max' => 255])
+                                    ],
+                                        'attr' => ['max_length' => 255, 'required' => false],
+                                    ])
+                                    ->add('content', 'textarea', ['constraints' => [
+                                        new Assert\NotBlank(),
+                                        new Assert\Length(['max' => 255])
+                                    ],
+                                        'attr' => ['class' => 'markdown', 'required' => false],
+                                    ])
+                                    ->add('published', 'datetime', [
+                                        'data' => new \DateTime(),
+                                    ])
+                                    ->add('submit', 'submit')
+                                    ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $data = $form->getData();
+
+            // do something with the data
+
+            // redirect somewhere
+            return $app->json(['valid' => 1]);
+        }
+
+//        print_r(get_included_files());
+
+        return $app['twig']->render('admin/form.twig', ['form' => $form->createView()]);
+    }
+
     public function record(Application $app, Request $reqeust)
     {
-        \SimpleRecord\Record::connection($app['db']);
-        $post = new \Model\Post();
+        $post = new Model\Post();
         $post->description = 'descr55';
         $result = $post->save();
 
@@ -48,7 +97,7 @@ class HomeController
 //        $db_post = $post->findAll();
 //print_r(get_included_files());exit;
         return '';
-        return $app->json(['result'=>$db_post]);
+        return $app->json(['result' => $db_post]);
     }
 
     public function test(Application $app, Request $reqeust)
@@ -96,7 +145,7 @@ class HomeController
 
     public function sidebarAction(Application $app, Request $reqeust)
     {
- return '';
+        return '';
         return $app->render('project.twig', $data, $response);
     }
 

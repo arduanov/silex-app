@@ -50,6 +50,9 @@ class Application extends Silex
     {
         $app->register(new Provider\MonologServiceProvider(), $app['monolog.config']);
         $app->register(new Provider\DoctrineServiceProvider());
+        // connect to db
+        \SimpleRecord\Record::connection($app['db']);
+
         $app['migrations.output_writer'] = new OutputWriter(
             function ($message) {
                 $output = new ConsoleOutput();
@@ -182,6 +185,7 @@ class Application extends Silex
         };
 
         $app->get('/', "home.controller:indexAction");
+        $app->get('/post', "home.controller:post");
         $app->get('/record', "home.controller:record");
         $app->get('/test', "home.controller:test");
         $app->get('/test2', "home.controller:test2")->method('get|post');

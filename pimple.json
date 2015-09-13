@@ -105,11 +105,6 @@
         "value": "Silex\\ExceptionHandler"
     },
     {
-        "name": "environment",
-        "type": "string",
-        "value": "sandbox"
-    },
-    {
         "name": "root.path",
         "type": "string",
         "value": "\/var\/www\/silex"
@@ -135,32 +130,17 @@
         "value": ""
     },
     {
+        "name": "migrations",
+        "type": "array",
+        "value": ""
+    },
+    {
         "name": "cache.lifetime",
         "type": "int",
         "value": 0
     },
     {
-        "name": "amqp.options",
-        "type": "array",
-        "value": ""
-    },
-    {
         "name": "swiftmailer.options",
-        "type": "array",
-        "value": ""
-    },
-    {
-        "name": "predis.db",
-        "type": "int",
-        "value": 0
-    },
-    {
-        "name": "predis.options",
-        "type": "array",
-        "value": ""
-    },
-    {
-        "name": "predis.parametrs",
         "type": "array",
         "value": ""
     },
@@ -232,7 +212,7 @@
     {
         "name": "monolog.logfile",
         "type": "string",
-        "value": "\/var\/www\/silex\/var\/logs\/2015-09-11.log"
+        "value": "\/var\/www\/silex\/var\/logs\/2015-09-13.log"
     },
     {
         "name": "monolog.slack.key",
@@ -296,6 +276,26 @@
         "name": "db.event_manager",
         "type": "class",
         "value": "Doctrine\\Common\\EventManager"
+    },
+    {
+        "name": "dbs.options",
+        "type": "array",
+        "value": ""
+    },
+    {
+        "name": "dbs.default",
+        "type": "string",
+        "value": "default"
+    },
+    {
+        "name": "migrations.output_writer",
+        "type": "class",
+        "value": "Doctrine\\DBAL\\Migrations\\OutputWriter"
+    },
+    {
+        "name": "migrations.configuration",
+        "type": "class",
+        "value": "Doctrine\\DBAL\\Migrations\\Configuration\\Configuration"
     },
     {
         "name": "twig.options",
@@ -765,7 +765,7 @@
     {
         "name": "home.controller",
         "type": "class",
-        "value": "Controller\\HomeController"
+        "value": "App\\Controller\\HomeController"
     },
     {
         "name": "security.user_provider.admin",
