@@ -39,7 +39,7 @@ var paths = {
         'node_modules/simplemde/src/js/typo.js',
         'node_modules/simplemde/src/js/spell-checker.js',
         'node_modules/simplemde/src/js/marked.js',
-        'node_modules/simplemde/src/js/simplemde.js', 
+        'templates/asset/simplemde.js',
 
         'templates/asset/admin.js',
         'templates/asset/material.js'

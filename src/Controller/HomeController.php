@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Application;
 use App\Model;
+use App\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -12,7 +13,6 @@ class HomeController
 {
     public function indexAction(Application $app, Request $reqeust)
     {
-        $where = new \PommProject\Foundation\Where('role = $*', ['seller']);
 //phpinfo();
         $sellers = $app['user.model']->paginateFindWhere($where, 20);
 //        foreach ($computers as $computer) {
@@ -32,67 +32,23 @@ class HomeController
         return $app->render('projects.twig', $data, $response);
     }
 
-    public function post(Application $app, Request $request)
+    public function postEdit(Application $app, Request $request, $post_id = null)
     {
-        $data = [
-//            'name' => 'Your name',
-//            'email' => 'Your email',
-        ];
+        $data = ($post_id) ? $app['post.model']->find($post_id) : new Model\Post();
 
-        $form = $app['form.factory']->createBuilder('form', $data)
-                                    ->add('title', 'text', ['constraints' => [
-                                        new Assert\NotBlank(),
-                                        new Assert\Length(['max' => 255])
-                                    ],
-                                        'attr' => ['max_length' => 255],
-                                    ])
-                                    ->add('slug', 'text', ['constraints' => [
-                                        new Assert\NotBlank(),
-                                        new Assert\Length(['max' => 255])
-                                    ],
-                                        'attr' => ['max_length' => 255],
-                                    ])
-                                    ->add('description', 'text', ['constraints' => [
-                                        new Assert\NotBlank(),
-                                        new Assert\Length(['max' => 255])
-                                    ],
-                                        'attr' => ['max_length' => 255, 'required' => false],
-                                    ])
-                                    ->add('content', 'textarea', ['constraints' => [
-                                        new Assert\NotBlank(),
-                                        new Assert\Length(['max' => 255])
-                                    ],
-                                        'attr' => ['class' => 'markdown_editor', 'required' => false],
-                                    ])
-                                    ->add('published_at', 'datetime', [
-                                        'data' => date('Y-m-d H:i:s'),
-                                        'input' => 'string'
-                                    ])
-                                    ->add('published', 'checkbox', [
-                                        'label' => ' Published',
-                                        'label_attr' => [
-                                            'class' => 'checkbox-material',
-                                        ],
-                                        'required' => false
-                                    ])
-                                    ->add('Save', 'submit',
-                                        ['attr' => ['class' => 'btn-primary']])
+        $form = $app['form.factory']->createBuilder(new Form\PostType($app), $data)
                                     ->getForm();
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $data = $form->getData();
-//            print_r($data);exit;
-            $post = new Model\Post($data);
+            $post = $form->getData();
+//            print_r($post);exit;
             $post->save();
-            // do something with the data
 
             // redirect somewhere
-            return $app->json(['valid' => 1]);
+//            return $app->json(['valid' => 1]);
         }
-
-//        print_r(get_included_files());
 
         return $app['twig']->render('admin/form.twig', ['form' => $form->createView()]);
     }

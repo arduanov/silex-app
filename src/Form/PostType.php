@@ -9,11 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Form;
+namespace App\Form;
 
+use App\Application;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Defines the form used to create and manipulate blog posts.
@@ -23,35 +25,70 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class PostType extends AbstractType
 {
+    public function __construct(Application $app)
+    {
+        $this->app = $app;
+    }
+
     /**
      * @param FormBuilderInterface $builder
-     * @param array                $options
+     * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        // For the full reference of options defined by each form field type
-        // see http://symfony.com/doc/current/reference/forms/types.html
-
-        // By default, form fields include the 'required' attribute, which enables
-        // the client-side form validation. This means that you can't test the
-        // server-side validation errors from the browser. To temporarily disable
-        // this validation, set the 'required' attribute to 'false':
-        //
-        //     $builder->add('title', null, array('required' => false, ...));
+        $app = $this->app;
+        $form_data = $options['data'];
 
         $builder
-            ->add('title', null, array('label' => 'label.title'))
-            ->add('summary', 'textarea', array('label' => 'label.summary'))
-            ->add('content', 'textarea', array(
-                'attr' => array('rows' => 20),
-                'label' => 'label.content',
-            ))
-            ->add('authorEmail', 'email', array('label' => 'label.author_email'))
-            ->add('publishedAt', 'datetime', array(
-                'widget' => 'single_text',
-                'label' => 'label.published_at',
-            ))
-        ;
+            ->add('id', 'hidden')
+            ->add('title', 'text', ['constraints' => [
+                new Assert\NotBlank(),
+                new Assert\Length(['max' => 255])
+            ],
+                'attr' => ['max_length' => 255],
+            ])
+            ->add('slug', 'text', ['constraints' => [
+                new Assert\NotBlank(),
+                new Assert\Length(['max' => 255]),
+                new Assert\Callback(function ($data, $context) use ($app, $form_data) {
+                    /**
+                     * поиск по слугу и сравнение с формой
+                     */
+                    $existed = $app['post.model']->findOneBy(['slug' => $data]);
+                    if (isset($form_data->id) && $existed && $existed->id != $form_data->id) {
+                        $context->buildViolation('Slug "' . $data . '" already exist')
+                                ->addViolation();
+                    }
+                })
+            ],
+                'attr' => ['max_length' => 255],
+            ])
+            ->add('description', 'text', ['constraints' => [
+                new Assert\NotBlank(),
+                new Assert\Length(['max' => 255])
+            ],
+                'attr' => ['max_length' => 255, 'required' => false],
+            ])
+            ->add('content', 'textarea', ['constraints' => [
+                new Assert\NotBlank(),
+                new Assert\Length(['max' => 255])
+            ],
+                'attr' => ['class' => 'markdown_editor', 'required' => false],
+            ])
+            ->add('published_at', 'datetime', [
+                'date_format' => 'ddMMy',
+                'data' => date('Y-m-d H:i:s'),
+                'input' => 'string'
+            ])
+            ->add('published', 'checkbox', [
+                'label' => ' Published',
+                'label_attr' => [
+                    'class' => 'checkbox-material',
+                ],
+                'required' => false
+            ])
+            ->add('Save', 'submit',
+                ['attr' => ['class' => 'btn-primary']]);
     }
 
     /**
@@ -59,9 +96,9 @@ class PostType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Post',
-        ));
+        $resolver->setDefaults([
+            'data_class' => 'App\Model\Post',
+        ]);
     }
 
     /**

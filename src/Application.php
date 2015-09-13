@@ -30,7 +30,7 @@ class Application extends Silex
         $this->loadConfig($this);
         $this->loadProviders($this);
         $this->loadErrorHandler($this);
-//        $this->loadModels($this);
+        $this->loadModels($this);
         $this->loadRoutes($this);
 //        print_r(get_included_files());
 
@@ -173,6 +173,13 @@ class Application extends Silex
 //        });
     }
 
+    public function loadModels(Application $app)
+    {
+        $app['post.model'] = function () use ($app) {
+            return new Model\Post();
+        };
+    }
+
     public function loadRoutes(Application $app)
     {
 //        $app->get('/', function () use ($app) {
@@ -185,7 +192,8 @@ class Application extends Silex
         };
 
         $app->get('/', "home.controller:indexAction");
-        $app->get('/post', "home.controller:post")->method('get|post');
+        $app->get('/post/', "home.controller:postEdit")->method('get|post');
+        $app->get('/post/{post_id}/', "home.controller:postEdit")->assert('post_id', '\d+')->method('get|post');
         $app->get('/record', "home.controller:record");
         $app->get('/test', "home.controller:test");
         $app->get('/test2', "home.controller:test2")->method('get|post');

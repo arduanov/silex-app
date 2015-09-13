@@ -763,6 +763,11 @@
         "value": "Whoops\\Run"
     },
     {
+        "name": "post.model",
+        "type": "class",
+        "value": "App\\Model\\Post"
+    },
+    {
         "name": "home.controller",
         "type": "class",
         "value": "App\\Controller\\HomeController"

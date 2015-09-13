@@ -89,17 +89,22 @@ var simplemdeToolbar = [
     }
 ];
 
-$(".markdown_editor").each(function(index,obj){
-    var editor_name = 'simplemde'+index;
+$(".markdown_editor").each(function (index, obj) {
+    var editor_name = $(obj).attr('id') + 'simplemde' + index;
     window[editor_name] = new SimpleMDE(
         {
             element: obj,
-            toolbar: simplemdeToolbar
+            toolbar: simplemdeToolbar,
+            autosave: {
+                enabled: true,
+                unique_id: editor_name
+            },
+            spellChecker: false
         }
     );
     window[editor_name].render();
     window[editor_name].codemirror.on("blur", function () {
-        window[editor_name].element.value =  window[editor_name].value();
+        window[editor_name].element.value = window[editor_name].value();
     })
 });
 
