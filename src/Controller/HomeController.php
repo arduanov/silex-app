@@ -34,14 +34,19 @@ class HomeController
 
     public function post(Application $app, Request $request)
     {
-        $post = new Model\Post();
         $data = [
-            'name' => 'Your name',
-            'email' => 'Your email',
+//            'name' => 'Your name',
+//            'email' => 'Your email',
         ];
 
         $form = $app['form.factory']->createBuilder('form', $data)
                                     ->add('title', 'text', ['constraints' => [
+                                        new Assert\NotBlank(),
+                                        new Assert\Length(['max' => 255])
+                                    ],
+                                        'attr' => ['max_length' => 255],
+                                    ])
+                                    ->add('slug', 'text', ['constraints' => [
                                         new Assert\NotBlank(),
                                         new Assert\Length(['max' => 255])
                                     ],
@@ -57,19 +62,30 @@ class HomeController
                                         new Assert\NotBlank(),
                                         new Assert\Length(['max' => 255])
                                     ],
-                                        'attr' => ['class' => 'markdown', 'required' => false],
+                                        'attr' => ['class' => 'markdown_editor', 'required' => false],
                                     ])
-                                    ->add('published', 'datetime', [
-                                        'data' => new \DateTime(),
+                                    ->add('published_at', 'datetime', [
+                                        'data' => date('Y-m-d H:i:s'),
+                                        'input' => 'string'
                                     ])
-                                    ->add('submit', 'submit')
+                                    ->add('published', 'checkbox', [
+                                        'label' => ' Published',
+                                        'label_attr' => [
+                                            'class' => 'checkbox-material',
+                                        ],
+                                        'required' => false
+                                    ])
+                                    ->add('Save', 'submit',
+                                        ['attr' => ['class' => 'btn-primary']])
                                     ->getForm();
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $data = $form->getData();
-
+//            print_r($data);exit;
+            $post = new Model\Post($data);
+            $post->save();
             // do something with the data
 
             // redirect somewhere

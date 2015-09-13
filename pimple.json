@@ -212,7 +212,7 @@
     {
         "name": "monolog.logfile",
         "type": "string",
-        "value": "\/var\/www\/silex\/var\/logs\/2015-09-13.log"
+        "value": "\/var\/www\/silex\/var\/logs\/2015-09-14.log"
     },
     {
         "name": "monolog.slack.key",

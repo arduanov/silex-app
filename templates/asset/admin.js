@@ -89,10 +89,24 @@ var simplemdeToolbar = [
     }
 ];
 
-var simplemde = new SimpleMDE(
-    {
-        element: document.getElementById("form_content"),
-        toolbar: simplemdeToolbar
-    }
-);
-simplemde.render();
+$(".markdown_editor").each(function(index,obj){
+    var editor_name = 'simplemde'+index;
+    window[editor_name] = new SimpleMDE(
+        {
+            element: obj,
+            toolbar: simplemdeToolbar
+        }
+    );
+    window[editor_name].render();
+    window[editor_name].codemirror.on("blur", function () {
+        window[editor_name].element.value =  window[editor_name].value();
+    })
+});
+
+//var simplemde = new SimpleMDE(
+//    {
+//        element: $(".markdown_editor")[0],
+//        toolbar: simplemdeToolbar
+//    }
+//);
+//simplemde.render();

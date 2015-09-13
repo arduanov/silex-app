@@ -185,7 +185,7 @@ class Application extends Silex
         };
 
         $app->get('/', "home.controller:indexAction");
-        $app->get('/post', "home.controller:post");
+        $app->get('/post', "home.controller:post")->method('get|post');
         $app->get('/record', "home.controller:record");
         $app->get('/test', "home.controller:test");
         $app->get('/test2', "home.controller:test2")->method('get|post');

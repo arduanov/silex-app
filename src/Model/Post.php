@@ -26,7 +26,12 @@ class Post extends Record
 ////        if (!empty($this->id)) {
 ////            var_dump($this->id);
 ////        }
-//    }
+
+    public function beforeInsert()
+    {
+//        $this->created_at = date('Y-m-d H:i:s');
+        return true;
+    }
 }
 
 
