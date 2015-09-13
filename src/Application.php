@@ -12,6 +12,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use WhoopsSilex\WhoopsServiceProvider;
 use Symfony\Component\Debug\Debug;
+use Doctrine\DBAL\Migrations\OutputWriter;
+use Symfony\Component\Console\Output\ConsoleOutput;
+use Doctrine\DBAL\Migrations\Configuration\Configuration;
+
 
 class Application extends Silex
 {
@@ -46,14 +50,28 @@ class Application extends Silex
     {
         $app->register(new Provider\MonologServiceProvider(), $app['monolog.config']);
         $app->register(new Provider\DoctrineServiceProvider());
+        $app['migrations.output_writer'] = new OutputWriter(
+            function ($message) {
+                $output = new ConsoleOutput();
+                $output->writeln($message);
+            }
+        );
+        $app['migrations.configuration'] = function () use ($app) {
+            $configuration = new Configuration($app['db'], $app['migrations.output_writer']);
+            $configuration->setMigrationsDirectory($app['migrations']['directory']);
+            $configuration->setName($app['migrations']['name']);
+            $configuration->setMigrationsNamespace($app['migrations']['namespace']);
+            $configuration->setMigrationsTableName($app['migrations']['table_name']);
+            $configuration->registerMigrationsFromDirectory($app['migrations']['directory']);
+
+            return $configuration;
+        };
 
         $app->register(new Provider\TwigServiceProvider(), [
             'twig.path' => $app['root.path'] . '/templates/',
             'twig.form.templates' => ['bootstrap_3_horizontal_layout.html.twig']
         ]);
         $app->register(new Provider\AssetServiceProvider(), [
-            //'assets.version' => 'v1',
-//            'assets.base_path' => $app['root.path'],
             'assets.named_packages' => [
                 'css' => [
                     'version' => 'v1',

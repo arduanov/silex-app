@@ -3,7 +3,6 @@
 $root_path = realpath(__DIR__ . "/..");
 
 return [
-    'environment' => 'sandbox',
     'root.path' => $root_path,
     'cache.path' => $root_path . '/var/cache',
     'fragment.path' => $root_path . '/var/cache/_fragment',
@@ -17,15 +16,13 @@ return [
         'monolog.slack.key' => '',
     ],
 
+    'migrations'=>[
+        'directory'=>$root_path.'/src/Data/Migrations',
+        'name'=>'Migrations',
+        'namespace'=>'App\Data\Migrations',
+        'table_name'=>'migration_versions',
+    ],
     'cache.lifetime' => 0,
-
-    'amqp.options' =>
-        [
-            'host' => 'localhost',
-            'port' => 5672,
-            'user' => '',
-            'password' => '',
-        ],
 
     'swiftmailer.options' =>
         [
@@ -34,14 +31,6 @@ return [
             'username' => '',
             'password' => '',
             'encryption' => null,
-        ],
-    'predis.db' => 0,
-    'predis.options' => ['prefix' => 'sandbox:'],
-    'predis.parametrs' =>
-        [
-            'scheme' => 'tcp',
-            'host' => '127.0.0.1',
-            'port' => 6379
         ],
     'db.options' => [
         'driver' => 'pdo_pgsql',
