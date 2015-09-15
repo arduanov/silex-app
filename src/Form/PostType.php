@@ -73,7 +73,7 @@ class PostType extends AbstractType
                 new Assert\NotBlank(),
                 new Assert\Length(['max' => 255])
             ],
-                'attr' => ['class' => 'markdown_editor', 'required' => false],
+                'attr' => ['class' => 'markdown_editor', 'required' => false, 'uniq_id' => md5($form_data->content)],
             ])
             ->add('published_at', 'datetime', [
                 'date_format' => 'ddMMy',

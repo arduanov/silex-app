@@ -13353,7 +13353,7 @@ SimpleMDE.prototype.autosave = function() {
 	}
 
 	if(this.options.autosave.loaded !== true) {
-		if(localStorage.getItem(this.options.autosave.unique_id) != "")
+		if(typeof localStorage.getItem(this.options.autosave.unique_id) == "string" && localStorage.getItem(this.options.autosave.unique_id) != "")
 			this.codemirror.setValue(localStorage.getItem(this.options.autosave.unique_id));
 
 		this.options.autosave.loaded = true;
@@ -13738,7 +13738,7 @@ var simplemdeToolbar = [
 ];
 
 $(".markdown_editor").each(function (index, obj) {
-    var editor_name = $(obj).attr('id') + 'simplemde' + index;
+    var editor_name = $(obj).attr('id')+$(obj).attr('uniq_id') + 'simplemde' + index;
     window[editor_name] = new SimpleMDE(
         {
             element: obj,

@@ -32,8 +32,24 @@ class HomeController
         return $app->render('projects.twig', $data, $response);
     }
 
+    public function postList(Application $app, Request $request)
+    {
+        $title = 'Posts';
+//$request->attributes
+        $paginator = new \Paginator\Paginator();
+        $paginator->setCurrentPageNumber(2);
+        $paginator->setTotalItemCount(150);
+
+        return $app['twig']->render('test.html.twig', array(
+            'paginator' => $paginator
+        ));
+
+        return $app['twig']->render('admin/list.twig', ['title' => $title, 'items' => []]);
+    }
+
     public function postEdit(Application $app, Request $request, $post_id = null)
     {
+        $title = 'Post ' . ($post_id ? 'edit' : 'add');
         $data = ($post_id) ? $app['post.model']->find($post_id) : new Model\Post();
 
         $form = $app['form.factory']->createBuilder(new Form\PostType($app), $data)
@@ -43,14 +59,10 @@ class HomeController
 
         if ($form->isValid()) {
             $post = $form->getData();
-//            print_r($post);exit;
             $post->save();
-
-            // redirect somewhere
-//            return $app->json(['valid' => 1]);
         }
 
-        return $app['twig']->render('admin/form.twig', ['form' => $form->createView()]);
+        return $app['twig']->render('admin/form.twig', ['title' => $title, 'form' => $form->createView()]);
     }
 
     public function record(Application $app, Request $reqeust)

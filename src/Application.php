@@ -121,10 +121,15 @@ class Application extends Silex
                 ],
             ],
         ];
+
         $app->register(new \Silex\Provider\SecurityServiceProvider());
+
+        $app->register(new \Paginator\Provider\PaginatorServiceProvider());
+
+
+
+
         $app->register(new \Sorien\Provider\PimpleDumpProvider(), ['dump.path' => $app['root.path']]);
-
-
     }
 
 //    public function loadModels(Application $app)
@@ -191,9 +196,13 @@ class Application extends Silex
             return new Controller\HomeController();
         };
 
-        $app->get('/', "home.controller:indexAction");
-        $app->get('/post/', "home.controller:postEdit")->method('get|post');
+
+        $app->get('/post/', "home.controller:postList");
         $app->get('/post/{post_id}/', "home.controller:postEdit")->assert('post_id', '\d+')->method('get|post');
+        $app->get('/post/add/', "home.controller:postEdit")->method('get|post');
+
+
+        $app->get('/', "home.controller:indexAction");
         $app->get('/record', "home.controller:record");
         $app->get('/test', "home.controller:test");
         $app->get('/test2', "home.controller:test2")->method('get|post');

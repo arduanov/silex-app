@@ -90,7 +90,7 @@ var simplemdeToolbar = [
 ];
 
 $(".markdown_editor").each(function (index, obj) {
-    var editor_name = $(obj).attr('id') + 'simplemde' + index;
+    var editor_name = $(obj).attr('id')+$(obj).attr('uniq_id') + 'simplemde' + index;
     window[editor_name] = new SimpleMDE(
         {
             element: obj,
