@@ -32,17 +32,17 @@ class HomeController
         return $app->render('projects.twig', $data, $response);
     }
 
-    public function postList(Application $app, Request $request)
+    public function postList(Application $app, Request $request, $page)
     {
         $title = 'Posts';
 //$request->attributes
         $paginator = new \Paginator\Paginator();
-        $paginator->setCurrentPageNumber(2);
+        $paginator->setCurrentPageNumber($page);
         $paginator->setTotalItemCount(150);
-
-        return $app['twig']->render('test.html.twig', array(
-            'paginator' => $paginator
-        ));
+//print_r( $paginator->getPages());exit;
+        return $app['twig']->render('test.html.twig', [
+            'paginator' => $paginator->getPages()
+        ]);
 
         return $app['twig']->render('admin/list.twig', ['title' => $title, 'items' => []]);
     }

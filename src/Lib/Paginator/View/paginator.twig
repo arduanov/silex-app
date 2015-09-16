@@ -1,42 +1,43 @@
 {# default Sliding pagination control implementation #}
 sdsdc ssssssssssssssss
 {#{{ first}}#}
-{% if pageCount > 1 %}
+{% if paginator.pageCount > 1 %}
 
     <div>
         <ul class="pagination pagination-sm">
-            {% if current != first %}
-                {{ path(app.request.get('_route')) }}
-                <li><a href="{{ path(app.request.get('_route'),query|merge({page: first}))|raw }}"><i
+            {% if paginator.current != paginator.first %}
+                {#{{ path(app.request.get('_controller')) }}#}
+                {{ path(app.request.get('_route'),{page: paginator.first}) }}
+                <li><a href="{{ path(app.request.get('_route'),{page: paginator.first}) }}"><i
                                 class="glyphicon glyphicon-fast-backward"></i></a></li>
             {% else %}
                 <li class="disabled"><span><i class="glyphicon glyphicon-fast-backward"></i></span></li>
             {% endif %}
 
-            {% if previous is defined and current != previous %}
-                <li><a href="{{ path(app.request.get('_route'), query|merge({page: previous})) }}"><i
+            {% if paginator.previous is defined and paginator.current != paginator.previous %}
+                <li><a href="{{ path(app.request.get('_route'), {page: paginator.previous}) }}"><i
                                 class="glyphicon glyphicon-step-backward"></i></a></li>
             {% else %}
                 <li class="disabled"><span><i class="glyphicon glyphicon-step-backward"></i></span></li>
             {% endif %}
 
-            {% for page in pagesInRange %}
-                {% if page != current %}
-                    <li><a href="{{ path(app.request.get('_route'), query|merge({page: page})) }}">{{ page }}</a></li>
+            {% for pagew in paginator.pagesInRange %}
+                {% if pagew != paginator.current %}
+                    <li><a href="{{ path(app.request.get('_route'), {page: pagew}) }}">{{ pagew }}</a></li>
                 {% else %}
-                    <li class="active"><span>{{ page }}</span></li>
+                    <li class="active"><span>{{ pagew }}</span></li>
                 {% endif %}
             {% endfor %}
 
             {% if next is defined and current != next %}
-                <li><a href="{{ path(app.request.get('_route'), query|merge({page: next})) }}"><i
+                <li><a href="{{ path(app.request.get('_route'), {page: paginator.next}) }}"><i
                                 class="glyphicon glyphicon-step-forward"></i></a></li>
             {% else %}
                 <li class="disabled"><span><i class="glyphicon glyphicon-step-forward"></i></span></li>
             {% endif %}
 
-            {% if current != last %}
-                <li><a href="{{ path(app.request.get('_route'), query|merge({page: last})) }}"><i
+            {% if paginator.current != paginator.last %}
+                <li><a href="{{ path(app.request.get('_route'), {page: paginator.last}) }}"><i
                                 class="glyphicon glyphicon-fast-forward"></i></a></li>
             {% else %}
                 <li class="disabled"><span><i class="glyphicon glyphicon-fast-forward"></i></span></li>

@@ -15,6 +15,7 @@ use Symfony\Component\Debug\Debug;
 use Doctrine\DBAL\Migrations\OutputWriter;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Doctrine\DBAL\Migrations\Configuration\Configuration;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 
 class Application extends Silex
@@ -127,8 +128,6 @@ class Application extends Silex
         $app->register(new \Paginator\Provider\PaginatorServiceProvider());
 
 
-
-
         $app->register(new \Sorien\Provider\PimpleDumpProvider(), ['dump.path' => $app['root.path']]);
     }
 
@@ -197,7 +196,10 @@ class Application extends Silex
         };
 
 
-        $app->get('/post/', "home.controller:postList");
+        $app->get('/post/', function () use ($app) {
+            return $app->redirect('/post/page/1/');
+        });
+        $app->get('/post/page/{page}/', "home.controller:postList")->assert('page', '\d+');
         $app->get('/post/{post_id}/', "home.controller:postEdit")->assert('post_id', '\d+')->method('get|post');
         $app->get('/post/add/', "home.controller:postEdit")->method('get|post');
 

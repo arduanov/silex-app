@@ -24,7 +24,7 @@ class Paginator implements Countable
      *
      * @var string
      */
-    protected static $defaultScrollingStyle = 'Sliding';
+    protected static $defaultScrollingStyle = 'Elastic';
 
     /**
      * Default item count per page
@@ -60,7 +60,7 @@ class Paginator implements Countable
      *
      * @var int
      */
-    protected $pageRange = 5;
+    protected $pageRange = 10;
 
     /**
      * Pages

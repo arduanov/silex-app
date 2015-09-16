@@ -25,11 +25,11 @@ class PaginatorServiceProvider implements ServiceProviderInterface
         $app['paginator.range'] = 5;
         $app['twig.loader']->addLoader(new Twig_Loader_Filesystem(__DIR__ . '/../View'));
 
-        $app['twig'] = $app->extend('twig', function ($twig,$app) {
+//        $app['twig'] = $app->extend('twig', function ($twig,$app) {
 //            $twig->addGlobal('paginator.range', $app['paginator.range']);
-            $twig->addExtension(new Twig\TwigPaginatorExtension($app['request_stack']));
-
-            return $twig;
-        });
+//            $twig->addExtension(new Twig\TwigPaginatorExtension($app['request_stack']));
+//
+//            return $twig;
+//        });
     }
 }
