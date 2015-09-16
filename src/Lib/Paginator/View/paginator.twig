@@ -1,12 +1,8 @@
-{# default Sliding pagination control implementation #}
-sdsdc ssssssssssssssss
-{#{{ first}}#}
 {% if paginator.pageCount > 1 %}
 
     <div>
         <ul class="pagination pagination-sm">
             {% if paginator.current != paginator.first %}
-                {#{{ path(app.request.get('_controller')) }}#}
                 {{ path(app.request.get('_route'),{page: paginator.first}) }}
                 <li><a href="{{ path(app.request.get('_route'),{page: paginator.first}) }}"><i
                                 class="glyphicon glyphicon-fast-backward"></i></a></li>
@@ -21,11 +17,11 @@ sdsdc ssssssssssssssss
                 <li class="disabled"><span><i class="glyphicon glyphicon-step-backward"></i></span></li>
             {% endif %}
 
-            {% for pagew in paginator.pagesInRange %}
-                {% if pagew != paginator.current %}
-                    <li><a href="{{ path(app.request.get('_route'), {page: pagew}) }}">{{ pagew }}</a></li>
+            {% for page_in_range in paginator.pagesInRange %}
+                {% if page_in_range != paginator.current %}
+                    <li><a href="{{ path(app.request.get('_route'), {page: page_in_range}) }}">{{ page_in_range }}</a></li>
                 {% else %}
-                    <li class="active"><span>{{ pagew }}</span></li>
+                    <li class="active"><span>{{ page_in_range }}</span></li>
                 {% endif %}
             {% endfor %}
 
