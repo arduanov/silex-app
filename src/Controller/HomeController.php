@@ -40,11 +40,15 @@ class HomeController
         $paginator->setCurrentPageNumber($page);
         $paginator->setTotalItemCount(150);
 //print_r( $paginator->getPages());exit;
-        return $app['twig']->render('test.html.twig', [
+//        return $app['twig']->render('test.html.twig', [
+//            'paginator' => $paginator->getPages()
+//        ]);
+
+        return $app['twig']->render('admin/list.twig', [
+            'title' => $title,
+            'items' => [],
             'paginator' => $paginator->getPages()
         ]);
-
-        return $app['twig']->render('admin/list.twig', ['title' => $title, 'items' => []]);
     }
 
     public function postEdit(Application $app, Request $request, $post_id = null)

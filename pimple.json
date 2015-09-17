@@ -212,7 +212,7 @@
     {
         "name": "monolog.logfile",
         "type": "string",
-        "value": "\/var\/www\/silex\/var\/logs\/2015-09-16.log"
+        "value": "\/var\/www\/silex\/var\/logs\/2015-09-17.log"
     },
     {
         "name": "monolog.slack.key",
@@ -748,16 +748,6 @@
         "value": "Symfony\\Component\\Security\\Core\\Validator\\Constraints\\UserPasswordValidator"
     },
     {
-        "name": "paginator.template",
-        "type": "string",
-        "value": "paginator.twig"
-    },
-    {
-        "name": "paginator.range",
-        "type": "int",
-        "value": 5
-    },
-    {
         "name": "whoops.error_page_handler",
         "type": "class",
         "value": "Whoops\\Handler\\PrettyPageHandler"
@@ -826,15 +816,5 @@
         "name": "security.authentication.failure_handler.admin",
         "type": "class",
         "value": "Symfony\\Component\\Security\\Http\\Authentication\\DefaultAuthenticationFailureHandler"
-    },
-    {
-        "name": "twig.form.engine",
-        "type": "class",
-        "value": "Symfony\\Bridge\\Twig\\Form\\TwigRendererEngine"
-    },
-    {
-        "name": "twig.form.renderer",
-        "type": "class",
-        "value": "Symfony\\Bridge\\Twig\\Form\\TwigRenderer"
     }
 ]

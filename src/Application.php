@@ -125,7 +125,7 @@ class Application extends Silex
 
         $app->register(new \Silex\Provider\SecurityServiceProvider());
 
-//        $app->register(new \Paginator\Provider\PaginatorServiceProvider());
+        $app->register(new \Paginator\Provider\PaginatorServiceProvider());
 
 
         $app->register(new \Sorien\Provider\PimpleDumpProvider(), ['dump.path' => $app['root.path']]);
