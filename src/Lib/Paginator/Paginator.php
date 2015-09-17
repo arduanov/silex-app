@@ -7,9 +7,6 @@
  * @license     http://creativecommons.org/licenses/MIT/deed.fr    MIT
  */
 
-/**
- * @namespace
- */
 namespace Paginator;
 
 use Countable;
@@ -60,7 +57,7 @@ class Paginator implements Countable
      *
      * @var int
      */
-    protected $pageRange = 10;
+    protected $pageRange = 5;
 
     /**
      * Pages
@@ -323,11 +320,6 @@ class Paginator implements Countable
         return $this->totalItemCount;
     }
 
-    public function render()
-    {
-        return '';
-    }
-
     /**
      * Calculates the page count.
      *
@@ -412,15 +404,5 @@ class Paginator implements Countable
                     'name or object implementing Paginator\ScrollingStyle\ScrollingStyleInterface'
                 );
         }
-    }
-
-    /**
-     * Serializes the object as a string.  Proxies to {@link render()}.
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->render();
     }
 }
