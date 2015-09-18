@@ -6,11 +6,23 @@
 
 
 {% block content %}
-<div class="col-lg-12">
-    <h1 class="text-primary">{{ title }}</h1>
-</div>
-<div class="col-lg-12  well">
-    {{ form(form) }}
-</div>
+    {#<div class="col-lg-12">#}
+    {#<h1 class="text-primary">{{ title }}</h1>#}
+    {#</div>#}
+    <div class="row">
+
+        <div class="col-lg-12">
+            <h1 class="text-primary" style="float: left">{{ title }}</h1> <a href="{{ path('post_list') }}"
+                                                                             class="btn btn-default btn-fab btn-raised mdi-content-clear btn-material-red-100 "
+                                                                             style="float: right;color:#fff"></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 ">
+            <div class="panel panel-default" style="padding: 20px">
+                    {{ form(form) }}
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

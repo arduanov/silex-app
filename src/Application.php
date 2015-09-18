@@ -199,9 +199,9 @@ class Application extends Silex
         $app->get('/post/', function () use ($app) {
             return $app->redirect('/post/page/1/');
         });
-        $app->get('/post/page/{page}/', "home.controller:postList")->assert('page', '\d+');
-        $app->get('/post/{post_id}/', "home.controller:postEdit")->assert('post_id', '\d+')->method('get|post');
-        $app->get('/post/add/', "home.controller:postEdit")->method('get|post');
+        $app->get('/post/page/{page}/', "home.controller:postList")->assert('page', '\d+')->value('page',1)->bind('post_list');
+        $app->get('/post/{id}/', "home.controller:postEdit")->assert('id', '\d+')->method('get|post')->bind('post');
+        $app->get('/post/add/', "home.controller:postEdit")->method('get|post')->bind('post_add');
 
 
         $app->get('/', "home.controller:indexAction");

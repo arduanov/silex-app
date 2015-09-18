@@ -34,6 +34,18 @@
     margin-left:0px !important;
 }
 
+.table.sortable th:hover{
+    cursor: pointer;
+    background-color: #eee;
+}
+
+.table.sortable th a{
+    color: #bbb;
+    float: right;
+}
+.table.sortable th a.active{
+    background-color: #009688;
+}
 /*
    markdown editor
 */

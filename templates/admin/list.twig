@@ -7,45 +7,78 @@
 
 {% block content %}
     {#<style>#}
-        {#.table .sorting i{#}
-            {#font-size: 14px;#}
-            {#float: right;#}
-            {#padding-top: 2px;#}
-            {#padding-left: 7px;#}
-            {#padding-right: 7px;#}
-            {#/*margin: 0;*/#}
-            {#/*padding: 5px;*/#}
-        {#}#}
+    {#.table .sorting i{#}
+    {#font-size: 14px;#}
+    {#float: right;#}
+    {#padding-top: 2px;#}
+    {#padding-left: 7px;#}
+    {#padding-right: 7px;#}
+    {#/*margin: 0;*/#}
+    {#/*padding: 5px;*/#}
+    {#}#}
     {#</style>#}
-    <div class="col-lg-12">
-        <h1 class="text-primary">{{ title }}</h1>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="text-primary" style="float: left">{{ title }}</h1> <a href="{{ path('post_add') }}"
+                                                                             class="btn btn-success btn-fab btn-raised mdi-content-add "
+                                                                             style="float: right"></a>
+        </div>
+
+        {#<div class="col-lg-6">#}
+        {##}
+        {#</div>#}
     </div>
-    <div class="col-lg-12  well">
-        <table class="table table-striped  ">
-            <thead>
-            <tr>
-                <th>#<a href="#" class="sorting"><i class="mdi-navigation-unfold-more"></i></a></th>
-                <th>Column heading<a href="#" class="sorting"><i class="mdi-navigation-expand-more"></i></a></th>
-                <th>Column heading<a href="#" class="sorting"><i class="mdi-navigation-expand-less"></i></a></th>
-                <th>Column heading</th>
-            </tr>
-            </thead>
-            <tr>
-                <td>1</td>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-        </table>
+    <div class="row">
 
-        {% include 'paginator.twig' %}
+        <div class="col-lg-12  ">
+            <div class="panel panel-default">
 
+                <table class="table table-hover sortable">
+                    <thead>
+                    <tr>
+                        {% for title in table_head %}
+                            <th>
+                                {{ title | capitalize|replace({'_': ' '}) }}
+                                <a href="#"><i class="mdi-navigation-unfold-more"></i></a>
+                            </th>
+                        {% endfor %}
+                        {#<th>#<a href="#" class="sorting"><i class="mdi-navigation-unfold-more"></i></a></th>#}
+                        {#<th>Column heading<a href="#" class="sorting"><i class="mdi-navigation-expand-more"></i></a></th>#}
+                        {#<th>Column heading<a href="#" class="sorting"><i class="mdi-navigation-expand-less"></i></a></th>#}
+                        <th style="width: 120px"></th>
+                    </tr>
+                    </thead>
+                    {% for item in items %}
+                        <tr>
+                            {% for title in table_head %}
+                                <td> {{ attribute(item ,title) }} </td>
+                            {% endfor %}
+
+                            {#{% for key, value in item|cast_to_array %}#}
+                            {#<td>{{ value }}</td>#}
+                            {#{% endfor %}#}
+                            <td>
+                                <div class="btn-group" style="margin: 0;float: right">
+                                    <a href="{{ path('post',{id: item.id}) }}" class="btn btn-primary btn-xs">Edit</a>
+                                    <a href="javascript:void(0)" class="btn btn-default btn-xs">Del</a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    {#<tr>#}
+
+                    {#<td>Column content</td>#}
+                    {#<td>Column content</td>#}
+                    {#<td>Column content</td>#}
+                    {#</tr>#}
+                </table>
+
+                {% include 'paginator.twig' %}
+
+            </div>
+        </div>
     </div>
 
 {% endblock %}

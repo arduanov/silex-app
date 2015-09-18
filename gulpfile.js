@@ -7,7 +7,7 @@ var paths = {
 
     css: [
         'bower_components/bootstrap/dist/css/bootstrap.min.css',
-        'bower_components/bootstrap-material-design/dist/css/material.min.css',
+        'bower_components/bootstrap-material-design/dist/css/material-fullpalette.min.css',
         'bower_components/bootstrap-material-design/dist/css/roboto.css',
         'bower_components/bootstrap-material-design/dist/css/ripples.min.css',
         'node_modules/simplemde/src/css/codemirror.css',

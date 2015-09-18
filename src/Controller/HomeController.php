@@ -35,26 +35,24 @@ class HomeController
     public function postList(Application $app, Request $request, $page)
     {
         $title = 'Posts';
-//$request->attributes
-        $paginator = new \Paginator\Paginator();
-        $paginator->setCurrentPageNumber($page);
-        $paginator->setTotalItemCount(150);
-//print_r( $paginator->getPages());exit;
-//        return $app['twig']->render('test.html.twig', [
-//            'paginator' => $paginator->getPages()
-//        ]);
+
+        $posts = $app['post.model']->findAll();
+//print_r($posts);exit;
+
+        $keys = ['id','title','content'];
 
         return $app['twig']->render('admin/list.twig', [
             'title' => $title,
-            'items' => [],
-            'paginator' => $paginator->getPages()
+            'table_head' => $keys,
+            'items' => $posts,
+            'paginator' => $app['paginator']($page, count($posts))
         ]);
     }
 
-    public function postEdit(Application $app, Request $request, $post_id = null)
+    public function postEdit(Application $app, Request $request, $id = null)
     {
-        $title = 'Post ' . ($post_id ? 'edit' : 'add');
-        $data = ($post_id) ? $app['post.model']->find($post_id) : new Model\Post();
+        $title = 'Post ' . ($id ? 'edit' : 'add');
+        $data = ($id) ? $app['post.model']->find($id) : new Model\Post();
 
         $form = $app['form.factory']->createBuilder(new Form\PostType($app), $data)
                                     ->getForm();

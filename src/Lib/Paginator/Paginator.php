@@ -10,7 +10,6 @@
 namespace Paginator;
 
 use Countable;
-use Traversable;
 use InvalidArgumentException;
 use Paginator\ScrollingStyle\ScrollingStyleInterface;
 
@@ -72,7 +71,7 @@ class Paginator implements Countable
      * @var array
      */
     protected $totalItemCount = 0;
-    
+
     /**
      * Constructor
      *
@@ -80,15 +79,15 @@ class Paginator implements Countable
      * @param int $itemCountPerPage
      * @param int $currentPageNumber
      */
-    public function __construct($totalItemsCount = null, $itemCountPerPage = null, $currentPageNumber = null)
+    public function __construct($currentPageNumber = null, $totalItemsCount = null, $itemCountPerPage = null)
     {
-        if($totalItemsCount) {
+        if ($totalItemsCount) {
             $this->setTotalItemCount($totalItemsCount);
         }
-        if($itemCountPerPage) {
+        if ($itemCountPerPage) {
             $this->setItemCountPerPage($itemCountPerPage);
         }
-        if($currentPageNumber) {
+        if ($currentPageNumber) {
             $this->setCurrentPageNumber($currentPageNumber);
         }
     }
@@ -120,7 +119,7 @@ class Paginator implements Countable
      */
     public static function setDefaultItemCountPerPage($count)
     {
-        static::$defaultItemCountPerPage = (int) $count;
+        static::$defaultItemCountPerPage = (int)$count;
     }
 
     /**
@@ -165,9 +164,9 @@ class Paginator implements Countable
      */
     public function setCurrentPageNumber($pageNumber)
     {
-        $this->currentPageNumber = (int) $pageNumber;
-        $this->currentItems      = null;
-        $this->currentItemCount  = null;
+        $this->currentPageNumber = (int)$pageNumber;
+        $this->currentItems = null;
+        $this->currentItemCount = null;
 
         return $this;
     }
@@ -194,12 +193,12 @@ class Paginator implements Countable
      */
     public function setItemCountPerPage($itemCountPerPage = -1)
     {
-        $this->itemCountPerPage = (int) $itemCountPerPage;
+        $this->itemCountPerPage = (int)$itemCountPerPage;
         if ($this->itemCountPerPage < 1) {
             $this->itemCountPerPage = $this->getTotalItemCount();
         }
-        $this->pageCount        = $this->_calculatePageCount();
-        $this->currentItems     = null;
+        $this->pageCount = $this->_calculatePageCount();
+        $this->currentItems = null;
         $this->currentItemCount = null;
 
         return $this;
@@ -223,7 +222,7 @@ class Paginator implements Countable
      */
     public function setPageRange($pageRange)
     {
-        $this->pageRange = (int) $pageRange;
+        $this->pageRange = (int)$pageRange;
 
         return $this;
     }
@@ -255,7 +254,7 @@ class Paginator implements Countable
         $lowerBound = $this->normalizePageNumber($lowerBound);
         $upperBound = $this->normalizePageNumber($upperBound);
 
-        $pages = array();
+        $pages = [];
 
         for ($pageNumber = $lowerBound; $pageNumber <= $upperBound; $pageNumber++) {
             $pages[$pageNumber] = $pageNumber;
@@ -272,7 +271,7 @@ class Paginator implements Countable
      */
     public function normalizeItemNumber($itemNumber)
     {
-        $itemNumber = (int) $itemNumber;
+        $itemNumber = (int)$itemNumber;
 
         if ($itemNumber < 1) {
             $itemNumber = 1;
@@ -293,7 +292,7 @@ class Paginator implements Countable
      */
     public function normalizePageNumber($pageNumber)
     {
-        $pageNumber = (int) $pageNumber;
+        $pageNumber = (int)$pageNumber;
 
         if ($pageNumber < 1) {
             $pageNumber = 1;
@@ -327,7 +326,7 @@ class Paginator implements Countable
      */
     protected function _calculatePageCount()
     {
-        return (int) ceil($this->getTotalItemCount() / $this->getItemCountPerPage());
+        return (int)ceil($this->getTotalItemCount() / $this->getItemCountPerPage());
     }
 
     /**
@@ -338,16 +337,16 @@ class Paginator implements Countable
      */
     protected function _createPages($scrollingStyle = null)
     {
-        $pageCount         = $this->count();
+        $pageCount = $this->count();
         $currentPageNumber = $this->getCurrentPageNumber();
 
-        $pages = array(
-            'pageCount'         => $pageCount,
-            'itemCountPerPage'  => $this->getItemCountPerPage(),
-            'first'             => 1,
-            'current'           => $currentPageNumber,
-            'last'              => $pageCount
-        );
+        $pages = [
+            'pageCount' => $pageCount,
+            'itemCountPerPage' => $this->getItemCountPerPage(),
+            'first' => 1,
+            'current' => $currentPageNumber,
+            'last' => $pageCount
+        ];
 
         // Previous and next
         if ($currentPageNumber - 1 > 0) {
@@ -360,9 +359,9 @@ class Paginator implements Countable
 
         // Pages in range
         $scrollingStyle = $this->_loadScrollingStyle($scrollingStyle);
-        $pages['pagesInRange']     = $scrollingStyle->getPages($this);
+        $pages['pagesInRange'] = $scrollingStyle->getPages($this);
         $pages['firstPageInRange'] = min($pages['pagesInRange']);
-        $pages['lastPageInRange']  = max($pages['pagesInRange']);
+        $pages['lastPageInRange'] = max($pages['pagesInRange']);
 
 
         return $pages;

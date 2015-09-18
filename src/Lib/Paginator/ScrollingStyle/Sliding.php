@@ -19,7 +19,7 @@ class Sliding implements ScrollingStyleInterface
     /**
      * Returns an array of "local" pages given a page number and range.
      *
-     * @param  Paginator\Paginator $paginator
+     * @param  \Paginator\Paginator $paginator
      * @param  int $pageRange (Optional) Page range
      * @return array
      */
