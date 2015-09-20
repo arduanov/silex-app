@@ -37,12 +37,15 @@ class HomeController
         $title = 'Posts';
         $sort_by = 'id';
         $sort_order = 'DESC';
+
         if ($request->get('sort_by')) {
             $sort_by = $request->get('sort_by');
+
+            if ($request->get('sort_order')) {
+                $sort_order = $request->get('sort_order');
+            }
         }
-        if ($request->get('sort_order')) {
-            $sort_order = $request->get('sort_order');
-        }
+
         $postModel = $app['post.model'];
 
         $filter_value = $request->get('filter');
@@ -53,13 +56,13 @@ class HomeController
 
 
         $posts = $postModel->filterBy($filter, [$sort_by => $sort_order], $app['paginator.per_page'], ($page - 1) * $app['paginator.per_page']);
-        $posts_count = $postModel->countLastQuery();
+//        $posts_count = $postModel->countLastQuery();
 
         return $app['twig']->render('admin/list.twig', [
             'title' => $title,
             'table_head' => $postModel->getFilterKeys(),
             'items' => $posts,
-            'paginator' => $app['paginator']($page, $posts_count)
+            'paginator' => $app['paginator']($page, 10)
         ]);
     }
 

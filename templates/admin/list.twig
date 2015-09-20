@@ -47,9 +47,28 @@
                         <thead>
                         <tr>
                             {% for title in table_head %}
-                                <th>
+                                <th{% if global.request.get('sort_by') == title %} class="active" {% endif %}>
                                     {{ title | capitalize|replace({'_': ' '}) }}
-                                    <a href="#"><i class="mdi-navigation-unfold-more"></i></a>
+
+                                    {% if global.request.get('sort_by') == title and global.request.get('sort_order') == 'asc' %}
+                                        {% set sort_order = 'desc' %}
+                                    {% else %}
+                                        {% set sort_order = 'asc' %}
+                                    {% endif %}
+
+
+                                    <a href="{{ path(global.request.get('_route'), {sort_by: title, sort_order: sort_order}) }}">
+                                        {% if global.request.get('sort_by') == title %}
+                                          {% if global.request.get('sort_order') == 'asc' %}
+                                              <i class="mdi-navigation-expand-more"></i>
+                                          {% else %}
+                                              <i class="mdi-navigation-expand-less"></i>
+                                          {% endif %}
+                                        {% else %}
+                                          <i class="mdi-navigation-unfold-more"></i>
+                                        {% endif %}
+
+                                    </a>
                                 </th>
                             {% endfor %}
                             {#<th>#<a href="#" class="sorting"><i class="mdi-navigation-unfold-more"></i></a></th>#}
