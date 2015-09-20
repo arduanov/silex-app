@@ -1,43 +1,55 @@
 {% if paginator.pageCount > 1 %}
-
-    <div>
+    <nav>
         <ul class="pagination">
             {% if paginator.current != paginator.first %}
-                <li><a href="{{ path(app.request.get('_route'),{page: paginator.first}) }}"><i
-                                class="mdi-navigation-arrow-back"></i></a></li>
+                <li>
+                    <a href="{{ path(global.request.get('_route'),{page: paginator.first}) }}"><i class="mdi-navigation-arrow-back"></i></a>
+                </li>
             {% else %}
-                <li class="disabled"><span><i class="mdi-navigation-arrow-back"></i></span></li>
+                <li class="disabled">
+                    <span><i class="mdi-navigation-arrow-back"></i></span>
+                </li>
             {% endif %}
 
             {% if paginator.previous is defined and paginator.current != paginator.previous %}
-                <li><a href="{{ path(app.request.get('_route'), {page: paginator.previous}) }}"><i
-                                class="mdi-navigation-chevron-left"></i></a></li>
+                <li>
+                    <a href="{{ path(global.request.get('_route'), {page: paginator.previous}) }}"><i class="mdi-navigation-chevron-left"></i></a>
+                </li>
             {% else %}
                 <li class="disabled"><span><i class="mdi-navigation-chevron-left"></i></span></li>
             {% endif %}
 
             {% for page_in_range in paginator.pagesInRange %}
                 {% if page_in_range != paginator.current %}
-                    <li><a href="{{ path(app.request.get('_route'), {page: page_in_range}) }}">{{ page_in_range }}</a></li>
+                    <li>
+                        <a href="{{ path(global.request.get('_route'), {page: page_in_range}) }}">{{ page_in_range }}</a>
+                    </li>
                 {% else %}
-                    <li class="active"><span>{{ page_in_range }}</span></li>
+                    <li class="active">
+                        <span>{{ page_in_range }}</span>
+                    </li>
                 {% endif %}
             {% endfor %}
 
             {% if paginator.next is defined and paginator.current != paginator.next %}
-                <li><a href="{{ path(app.request.get('_route'), {page: paginator.next}) }}"><i
-                                class="mdi-navigation-chevron-right"></i></a></li>
+                <li>
+                    <a href="{{ path(global.request.get('_route'), {page: paginator.next}) }}"><i class="mdi-navigation-chevron-right"></i></a>
+                </li>
             {% else %}
-                <li class="disabled"><span><i class="mdi-navigation-chevron-right"></i></span></li>
+                <li class="disabled">
+                    <span><i class="mdi-navigation-chevron-right"></i></span>
+                </li>
             {% endif %}
 
             {% if paginator.current != paginator.last %}
-                <li><a href="{{ path(app.request.get('_route'), {page: paginator.last}) }}"><i
-                                class="mdi-navigation-arrow-forward"></i></a></li>
+                <li>
+                    <a href="{{ path(global.request.get('_route'), {page: paginator.last}) }}"><i class="mdi-navigation-arrow-forward"></i></a>
+                </li>
             {% else %}
-                <li class="disabled"><span><i class="mdi-navigation-arrow-forward"></i></span></li>
+                <li class="disabled">
+                    <span><i class="mdi-navigation-arrow-forward"></i></span>
+                </li>
             {% endif %}
         </ul>
-    </div>
-
+    </nav>
 {% endif %}

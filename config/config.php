@@ -6,7 +6,7 @@ return [
     'root.path' => $root_path,
     'cache.path' => $root_path . '/var/cache',
     'fragment.path' => $root_path . '/var/cache/_fragment',
-
+    'paginator.per_page' =>5,
     'monolog.level' => Monolog\Logger::DEBUG,
 
     'monolog.config' => [

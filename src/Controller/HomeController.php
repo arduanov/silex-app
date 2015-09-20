@@ -35,33 +35,48 @@ class HomeController
     public function postList(Application $app, Request $request, $page)
     {
         $title = 'Posts';
+        $sort_by = 'id';
+        $sort_order = 'DESC';
+        if ($request->get('sort_by')) {
+            $sort_by = $request->get('sort_by');
+        }
+        if ($request->get('sort_order')) {
+            $sort_order = $request->get('sort_order');
+        }
+        $postModel = $app['post.model'];
 
-        $posts = $app['post.model']->findAll();
-//print_r($posts);exit;
+        $filter_value = $request->get('filter');
+        $filter = [];
+        foreach ($postModel->getFilterKeys() as $key) {
+            $filter[$key] = $filter_value;
+        }
 
-        $keys = ['id','title','content'];
+
+        $posts = $postModel->filterBy($filter, [$sort_by => $sort_order], $app['paginator.per_page'], ($page - 1) * $app['paginator.per_page']);
+        $posts_count = $postModel->countLastQuery();
 
         return $app['twig']->render('admin/list.twig', [
             'title' => $title,
-            'table_head' => $keys,
+            'table_head' => $postModel->getFilterKeys(),
             'items' => $posts,
-            'paginator' => $app['paginator']($page, count($posts))
+            'paginator' => $app['paginator']($page, $posts_count)
         ]);
     }
 
     public function postEdit(Application $app, Request $request, $id = null)
     {
         $title = 'Post ' . ($id ? 'edit' : 'add');
-        $data = ($id) ? $app['post.model']->find($id) : new Model\Post();
+        $data = ($id) ? $app['post.model']->find($id) : $app['post.model'];
 
-        $form = $app['form.factory']->createBuilder(new Form\PostType($app), $data)
-                                    ->getForm();
+        $form = $app['form.factory']->createBuilder(new Form\PostType($app), $data)->getForm();
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $post = $form->getData();
             $post->save();
+
+            return $app->redirect($app->path('post_list'));
         }
 
         return $app['twig']->render('admin/form.twig', ['title' => $title, 'form' => $form->createView()]);

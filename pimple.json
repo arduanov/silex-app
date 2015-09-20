@@ -120,6 +120,11 @@
         "value": "\/var\/www\/silex\/var\/cache\/_fragment"
     },
     {
+        "name": "paginator.per_page",
+        "type": "int",
+        "value": 5
+    },
+    {
         "name": "monolog.level",
         "type": "int",
         "value": 250
@@ -212,7 +217,7 @@
     {
         "name": "monolog.logfile",
         "type": "string",
-        "value": "\/var\/www\/silex\/var\/logs\/2015-09-18.log"
+        "value": "\/var\/www\/silex\/var\/logs\/2015-09-20.log"
     },
     {
         "name": "monolog.slack.key",
@@ -454,7 +459,7 @@
     },
     {
         "name": "translator.resources",
-        "type": "array",
+        "type": "closure",
         "value": ""
     },
     {
@@ -821,15 +826,5 @@
         "name": "security.authentication.failure_handler.admin",
         "type": "class",
         "value": "Symfony\\Component\\Security\\Http\\Authentication\\DefaultAuthenticationFailureHandler"
-    },
-    {
-        "name": "twig.form.engine",
-        "type": "class",
-        "value": "Symfony\\Bridge\\Twig\\Form\\TwigRendererEngine"
-    },
-    {
-        "name": "twig.form.renderer",
-        "type": "class",
-        "value": "Symfony\\Bridge\\Twig\\Form\\TwigRenderer"
     }
 ]
