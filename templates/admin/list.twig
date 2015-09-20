@@ -1,0 +1,124 @@
+{% extends 'admin/layout.twig' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+
+{% block content %}
+    {#<style>#}
+    {#.table .sorting i{#}
+    {#font-size: 14px;#}
+    {#float: right;#}
+    {#padding-top: 2px;#}
+    {#padding-left: 7px;#}
+    {#padding-right: 7px;#}
+    {#/*margin: 0;*/#}
+    {#/*padding: 5px;*/#}
+    {#}#}
+    {#</style>#}
+
+    <div class="row">
+        <div class="col-lg-12">
+            <span class="h1 text-primary" style="float: left">{{ title }}</span>
+            {#<span class="h1 text-primary" style="float: left">#}
+            <form style="float: left;padding-top: 27px;
+    margin-left: 30px;">
+                <input name="filter" type="text" class="form-control col-lg-8" placeholder="Search" value="{{ global.request.get('filter') }}">
+            </form>
+            {#</span>#}
+
+
+            <a href="{{ path('post_add') }}"
+               class="btn btn-success btn-fab btn-raised mdi-content-add "
+               style="float: right"></a>
+        </div>
+
+        {#<div class="col-lg-6">#}
+        {##}
+        {#</div>#}
+    </div>
+    <div class="row">
+
+        <div class="col-lg-12  ">
+            <div class="panel panel-default">
+                <div class="panel-body" style="padding: 0">
+                    <table class="table table-hover sortable" style="margin-bottom: 0">
+                        <thead>
+                        <tr>
+                            {% for title in table_head %}
+                                <th{% if global.request.get('sort_by') == title %} class="active" {% endif %}>
+                                    {{ title | capitalize|replace({'_': ' '}) }}
+
+                                    {% if global.request.get('sort_by') == title and global.request.get('sort_order') == 'asc' %}
+                                        {% set sort_order = 'desc' %}
+                                    {% else %}
+                                        {% set sort_order = 'asc' %}
+                                    {% endif %}
+
+
+                                    <a href="{{ path(global.request.get('_route'), {sort_by: title, sort_order: sort_order}) }}">
+                                        {% if global.request.get('sort_by') == title %}
+                                          {% if global.request.get('sort_order') == 'asc' %}
+                                              <i class="mdi-navigation-expand-more"></i>
+                                          {% else %}
+                                              <i class="mdi-navigation-expand-less"></i>
+                                          {% endif %}
+                                        {% else %}
+                                          <i class="mdi-navigation-unfold-more"></i>
+                                        {% endif %}
+
+                                    </a>
+                                </th>
+                            {% endfor %}
+                            {#<th>#<a href="#" class="sorting"><i class="mdi-navigation-unfold-more"></i></a></th>#}
+                            {#<th>Column heading<a href="#" class="sorting"><i class="mdi-navigation-expand-more"></i></a></th>#}
+                            {#<th>Column heading<a href="#" class="sorting"><i class="mdi-navigation-expand-less"></i></a></th>#}
+                            <th style="width: 120px"></th>
+                        </tr>
+                        </thead>
+                        {% for item in items %}
+                            <tr>
+                                {% for title in table_head %}
+                                    <td> {{ attribute(item ,title) }} </td>
+                                {% endfor %}
+
+                                {#{% for key, value in item|cast_to_array %}#}
+                                {#<td>{{ value }}</td>#}
+                                {#{% endfor %}#}
+                                <td>
+                                    <div class="btn-group" style="margin: 0;float: right">
+                                        <a href="{{ path('post',{id: item.id}) }}" class="btn btn-primary btn-xs">Edit</a>
+                                        <a href="javascript:void(0)" class="btn btn-default btn-xs">Del</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                        {#<tr>#}
+
+                        {#<td>Column content</td>#}
+                        {#<td>Column content</td>#}
+                        {#<td>Column content</td>#}
+                        {#</tr>#}
+                    </table>
+                </div>
+                <div class="panel-footer" style="padding: 0; text-align: center;">
+                    {% include 'paginator.twig' %}</div>
+            </div>
+            {#<div class="panel panel-default">#}
+                {#<div class="panel-body">#}
+
+
+
+
+                {#</div>#}
+            {#</div>#}
+            {#<div class="panel-footer">#}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

@@ -1,0 +1,23 @@
+{
+  "name": "silex-bootstrap",
+  "main": "gulpfile.js",
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:sartas/silex.git"
+  },
+  "scripts": {
+    "postinstall": "bower install && gulp"
+  },
+  "author": "Marsel Arduanov",
+  "dependencies": {
+    "simplemde": "^1.7.0",
+    "bower": "*",
+    "gulp": "*",
+    "gulp-minify-css": "*",
+    "gulp-uglify": "*",
+    "gulp-concat": "*"
+  },
+  "devDependencies": {
+    "gulp-csso": "^1.0.0"
+  }
+}

@@ -5,7 +5,8 @@
   ],
   "private": true,
   "dependencies": {
-    "bootstrap-markdown": "*",
+    "bootstrap": "*",
+    "marked": "*",
     "bootstrap-material-design": "*",
     "bootstrap-tagsinput": "*",
     "dropzone": "*",

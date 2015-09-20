@@ -3,6 +3,7 @@
 
 apt-get update
 timedatectl set-timezone Europe/Moscow
+apt-get install -yqq git mc;
 
 ##
 # Postgresql

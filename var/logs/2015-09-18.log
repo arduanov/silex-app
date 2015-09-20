@@ -1,0 +1,1 @@
+[2015-09-18 00:25:29] application.NOTICE: E_NOTICE: Array to string conversion {"code":8,"message":"Array to string conversion","file":"/var/www/silex/vendor/twig/twig/lib/Twig/Template.php","line":509} []

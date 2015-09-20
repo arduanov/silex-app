@@ -1,0 +1,34 @@
+#!/usr/bin/env php
+<?php
+require_once(__DIR__ . '/../vendor/autoload.php');
+
+use Doctrine\DBAL\Migrations\Tools\Console\Command\AbstractCommand;
+use Symfony\Component\Console\Application as Console;
+
+$app = new \App\Application();
+$console = new Console();
+//$app->boot();
+
+$helperSet = new \Symfony\Component\Console\Helper\HelperSet([
+    'db' => new \Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper($app['db']),
+    'dialog' => new \Symfony\Component\Console\Helper\QuestionHelper(),
+]);
+
+$console->setHelperSet($helperSet);
+$commands = [
+    '\Doctrine\DBAL\Migrations\Tools\Console\Command\ExecuteCommand',
+    '\Doctrine\DBAL\Migrations\Tools\Console\Command\GenerateCommand',
+    '\Doctrine\DBAL\Migrations\Tools\Console\Command\MigrateCommand',
+    '\Doctrine\DBAL\Migrations\Tools\Console\Command\StatusCommand',
+    '\Doctrine\DBAL\Migrations\Tools\Console\Command\VersionCommand',
+];
+
+foreach ($commands as $name) {
+    /** @var AbstractCommand $command */
+    $command = new $name();
+    $command->setMigrationConfiguration($app['migrations.configuration']);
+    $console->add($command);
+}
+
+
+$console->run();
