@@ -8,5 +8,6 @@ app/cache/*
 app/data/*
 !app/data/.gitkeep
 bower_components
+node_modules
 .vagrant
 
