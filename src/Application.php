@@ -87,6 +87,7 @@ class Application extends Silex
                 ]
             ]
         ]);
+        $app->register(new Provider\SecurityServiceProvider());
 
         $app->register(new Provider\RoutingServiceProvider());
 //        $app->register(new Silex\Provider\HttpCacheServiceProvider(), [
@@ -101,6 +102,7 @@ class Application extends Silex
         $app->register(new Provider\FormServiceProvider());
 
         $app->register(new Provider\ServiceControllerServiceProvider());
+        $app->register(new Provider\SessionServiceProvider());
 
 //        $app['security.firewalls'] = [
 //            'admin' => [
@@ -113,20 +115,8 @@ class Application extends Silex
 //            ],
 //        ];
 
-        $app['security.firewalls'] = [
-            'admin' => [
-                'pattern' => '^/admin',
-                'form' => ['login_path' => '/login', 'check_path' => '/admin'],
-                'users' => [
-                    'admin' => ['ROLE_ADMIN', '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg=='],
-                ],
-            ],
-        ];
-
-        $app->register(new \Silex\Provider\SecurityServiceProvider());
 
         $app->register(new \Paginator\Provider\PaginatorServiceProvider());
-
 
         $app->register(new \Sorien\Provider\PimpleDumpProvider(), ['dump.path' => $app['root.path']]);
     }
@@ -143,10 +133,10 @@ class Application extends Silex
 
     public function loadErrorHandler(Application $app)
     {
-        Debug::enable();
+//        Debug::enable();
 //        ErrorHandler::register();
 //        ExceptionHandler::register();
-        $app->register(new WhoopsServiceProvider);
+//        $app->register(new WhoopsServiceProvider);
 
 //        $app->error(function (Exception $e, $code) {
 //            return new Response('We are sorry, but something went terribly wrong.');
@@ -196,12 +186,13 @@ class Application extends Silex
         };
 
 
-        $app->get('/post/', function () use ($app) {
-            return $app->redirect('/post/page/1/');
+        $app->get('/admin/post/', function () use ($app) {
+            return 123;
+//            return $app->redirect('/post/page/1/');
         });
-        $app->get('/post/page/{page}/', "home.controller:postList")->assert('page', '\d+')->value('page', 1)->bind('post_list');
-        $app->get('/post/{id}/', "home.controller:postEdit")->assert('id', '\d+')->method('get|post')->bind('post');
-        $app->get('/post/add/', "home.controller:postEdit")->method('get|post')->bind('post_add');
+        $app->get('/admin/post/page/{page}/', "home.controller:postList")->assert('page', '\d+')->value('page', 1)->bind('post_list');
+        $app->get('/admin/post/{id}/', "home.controller:postEdit")->assert('id', '\d+')->method('get|post')->bind('post');
+        $app->get('/admin/post/add/', "home.controller:postEdit")->method('get|post')->bind('post_add');
 
 
         $app->get('/', "home.controller:indexAction");
@@ -209,13 +200,15 @@ class Application extends Silex
         $app->get('/test', "home.controller:test");
         $app->get('/test2', "home.controller:test2")->method('get|post');
         $app->get('/tracks', "home.controller:tracksAction");
-        $app->get('/one/', "home.controller:sidebarAction")->bind('sidebar');
-        $app->get('/admin', function () {
+        $app->get('/one/',  function () use ($app) {
+            return $app->json(['a' => 'b']);
+        })->bind('sidebar');
+        $app->get('/admin33', function () use ($app) {
 //            print_r(get_included_files());
-            return 'admin';
-        });
-        $app->get('/two', function () {
-            return 'two';
+            return $app->json(['a' => 'b']);
+        })->bind('admin')->method('get|post');
+        $app->get('/admin/login_check', function () use ($app) {
+            return $app->json(['a' => 'b']);
         });
 
         $app->get('/login', function (Request $request) use ($app) {
@@ -224,6 +217,21 @@ class Application extends Silex
                 'last_username' => $app['session']->get('_security.last_username'),
             ]);
         });
+
+
+        $app['security.firewalls'] = [
+            'secured_area' => [
+                'pattern' => '^/admin',
+                'anonymous' => false,
+                'form' => ['login_path' => '/login', 'check_path' => '/admin/check_login',
+                    'always_use_default_target_path'=>true,
+                    'default_target_path' => 'post_add',
+                ],
+                'users' => [
+                    'admin' => ['ROLE_ADMIN', '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg=='],
+                ],
+            ],
+        ];
     }
 
 }
