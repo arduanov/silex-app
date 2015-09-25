@@ -107,32 +107,10 @@ class Application extends Silex
         $app->register(new Provider\ServiceControllerServiceProvider());
         $app->register(new Provider\SessionServiceProvider());
 
-//        $app['security.firewalls'] = [
-//            'admin' => [
-//                'pattern' => '^/admin',
-//                'http' => true,
-//                'users' => [
-//                    // raw password is foo
-//                    'admin' => ['ROLE_ADMIN', '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg=='],
-//                ],
-//            ],
-//        ];
-
-
         $app->register(new \Paginator\Provider\PaginatorServiceProvider());
 
-        $app->register(new \Sorien\Provider\PimpleDumpProvider(), ['dump.path' => $app['root.path']]);
+//        $app->register(new \Sorien\Provider\PimpleDumpProvider(), ['dump.path' => $app['root.path']]);
     }
-
-//    public function loadModels(Application $app)
-//    {
-//        $app['user.model'] = function () use ($app) {
-//            return $app['db']->getModel('App\Model\XmUserModel');
-//        };
-//        $app['track.model'] = function () use ($app) {
-//            return $app['db']->getModel('App\Model\XmTrackOriginalModel');
-//        };
-//    }
 
     public function loadErrorHandler(Application $app)
     {
@@ -179,23 +157,19 @@ class Application extends Silex
 
     public function loadRoutes(Application $app)
     {
-//        $app->get('/', function () use ($app) {
-//            $app['pomm'];
-//            return 'Welcome to my new Silex app';
-//        });
-
         $app['home.controller'] = function () use ($app) {
             return new Controller\HomeController();
         };
 
-
         $app->get('/admin/post/', function () use ($app) {
-            return 123;
-//            return $app->redirect('/post/page/1/');
+            return $app->redirect('/post/page/1/');
         });
         $app->get('/admin/post/page/{page}/', "home.controller:postList")->assert('page', '\d+')->value('page', 1)->bind('post_list');
         $app->get('/admin/post/{id}/', "home.controller:postEdit")->assert('id', '\d+')->method('get|post')->bind('post');
         $app->get('/admin/post/add/', "home.controller:postEdit")->method('get|post')->bind('post_add');
+        $app->get('/admin/{all}',  function () use ($app) {
+            return $app->redirect('/admin');
+        })->assert('all', '.*');
 
 
         $app->get('/', "home.controller:indexAction");
@@ -206,13 +180,6 @@ class Application extends Silex
         $app->get('/one/', function () use ($app) {
             return $app->json(['a' => 'b']);
         })->bind('sidebar');
-        $app->get('/admin33', function () use ($app) {
-//            print_r(get_included_files());
-            return $app->json(['a' => 'b']);
-        })->bind('admin')->method('get|post');
-        $app->get('/admin/login_check', function () use ($app) {
-            return $app->json(['a' => 'b']);
-        });
 
         $app->get('/login', function (Request $request) use ($app) {
             return $app['twig']->render('login.twig', [
@@ -225,11 +192,11 @@ class Application extends Silex
         $app['security.firewalls'] = [
             'secured_area' => [
                 'pattern' => '^/admin',
-                'anonymous' => false,
                 'form' => ['login_path' => '/login', 'check_path' => '/admin/check_login',
                     'always_use_default_target_path' => true,
-                    'default_target_path' => 'post_add',
+                    'default_target_path' => 'post_list',
                 ],
+                'logout' => ['logout_path' => '/admin/logout', 'target' => '/', 'invalidate_session' => true],
                 'users' => [
                     'admin' => ['ROLE_ADMIN', '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg=='],
                 ],
@@ -238,13 +205,3 @@ class Application extends Silex
     }
 
 }
-
-//$app->get('/', function () use ($app) {
-//
-//    $iterator = $app['pomm']['db']
-//        ->getQueryManager();
-//
-//    echo get_class($iterator);
-//    print_r(get_included_files());
-//    return 123;
-//});

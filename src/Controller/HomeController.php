@@ -14,22 +14,22 @@ class HomeController
     public function indexAction(Application $app, Request $reqeust)
     {
 //phpinfo();
-        $sellers = $app['user.model']->paginateFindWhere($where, 20);
-//        foreach ($computers as $computer) {
-//            printf(
-//                $computer['id']);
-//        }
-//        print_r($sellers->getIterator()->extract());exit;
-        $data = ['tracks' => $sellers->getIterator()];
-//        print_r(get_included_files());
-//throw new \Exception(123);
-
-        $response = new Response();
-//        $response->setMaxAge(30);
-        $response->setSharedMaxAge(30);
-        $response->setTtl(30);
-
-        return $app->render('projects.twig', $data, $response);
+//        $sellers = $app['user.model']->paginateFindWhere($where, 20);
+////        foreach ($computers as $computer) {
+////            printf(
+////                $computer['id']);
+////        }
+////        print_r($sellers->getIterator()->extract());exit;
+//        $data = ['tracks' => $sellers->getIterator()];
+////        print_r(get_included_files());
+////throw new \Exception(123);
+//
+//        $response = new Response();
+////        $response->setMaxAge(30);
+//        $response->setSharedMaxAge(30);
+//        $response->setTtl(30);
+//
+//        return $app->render('projects.twig', $data, $response);
     }
 
     public function postList(Application $app, Request $request, $page)
