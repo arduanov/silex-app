@@ -127,7 +127,7 @@
     {
         "name": "monolog.level",
         "type": "int",
-        "value": 250
+        "value": 100
     },
     {
         "name": "monolog.config",
@@ -217,7 +217,7 @@
     {
         "name": "monolog.logfile",
         "type": "string",
-        "value": "\/var\/www\/silex\/var\/logs\/2015-09-22.log"
+        "value": "\/var\/www\/silex\/var\/logs\/2015-09-26.log"
     },
     {
         "name": "monolog.slack.key",

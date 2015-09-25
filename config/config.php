@@ -3,6 +3,7 @@
 $root_path = realpath(__DIR__ . "/..");
 
 return [
+    'debug' => false,
     'root.path' => $root_path,
     'cache.path' => $root_path . '/var/cache',
     'fragment.path' => $root_path . '/var/cache/_fragment',
@@ -11,7 +12,7 @@ return [
 
     'monolog.config' => [
         'monolog.logfile' => $root_path . '/var/logs/' . date('Y-m-d') . '.log',
-        'monolog.level' => Monolog\Logger::NOTICE,
+        'monolog.level' => Monolog\Logger::DEBUG,
         'monolog.name' => 'application',
         'monolog.slack.key' => '',
     ],

@@ -55,9 +55,12 @@
                                     {% else %}
                                         {% set sort_order = 'asc' %}
                                     {% endif %}
+                                    {% set url_params = {sort_by: title, sort_order: sort_order} %}
+                                    {% if global.request.get('filter') %}
+                                         {% set url_params = url_params|merge({filter: global.request.get('filter')}) %}
+                                    {% endif %}
 
-
-                                    <a href="{{ path(global.request.get('_route'), {sort_by: title, sort_order: sort_order}) }}">
+                                    <a href="{{ path(global.request.get('_route'), url_params) }}">
                                         {% if global.request.get('sort_by') == title %}
                                           {% if global.request.get('sort_order') == 'asc' %}
                                               <i class="mdi-navigation-expand-more"></i>

@@ -23,7 +23,7 @@ class Application extends Silex
     use Silex\TwigTrait;
     use Silex\UrlGeneratorTrait;
 
-//    use Silex\SecurityTrait;
+    use Silex\SecurityTrait;
 
     public function __construct()
     {
@@ -73,7 +73,10 @@ class Application extends Silex
 
         $app->register(new Provider\TwigServiceProvider(), [
             'twig.path' => $app['root.path'] . '/templates/',
-            'twig.form.templates' => ['bootstrap_3_horizontal_layout.html.twig']
+            'twig.form.templates' => ['bootstrap_3_horizontal_layout.html.twig'],
+            'twig.options' => [
+                'cache' => $app['cache.path'].'/twig',
+            ]
         ]);
         $app->register(new Provider\AssetServiceProvider(), [
             'assets.named_packages' => [
@@ -200,7 +203,7 @@ class Application extends Silex
         $app->get('/test', "home.controller:test");
         $app->get('/test2', "home.controller:test2")->method('get|post');
         $app->get('/tracks', "home.controller:tracksAction");
-        $app->get('/one/',  function () use ($app) {
+        $app->get('/one/', function () use ($app) {
             return $app->json(['a' => 'b']);
         })->bind('sidebar');
         $app->get('/admin33', function () use ($app) {
@@ -224,7 +227,7 @@ class Application extends Silex
                 'pattern' => '^/admin',
                 'anonymous' => false,
                 'form' => ['login_path' => '/login', 'check_path' => '/admin/check_login',
-                    'always_use_default_target_path'=>true,
+                    'always_use_default_target_path' => true,
                     'default_target_path' => 'post_add',
                 ],
                 'users' => [

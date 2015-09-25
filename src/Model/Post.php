@@ -34,10 +34,10 @@ class Post extends Record
         self::$QB = $qb = $this->getQueryBuilder();
 
         foreach (self::$filter['integer'] as $key) {
-            if (isset($criteria[$key])) {
+            if (isset($criteria[$key])&& is_numeric($criteria[$key])) {
                 $where = $key . '= :' . $key;
                 $qb->orWhere($where)
-                   ->setParameter(':' . $key, (int)$criteria[$key]);
+                   ->setParameter(':' . $key, $criteria[$key]);
             }
         }
         foreach (self::$filter['text'] as $key) {
