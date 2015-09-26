@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Enter</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ asset('/min.css','css') }}" rel="stylesheet" media="all"/>
+    <style>
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .parent {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: auto;
+            white-space: nowrap;
+            text-align: center;
+            font-size: 0;
+        }
+
+        .parent:before {
+            height: 100%;
+            display: inline-block;
+            vertical-align: middle;
+            content: '';
+        }
+
+        .block {
+            display: inline-block;
+            white-space: normal;
+            vertical-align: middle;
+            text-align: left;
+        }
+
+        .block form {
+            display: block;
+            border: none;
+        }
+
+        .login input {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body role="document">
+<div class="parent">
+    <div class="block " style="width: 400px;">
+        <form class="form-horizontal login" action="{{ path('admin_check_login') }}" method="post">
+            <div class="">
+                <input type="name" class="form-control" id="inputEmail" placeholder="Username" name="_username">
+            </div>
+            <div class="">
+                <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="_password">
+            </div>
+            <div class="">
+                <button type="submit" class="btn btn-primary">Enter</button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+
+
+</body>
+</html>

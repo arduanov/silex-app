@@ -192,7 +192,7 @@ class Application extends Silex
         });
 
         $app->get('/admin/login', function (Request $request) use ($app) {
-            return $app['twig']->render('login.twig', [
+            return $app['twig']->render('admin/login.twig', [
                 'error' => $app['security.last_error']($request),
                 'last_username' => $app['session']->get('_security.last_username'),
             ]);
