@@ -10,7 +10,7 @@ return [
     'paginator.per_page' =>5,
     'admin.menu'=>[
         'post'=>'Posts',
-        'tags'=>'Tags'
+        'tag'=>'Tags'
     ],
 
     'monolog.level' => Monolog\Logger::DEBUG,

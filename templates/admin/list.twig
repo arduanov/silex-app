@@ -108,7 +108,10 @@
                     </table>
                 </div>
                 <div class="panel-footer" style="padding: 0; text-align: center;">
-                    {% include 'paginator.twig' %}</div>
+                {% if  paginator is defined %}
+                    {% include 'paginator.twig' %}
+                    {% endif %}
+                    </div>
             </div>
             {#<div class="panel panel-default">#}
                 {#<div class="panel-body">#}

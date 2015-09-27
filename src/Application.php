@@ -156,6 +156,9 @@ class Application extends Silex
         $app['post.model'] = $app->factory(function () use ($app) {
             return new Model\Post();
         });
+        $app['tag.model'] = $app->factory(function () use ($app) {
+            return new Model\Tag();
+        });
     }
 
     public function loadEventListeners(Application $app)
