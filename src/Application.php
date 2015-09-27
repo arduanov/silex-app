@@ -187,10 +187,6 @@ class Application extends Silex
 
 
 
-        $app->get('/admin/', function () use ($app) {
-            return 'admin';
-        });
-
         $app->get('/admin/login', function (Request $request) use ($app) {
             return $app['twig']->render('admin/login.twig', [
                 'error' => $app['security.last_error']($request),
@@ -198,11 +194,15 @@ class Application extends Silex
             ]);
         });
 
+        $app->get('/admin/', function () use ($app) {
+            return 'admin';
+        });
+
         /**
          * редирект для всех несуществующих роутов в админку
          */
         $app->get('/admin/{all}', function () use ($app) {
-            return $app->redirect('/admin');
+            return $app->redirect('/admin/');
         })->assert('all', '.*');
 
         $app['security.firewalls'] = [
@@ -223,6 +223,7 @@ class Application extends Silex
                 ],
             ],
         ];
+
     }
 
 }

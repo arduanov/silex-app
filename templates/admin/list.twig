@@ -21,17 +21,18 @@
     <div class="row">
         <div class="col-lg-12">
             <span class="h1 text-primary" style="float: left">{{ title }}</span>
+            <span style="float: left;padding-top: 36px;  margin-left: 7px;color: #999">{{ items_count }}</span>
             {#<span class="h1 text-primary" style="float: left">#}
-            <form style="float: left;padding-top: 27px;
-    margin-left: 30px;">
-                <input name="filter" type="text" class="form-control col-lg-8" placeholder="Search" value="{{ global.request.get('filter') }}">
-            </form>
+
             {#</span>#}
 
 
-            <a href="{{ path('post_add') }}"
+            <a href="{{ path(global.request.attributes.get('_route') ~ '_add') }}"
                class="btn btn-success btn-fab btn-raised mdi-content-add "
                style="float: right"></a>
+            <form style="float: right;padding-top: 27px;  margin-right: 40px;">
+                <input name="filter" type="text" class="form-control col-lg-8" placeholder="Search" value="{{ global.request.get('filter') }}">
+            </form>
         </div>
 
         {#<div class="col-lg-6">#}
@@ -91,7 +92,7 @@
                                 {#{% endfor %}#}
                                 <td>
                                     <div class="btn-group" style="margin: 0;float: right">
-                                        <a href="{{ path('post',{id: item.id}) }}" class="btn btn-primary btn-xs">Edit</a>
+                                        <a href="{{ path(global.request.attributes.get('_route') ~ '_edit',{id: item.id}) }}" class="btn btn-primary btn-xs">Edit</a>
                                         <a href="javascript:void(0)" class="btn btn-default btn-xs">Del</a>
                                     </div>
                                 </td>

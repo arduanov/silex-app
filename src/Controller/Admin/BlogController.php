@@ -14,14 +14,12 @@ class BlogController implements \Silex\Api\ControllerProviderInterface
     public function connect(Application $app)
     {
         $controllers = $app['controllers_factory'];
-        //crud contact
 
-        $controllers->get('/post/', function () use ($app) {
-            return $app->redirect('/admin/post/page/1/');
-        });
-        $controllers->get('/post/page/{page}/', [$this, 'postList'])->assert('page', '\d+')->value('page', 1)->bind('post_list');
-        $controllers->get('/post/{id}/', [$this, 'postEdit'])->assert('id', '\d+')->method('get|post')->bind('post');
+        $controllers->get('/post/page/{page}/', [$this, 'postList'])->assert('page', '\d+')->value('page', 1)->bind('post');
+        $controllers->get('/post/{id}/', [$this, 'postEdit'])->assert('id', '\d+')->method('get|post')->bind('post_edit');
         $controllers->get('/post/add/', [$this, 'postEdit'])->method('get|post')->bind('post_add');
+
+        $controllers->get('/tags/', [$this, 'tagsList'])->bind('tags');
 
         return $controllers;
     }
@@ -30,7 +28,6 @@ class BlogController implements \Silex\Api\ControllerProviderInterface
     {
         $title = 'Posts';
         $postModel = $app['post.model'];
-
 
         $sort_by = 'id';
         $sort_order = 'DESC';
@@ -43,23 +40,21 @@ class BlogController implements \Silex\Api\ControllerProviderInterface
             }
         }
 
-
-
         $filter_value = $request->get('filter');
         $filter = [];
         foreach ($postModel->getFilterKeys() as $key) {
             $filter[$key] = $filter_value;
         }
 
-
         $posts = $postModel->filterBy($filter, [$sort_by => $sort_order], $app['paginator.per_page'], ($page - 1) * $app['paginator.per_page']);
-//        $posts_count = $postModel->countLastQuery();
+        $posts_count = $postModel->countLastQuery();
 
         return $app['twig']->render('admin/list.twig', [
             'title' => $title,
             'table_head' => $postModel->getFilterKeys(),
             'items' => $posts,
-            'paginator' => $app['paginator']($page, 10)
+            'items_count' => $posts_count,
+            'paginator' => $app['paginator']($page, $posts_count)
         ]);
     }
 
