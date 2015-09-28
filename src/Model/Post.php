@@ -34,7 +34,7 @@ class Post extends Record
         self::$QB = $qb = $this->getQueryBuilder();
 
         foreach (self::$filter['integer'] as $key) {
-            if (isset($criteria[$key])&& is_numeric($criteria[$key])) {
+            if (isset($criteria[$key]) && is_numeric($criteria[$key])) {
                 $where = $key . '= :' . $key;
                 $qb->orWhere($where)
                    ->setParameter(':' . $key, $criteria[$key]);
@@ -58,6 +58,30 @@ class Post extends Record
             $qb->setFirstResult($offset);
         }
         return $this->findByQueryBuilder($qb);
+    }
+
+    public function getTags()
+    {
+        $post_tags = new PostTags();
+        $post_tags = $post_tags->findBy(['post_id' => $this->id]);
+        $result = [];
+        foreach ($post_tags as $item) {
+            $result[] = $item->tag_id;
+        }
+
+        return $result;
+    }
+
+    public function addTag($tag_id)
+    {
+        $post_tags = new PostTags(['post_id' => $this->id, 'tag_id' => $tag_id]);
+        $post_tags->save();
+    }
+
+    public function removeTag($tag_id)
+    {
+        $post_tags = new PostTags();
+        $post_tags->deleteBy(['post_id' => $this->id, 'tag_id' => $tag_id]);
     }
 
     public function beforeUpdate()

@@ -35,6 +35,11 @@ class PostType extends AbstractType
     {
         $app = $this->app;
         $form_data = $options['data'];
+        $tags = [];
+        $tags_list = $this->app['tag.model']->findAll();
+        foreach ($tags_list as $item) {
+            $tags[$item->id] = $item->title;
+        }
 
         $builder
             ->add('id', 'hidden')
@@ -77,6 +82,12 @@ class PostType extends AbstractType
                 'data' => date('Y-m-d H:i:s'),
                 'input' => 'string'
             ])
+            ->add('tags', 'choice', [
+                'choices' => $tags,
+                'multiple' => true,
+                'expanded' => true,
+                'label_attr' => ['class' => 'checkbox-material checkbox-inline']
+            ])
             ->add('published', 'checkbox', [
                 'label' => ' Published',
                 'label_attr' => [
@@ -84,8 +95,9 @@ class PostType extends AbstractType
                 ],
                 'required' => false
             ])
-            ->add('Save', 'submit',
-                ['attr' => ['class' => 'btn-primary']]);
+            ->add('Save', 'submit', [
+                'attr' => ['class' => 'btn-primary']
+            ]);
     }
 
     /**

@@ -218,7 +218,7 @@ class Application extends Silex
                     'login_path' => '/admin/login',
                     'check_path' => '/admin/check_login',
                     'always_use_default_target_path' => true,
-                    'default_target_path' => 'post_list',
+                    'default_target_path' => 'post',
                 ],
                 'logout' => ['logout_path' => '/admin/logout', 'target' => '/', 'invalidate_session' => true],
                 'users' => [
