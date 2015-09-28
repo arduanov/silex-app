@@ -21,10 +21,10 @@ class Version20150927212245 extends AbstractMigration
         $table->addColumn('title', 'string');
         $table->addColumn('slug', 'string');
 
-        $table->addColumn('created_at', 'datetime')->setDefault('NOW()');
-        $table->addColumn('modified_at', 'datetime')->setNotnull(false);
-
+        $table->addColumn('created_at', 'datetime')->setDefault('CURRENT_TIMESTAMP');
+        $table->addColumn('modified_at', 'datetime')->setDefault('CURRENT_TIMESTAMP');
         $table->addUniqueIndex(['slug']);
+
     }
 
     /**

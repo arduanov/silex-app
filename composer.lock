@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/arduanov/simple-record.git",
-                "reference": "dfb043fb41567084d8db49dbae5c94f06d5fef6f"
+                "reference": "248bcf180af6a25ebe6bf4b62a48e34a398ec7c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/arduanov/simple-record/zipball/dfb043fb41567084d8db49dbae5c94f06d5fef6f",
-                "reference": "dfb043fb41567084d8db49dbae5c94f06d5fef6f",
+                "url": "https://api.github.com/repos/arduanov/simple-record/zipball/248bcf180af6a25ebe6bf4b62a48e34a398ec7c0",
+                "reference": "248bcf180af6a25ebe6bf4b62a48e34a398ec7c0",
                 "shasum": ""
             },
             "require": {
@@ -51,10 +51,10 @@
                 "active record"
             ],
             "support": {
-                "source": "https://github.com/arduanov/simple-record/tree/master",
+                "source": "https://github.com/arduanov/simple-record/tree/1.0.2",
                 "issues": "https://github.com/arduanov/simple-record/issues"
             },
-            "time": "2015-09-20 17:41:03"
+            "time": "2015-09-28 20:58:46"
         },
         {
             "name": "cocur/slugify",
@@ -1060,12 +1060,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silexphp/Silex.git",
-                "reference": "42f199cc9697bd240d642d28634e9fea08e0af79"
+                "reference": "129cc1bd190e0018c8920c8d9150bfc9b4065946"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silexphp/Silex/zipball/42f199cc9697bd240d642d28634e9fea08e0af79",
-                "reference": "42f199cc9697bd240d642d28634e9fea08e0af79",
+                "url": "https://api.github.com/repos/silexphp/Silex/zipball/129cc1bd190e0018c8920c8d9150bfc9b4065946",
+                "reference": "129cc1bd190e0018c8920c8d9150bfc9b4065946",
                 "shasum": ""
             },
             "require": {
@@ -1135,7 +1135,7 @@
             "keywords": [
                 "microframework"
             ],
-            "time": "2015-09-15 06:39:37"
+            "time": "2015-09-27 18:54:29"
         },
         {
             "name": "silex/web-profiler",

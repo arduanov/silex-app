@@ -21,8 +21,8 @@ class Version20150912111529 extends AbstractMigration
         $table->addColumn('content', 'text')->setNotnull(false);
         $table->addColumn('content_markdown', 'text')->setNotnull(false);
 
-        $table->addColumn('created_at', 'datetime')->setDefault('NOW()');
-        $table->addColumn('modified_at', 'datetime')->setNotnull(false);
+        $table->addColumn('created_at', 'datetime')->setDefault('CURRENT_TIMESTAMP');
+        $table->addColumn('modified_at', 'datetime')->setDefault('CURRENT_TIMESTAMP');
         $table->addColumn('published_at', 'datetime')->setNotnull(false);
         $table->addColumn('published', 'boolean')->setDefault(false);
 
