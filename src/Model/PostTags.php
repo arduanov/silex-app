@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-use SimpleRecord\Record;
+use Record\Record;
 
 class PostTags extends Record
 {

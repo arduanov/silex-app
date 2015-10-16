@@ -36,8 +36,11 @@ class PostType extends AbstractType
         $app = $this->app;
         $form_data = $options['data'];
         $tags = [];
-        $tags_list = $this->app['tag.model']->findAll();
+        $tags_list = $this->app['tag.model']->all();
+
         foreach ($tags_list as $item) {
+//            print_r(get_object_vars($item));
+
             $tags[$item->id] = $item->title;
         }
 

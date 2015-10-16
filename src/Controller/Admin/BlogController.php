@@ -31,26 +31,27 @@ class BlogController implements \Silex\Api\ControllerProviderInterface
         $title = 'Posts';
         $postModel = $app['post.model'];
 
-        $sort_by = 'id';
-        $sort_order = 'DESC';
+//        $sort_by = 'id';
+//        $sort_order = 'DESC';
+//
+//        if ($request->get('sort_by')) {
+//            $sort_by = $request->get('sort_by');
+//
+//            if ($request->get('sort_order')) {
+//                $sort_order = $request->get('sort_order');
+//            }
+//        }
+//
+//        $filter_value = $request->get('filter');
+//        $filter = [];
+//        foreach ($postModel->getFilterKeys() as $key) {
+//            $filter[$key] = $filter_value;
+//        }
 
-        if ($request->get('sort_by')) {
-            $sort_by = $request->get('sort_by');
-
-            if ($request->get('sort_order')) {
-                $sort_order = $request->get('sort_order');
-            }
-        }
-
-        $filter_value = $request->get('filter');
-        $filter = [];
-        foreach ($postModel->getFilterKeys() as $key) {
-            $filter[$key] = $filter_value;
-        }
-
-        $posts = $postModel->filterBy($filter, [$sort_by => $sort_order], $app['paginator.per_page'], ($page - 1) * $app['paginator.per_page']);
-        $posts_count = $postModel->countLastQuery();
-
+//        $posts = $postModel->filterBy($filter, [$sort_by => $sort_order], $app['paginator.per_page'], ($page - 1) * $app['paginator.per_page']);
+//        $posts_count = $postModel->countLastQuery();
+        $posts = $postModel->all();
+        $posts_count = 20;
         return $app['twig']->render('admin/list.twig', [
             'title' => $title,
             'table_head' => $postModel->getFilterKeys(),
@@ -78,6 +79,7 @@ class BlogController implements \Silex\Api\ControllerProviderInterface
 
         return $app['twig']->render('admin/form.twig', ['title' => $title, 'form' => $form->createView()]);
     }
+
     public function tagEdit(Application $app, Request $request, $id = null)
     {
         $title = 'Tag ' . ($id ? 'edit' : 'add');

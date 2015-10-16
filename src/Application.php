@@ -33,7 +33,7 @@ class Application extends Silex
         $this->loadConfig($this);
         $this->loadProviders($this);
         $this->loadErrorHandler($this);
-        $this->loadModels($this);
+//        $this->loadModels($this);
         $this->loadRoutes($this);
         $this->loadEventListeners($this);
 //        print_r(get_included_files());
@@ -55,7 +55,23 @@ class Application extends Silex
         $app->register(new Provider\MonologServiceProvider(), $app['monolog.config']);
         $app->register(new Provider\DoctrineServiceProvider());
         // connect to db
-        \SimpleRecord\Record::connection($app['db']);
+//        \SimpleRecord\Record::connection($app['db']);
+        $models = [
+            'post.model' =>'App\Model\Post',
+            'tag.model' => 'App\Model\Tag',
+            'post_tags.model' => 'App\Model\PostTags',
+        ];
+
+        foreach ($models as $name => $class) {
+            if (is_callable($class)) {
+                $callable = $class;
+            } else {
+                $callable = function () use ($class, $app) {
+                    return new $class($app);
+                };
+            }
+            $app[$name] = $app->factory($callable);
+        }
 
         $app['migrations.output_writer'] = new OutputWriter(
             function ($message) {
@@ -150,16 +166,16 @@ class Application extends Silex
 //            exit;
 //        });
     }
-
-    public function loadModels(Application $app)
-    {
-        $app['post.model'] = $app->factory(function () use ($app) {
-            return new Model\Post();
-        });
-        $app['tag.model'] = $app->factory(function () use ($app) {
-            return new Model\Tag();
-        });
-    }
+//
+//    public function loadModels(Application $app)
+//    {
+//        $app['post.model'] = $app->factory(function () use ($app) {
+//            return new Model\Post();
+//        });
+//        $app['tag.model'] = $app->factory(function () use ($app) {
+//            return new Model\Tag();
+//        });
+//    }
 
     public function loadEventListeners(Application $app)
     {
