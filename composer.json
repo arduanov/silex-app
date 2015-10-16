@@ -18,7 +18,7 @@
   "repositories": [
     {
       "type": "vcs",
-      "url": "https://github.com/arduanov/simple-record"
+      "url": "https://github.com/arduanov/pimple-active-record"
     }
   ],
   "scripts": {
@@ -30,10 +30,9 @@
   "require": {
     "php": ">=5.6.0",
     "silex/silex": "~2.0@dev",
-    "arduanov/simple-record": "dev-master",
+    "arduanov/pimple-active-record": "dev-master",
     "doctrine/migrations": "1.0.*@dev",
     "doctrine/dbal": "~2.5",
-    "predis/predis": "~1.0",
     "monolog/monolog": "~1.16",
     "symfony/config": "~2.7",
     "symfony/form": "~2.7",
